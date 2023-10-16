@@ -22,9 +22,9 @@ This comes from the file `about.qmd`.
 This is a website for the final project for MA[46]15 Data Science with R by Team TEAMNAME.
 The members of this team are below.
 
-## Chang Liu
+## Arianit Balidemaj
 
-Luis is a Ph.D. student in Stats and is the Teaching Fellow for the course.
+Arianit is a undergraduate student at BU. Link to github https://github.com/ArianitBalidemaj
 
 ## Dan Sussman
 

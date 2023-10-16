@@ -4,7 +4,7 @@ project:
   resources: scripts
 
 website:
-  title: "MA [46]15 Final Project"
+  title: "Information Illumin8ors Final Project"
   navbar:
     right:
       - about.qmd
