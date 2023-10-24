@@ -1,0 +1,62 @@
+---
+title: "Blog Post 1 - Datasets Search"
+description:  |
+  We were very invested in taking the route of exploring racial disparity with drug use, income and mental illness and felt these datasets below represent the topic we are interested in very well.
+  
+  The first dataset that we had found was within this link:
+  "https://data.world/balexturner/drug-use-employment-work-absence-income-race-education" .This
+  dataset is called “NSDUH Workforce Adults”. This dataset has 64 columns
+  and 32,040 rows and is taken from the health survey conducted in 2015
+  by the Substance Abuse and Mental Health Services Administration. Since
+  this is a subset selected it is supposed to be randomly selected for
+  optimal analysis. Loading the data was easy as it was a csv easily
+  loaded into R Studio. We have not started cleaning the dataset but we
+  are able to parse through the dataset and get specific columns and data
+  points we might need making it easier for us. The ease of loading it
+  into R Studio and the ability to extract specific columns and data points
+  make this dataset a promising resource for conducting a comprehensive
+  exploration of various socio-economic and health-related factors among
+  adult populations.
+  
+  The second dataset that we had found was within this
+  link "https://www.icpsr.umich.edu/web/NACJD/studies/27521/variables." The
+  dataset is called “Gender, Mental Illness, and Crime in the United States,
+  2004”. This dataset has 3011 columns and for rows it has more than 2GB
+  of data and the last row is 55,602. The data was collected from a 2004
+  survey on drug use and health to the public. The data is plentiful with
+  data but however is not up to date with current date and the surveys were
+  major revamped. There are columns that were added to this dataset by the
+  researchers of this dataset. We were able to load the data and get the
+  columns and be able to see some of the sample responses. The only problem
+  with this dataset would be that it may be too old for use but it does
+  contain information that would be useful for relating racial disparity,
+  drug use and justice system.
+   
+  The third dataset that we had found is
+  "https://www.datafiles.samhsa.gov/dataset/national-survey-drug-use-and-health-2021-nsduh-2021-ds0001".
+  This dataset is straight from the SAMHSA (Substance Abuse and Mental
+  Services Administration) which conducts surveys directly and collects and
+  asks questions. There is an associated codebook for the data that can help
+  us determine relationships between certain drugs and income and much more
+  as well. Some of the collection methods were web-interviewing and more and
+  cannot be compared at all to previous years according to the website, which
+  offers the most up to date collection. This NSDUH dataset has 2,989 columns
+  and 58,034 entries of rows. It has very big general population coverage in
+  order to analyze. We were able to load the R data into R studio and convert
+  it into a csv as well. Being able to parse the data was also fairly simple
+  which helps in finding relationships between race and medical conditions
+  and more. This is the dataset we are most excited for because of how fairly
+  new it is and how many ways we can go about this topic with this many
+  variables/questions.
+  
+    Since we have found three very expansive and diverse data sets, we know that there is a lot of potential for questions we can explore. In our first data set, from the NDSUH codebook linked above, there are several columns of interest to us. This data set covers race, income, and location in relation to drug and alcohol use. Thus we can ask questions such as: what is the link between race and lifetime drug or alcohol use? If we filter by lower income areas, is the link between race and drug/alcohol use stronger? Is income or race a more important influencing factor in drug/alcohol use? These questions can be addressed by the data we have found and we are excited to learn more about how to visualize the data to best address trends in our data.	The data set from data.world is also a great option and it has several variables of interest to us. It provides links between drug use, employment rates, work absence, income, race, and education. This would allow us to ask questions such as: Is education level or employment rate by race a stronger influencing factor towards drug use? What is the variance of income by race? What is the average drug use by race and income level and which seems to have more of an influence on drug use? While this data set is interesting and useful, it does not allow us to ask complex questions such as what kind of drugs are more heavily used by different race categories and by different income levels, as the NDSUH codebook data set would allow us to do. The data set from UMich could also be good to use, it has interesting variables such as how many days per week or month people use/buy different drugs and it would allow us to sort the data by race and gender. It is a large data set like the NDSUH one. This data set also includes information on education, income, location, and employment. It would allow us to ask similarly interesting questions. 
+    
+    We are very interested in the NDSUH codebook data set, and while it is good that the NDSUH codebook data set is so diverse, this means it is also very large. The size of it has made it hard to work with and load into our repository and this will also make it harder to clean and organize. With the UMich data set, we may struggle to use it because it is not readily available as a CSV file and we would have to convert it into a format we could work with. Because there is so much data in the NDSUH data set, with so many different ways to interpret it and questions to ask, we could potentially struggle to come up with a good question(s) that are easily addressed by the data and not get lost in all of the data we have to work with. We could accidentally choose a question that is too specific and does not capitalize on the breadth of the data set, or we could go too broad and end up with a report that is too complex and does not achieve a meaningful or understandable interpretation of the data. We will also have to work hard to choose what to filter out and how to do that because it is impossible to use the entire data set and we will have to be careful in choosing which parts of it to work with and focus on. It could also be a good idea, with any data set that we choose, to weigh drug use against different factors such as education/income/location when possible so that we can see how much race actually influences drug use so we do not accidentally try to interpret false trends. 
+
+author: "Information Illumin8ors"
+date: "2023-10-23"
+categories: [Dataset Start]
+date-modified: "2023-10-23"
+draft: FALSE
+---
+  ``
