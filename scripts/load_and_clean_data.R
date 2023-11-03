@@ -1,10 +1,15 @@
 library(tidyverse)
+library(readr)
 
-loan_data <- read_csv(here::here("dataset", "loan_refusal.csv"))
+print("Loading")
+load('./dataset/NSDUH_2021.RData')
+print("Done Loading")
 
 ## CLEAN the data
-loan_data_clean <- loan_data
+drug_health_data_clean <- PUF2021_100622
+print("Done Cleaning")
 
-write_csv(loan_data_clean, file = here::here("dataset", "loan_refusal_clean.csv"))
+write_csv(drug_health_data_clean, "./dataset/cleaned_data.csv")
+print("Done Saving")
 
-save(loan_data_clean, file = here::here("dataset/loan_refusal.RData"))
+
