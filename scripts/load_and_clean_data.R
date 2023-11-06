@@ -45,6 +45,6 @@ drug_health_data_clean_new <- PUF2021_100622 |>
 
 
 # Save the cleaned data to a new CSV file
-write_csv(drug_health_data_clean_new, "./dataset/cleaned_data_new.csv")
+saveRDS(drug_health_data_clean_new, "./dataset/cleaned_data_new.rds")
 
 
