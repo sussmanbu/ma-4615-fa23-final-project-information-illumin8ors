@@ -1,0 +1,20 @@
+---
+title: "Blog Post 3"
+description:  |
+  Going into the data cleaning process for the dataset used
+author: "Information Illumin8ors"
+date: "2023-11-06"
+categories: [Data Cleaning]
+date-modified: "2023-11-06"
+draft: FALSE
+---
+
+  To approach the data in a way such that we can do efficient cleaning but also have the columns and rows we need to accurately assess the data, we first needed to understand what was recorded from the dataset. Once we understood that we divided and conquered the codebook associated with this data from the SAMHSA. We needed to look at questions answered in the survey such that they had a high response rate and also that they would be able to help in further analysis as well. We are focusing more on cutting many unnecessary columns that would not be as used throughout but also columns that tend to have high no response rates as well. This strategy is effective for the beginning as it gives a very good sense with what we are working with.
+
+  Some of the important columns we needed were which types of drugs people had tried and certain questions like if they have used in the past 30 days. We were also interested in the columns that reported on the age when a person used a substance because we could make an interesting comparison between ages a substance was first used by race. Then we also made sure to include questions about mental health and whether each respondent went out to receive treatment for mental health. This data could allow us to look at relationships between race, mental health treatment, and drug use. Other columns that were important are ones that discuss location as this will relate what we need if we need other datasets to incorporate into it with more precise location . Relating mental health with location as well as drug use to location can help with economic datasets per location be used as well as a follow up to further support the dataset and create more analysis. Another interesting comparison would be to look at the relationship between age of first use of a substance by race to see if there is a good trend/comparison there. 
+
+  Not only was this the thinking of our group for the data cleaning strategy, we also quickly realized how important it is to look at certain outliers and data points that might not work for analysis. One of the important points mentioned before was high non response rates which we quickly saw through in the table that we filtered for just cigarettes to understand how much is really missing. The codebook also helps in understanding this as well. This can be quickly seen through a look at the table with all the columns pictured below in the table sample:
+  ![](../../images/cig.png)
+  
+  Quickly looking into just this little sample shows that the cigyfu column has a bunch of skipped answers based on the codebook notation as well to support this. The 9999 and 99 and 991 are all variations of "NA" or did not want to respond to the survey to such a particular question as indicated by the codebook. As we continue to go through the data set we will be cautious to check for outliers. 
+

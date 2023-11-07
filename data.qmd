@@ -46,12 +46,6 @@ For larger datasets, you'll need to create a new folder in the project root dire
 
 Your [load_and_clean_data.R](/scripts/load_and_clean_data.R) file is how you will load and clean your data. Here is a an example of a very simple one.
 
-```{r}
-source(
-  "scripts/load_and_clean_data.R",
-  echo = TRUE # Use echo=FALSE or omit it to avoid code output  
-)
-```
 You should never use absolute paths (eg. `/Users/danielsussman/path/to/project/` or `C:\MA415\\Final_Project\`).
 
 You might consider using the `here` function fomr the [`here` package](https://here.r-lib.org/articles/here.html) to avoid path problems.
@@ -62,9 +56,28 @@ The idea behind this file is that someone coming to your website could largely r
 This file might create a derivative data set that you then use for your subsequent analysis.
 Note that you don't need to run this script from every post/page.
 Instead, you can load in the results of this script, which could be plain text files or `.RData` files. In your data page you'll describe how these results were created. If you have a very large data set, you might save smaller data sets that you can use for exploration purposes.
-To link to this file, you can use `[cleaning script](/scripts/load_and_clean_data.R)` wich appears as [cleaning script](/scripts/load_and_clean_data.R). 
+To link to this file, you can use `[cleaning script](/scripts/load_and_clean_data.R)` which appears as [cleaning script](/scripts/load_and_clean_data.R). 
+```{r}
+source(
+  "scripts/load_and_clean_data.R",
+  echo = TRUE # Use echo=FALSE or omit it to avoid code output  
+)
+```
 
 
+### Where to find Dataset
+We found the data set by googling keywords such as “mental health, race, age, substance abuse” accompanied with “data set, csv, R”. This allowed us to find the codebook from the “Substance Abuse and Mental Health Services Administration”, describing a survey on substance abuse, mental health, and race from 2021. This survey was the “National Survey on Drug Use and Health”. We deemed this source reputable and we found an R file to download from: https://www.datafiles.samhsa.gov/dataset/national-survey-drug-use-and-health-2021-nsduh-2021-ds0001. 
+The link to the codebook is here:  
+https://www.datafiles.samhsa.gov/sites/default/files/field-uploads-protected/studies/NSDUH-2021/NSDUH-2021-datasets/NSDUH-2021-DS0001/NSDUH-2021-DS0001-info/NSDUH-2021-DS0001-info-codebook.pdf 
+
+### How was the data collected
+The primary purpose of this data and the NSDUH organization was to measure the frequency and relationship between substance abuse and mental health issues. The target population is the civilian and noninstitutionalized one. This survey was sent out to and filled out by individual persons in the USA, aged 12 and over, the data was collected cross-sectionally. The survey collectors warn that this data is dependent on respondent’s truthfulness and memory, and should thus be taken with a grain of salt. Also, this survey does not include data from citizens who are active-duty military members or living in institutional group shelters (homeless shelters, hospitals, prisons, etc.). They warn that this may underestimate the use of certain drugs like heroin. 
+
+### Different data files used 
+While we used the R file available to download to make the cleaned data set in our final project repository, we used the codebook to actually understand the data set csv file. The codebook contained information about each column and it was broken down into sections of self-administered substance abuse, imputed substance abuse, other self-administered sections, demographics, and geographic. We divided the sections and went through them, when sorting through the substance abuse sections, we stayed consistent in the types of columns we chose, those were: “age when first used”, “time since last used”, “number of days per week used in last 12 months”, and “best estimate of how many times used in last 30 days”. 
+### Cleaning for the data
+
+This is the link to the script, [cleaning script](/scripts/load_and_clean_data.R). The Script cleans the data by keeping only the columns that have enough responses to the questions and also are highly relevant questions that can be used in understanding the data. As explained in our blog post, our strategy is too use the columns with the most value in analysis.
 
 ----
 
