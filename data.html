@@ -152,6 +152,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#sharing-your-data" id="toc-sharing-your-data" class="nav-link" data-scroll-target="#sharing-your-data">Sharing your data</a></li>
   <li><a href="#load-and-clean-data-script" id="toc-load-and-clean-data-script" class="nav-link" data-scroll-target="#load-and-clean-data-script">Load and clean data script</a></li>
+  <li><a href="#where-to-find-dataset" id="toc-where-to-find-dataset" class="nav-link" data-scroll-target="#where-to-find-dataset">Where to find Dataset</a></li>
+  <li><a href="#how-was-the-data-collected" id="toc-how-was-the-data-collected" class="nav-link" data-scroll-target="#how-was-the-data-collected">How was the data collected</a></li>
+  <li><a href="#different-data-files-used" id="toc-different-data-files-used" class="nav-link" data-scroll-target="#different-data-files-used">Different data files used</a></li>
   </ul></li>
   <li><a href="#rubric-on-this-page" id="toc-rubric-on-this-page" class="nav-link" data-scroll-target="#rubric-on-this-page">Rubric: On this page</a></li>
   </ul>
@@ -207,6 +210,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>If you create a folder named <code>data</code> this will cause problems.</p>
 <p>For larger datasets, you’ll need to create a new folder in the project root directory named <code>dataset-ignore</code>. This will be ignored by git (based off the <code>.gitignore</code> file in the project root directory) which will help you avoid issues with Github’s size limits. Your team will have to manually make sure the data files in <code>dataset-ignore</code> are synced across team members.</p>
 <p>Your <a href="./scripts/load_and_clean_data.R">load_and_clean_data.R</a> file is how you will load and clean your data. Here is a an example of a very simple one.</p>
+<p>You should never use absolute paths (eg. <code>/Users/danielsussman/path/to/project/</code> or <code>C:\MA415\\Final_Project\</code>).</p>
+<p>You might consider using the <code>here</code> function fomr the <a href="https://here.r-lib.org/articles/here.html"><code>here</code> package</a> to avoid path problems.</p>
+</section>
+<section id="load-and-clean-data-script" class="level3">
+<h3 class="anchored" data-anchor-id="load-and-clean-data-script">Load and clean data script</h3>
+<p>The idea behind this file is that someone coming to your website could largely replicate your analyses after running this script on the original data sets to clean them. This file might create a derivative data set that you then use for your subsequent analysis. Note that you don’t need to run this script from every post/page. Instead, you can load in the results of this script, which could be plain text files or <code>.RData</code> files. In your data page you’ll describe how these results were created. If you have a very large data set, you might save smaller data sets that you can use for exploration purposes. To link to this file, you can use <code>[cleaning script](/scripts/load_and_clean_data.R)</code> which appears as <a href="./scripts/load_and_clean_data.R">cleaning script</a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"scripts/load_and_clean_data.R"</span>,</span>
@@ -230,34 +239,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-&gt; loan_data &lt;- read_csv(here::here("dataset", "loan_refusal.csv"))</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 20 Columns: 5
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (1): bank
-dbl (4): min, white, himin, hiwhite
+&gt; library(readr)
 
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-&gt; loan_data_clean &lt;- loan_data
+&gt; load("./dataset/NSDUH_2021.RData")
 
-&gt; write_csv(loan_data_clean, file = here::here("dataset", 
-+     "loan_refusal_clean.csv"))
+&gt; drug_health_data_clean_new &lt;- select(PUF2021_100622, 
++     QUESTID2, filedate, cigwilyr, cigtry, cigrec, CIG30AV, alctry, 
++     alcrec, aldaypwk,  .... [TRUNCATED] 
 
-&gt; save(loan_data_clean, file = here::here("dataset/loan_refusal.RData"))</code></pre>
+&gt; saveRDS(drug_health_data_clean_new, "./dataset/cleaned_data_new.rds")</code></pre>
 </div>
 </div>
-<p>You should never use absolute paths (eg. <code>/Users/danielsussman/path/to/project/</code> or <code>C:\MA415\\Final_Project\</code>).</p>
-<p>You might consider using the <code>here</code> function fomr the <a href="https://here.r-lib.org/articles/here.html"><code>here</code> package</a> to avoid path problems.</p>
 </section>
-<section id="load-and-clean-data-script" class="level3">
-<h3 class="anchored" data-anchor-id="load-and-clean-data-script">Load and clean data script</h3>
-<p>The idea behind this file is that someone coming to your website could largely replicate your analyses after running this script on the original data sets to clean them. This file might create a derivative data set that you then use for your subsequent analysis. Note that you don’t need to run this script from every post/page. Instead, you can load in the results of this script, which could be plain text files or <code>.RData</code> files. In your data page you’ll describe how these results were created. If you have a very large data set, you might save smaller data sets that you can use for exploration purposes. To link to this file, you can use <code>[cleaning script](/scripts/load_and_clean_data.R)</code> wich appears as <a href="./scripts/load_and_clean_data.R">cleaning script</a>.</p>
+<section id="where-to-find-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="where-to-find-dataset">Where to find Dataset</h3>
+<p>We found the data set by googling keywords such as “mental health, race, age, substance abuse” accompanied with “data set, csv, R”. This allowed us to find the codebook from the “Substance Abuse and Mental Health Services Administration”, describing a survey on substance abuse, mental health, and race from 2021. This survey was the “National Survey on Drug Use and Health”. We deemed this source reputable and we found an R file to download from: https://www.datafiles.samhsa.gov/dataset/national-survey-drug-use-and-health-2021-nsduh-2021-ds0001. The link to the codebook is here:<br>
+https://www.datafiles.samhsa.gov/sites/default/files/field-uploads-protected/studies/NSDUH-2021/NSDUH-2021-datasets/NSDUH-2021-DS0001/NSDUH-2021-DS0001-info/NSDUH-2021-DS0001-info-codebook.pdf</p>
+</section>
+<section id="how-was-the-data-collected" class="level3">
+<h3 class="anchored" data-anchor-id="how-was-the-data-collected">How was the data collected</h3>
+<p>The primary purpose of this data and the NSDUH organization was to measure the frequency and relationship between substance abuse and mental health issues. The target population is the civilian and noninstitutionalized one. This survey was sent out to and filled out by individual persons in the USA, aged 12 and over, the data was collected cross-sectionally. The survey collectors warn that this data is dependent on respondent’s truthfulness and memory, and should thus be taken with a grain of salt. Also, this survey does not include data from citizens who are active-duty military members or living in institutional group shelters (homeless shelters, hospitals, prisons, etc.). They warn that this may underestimate the use of certain drugs like heroin.</p>
+</section>
+<section id="different-data-files-used" class="level3">
+<h3 class="anchored" data-anchor-id="different-data-files-used">Different data files used</h3>
+<p>While we used the R file available to download to make the cleaned data set in our final project repository, we used the codebook to actually understand the data set csv file. The codebook contained information about each column and it was broken down into sections of self-administered substance abuse, imputed substance abuse, other self-administered sections, demographics, and geographic. We divided the sections and went through them, when sorting through the substance abuse sections, we stayed consistent in the types of columns we chose, those were: “age when first used”, “time since last used”, “number of days per week used in last 12 months”, and “best estimate of how many times used in last 30 days”. ### Cleaning for the data</p>
+<p>This is the link to the script, <a href="./scripts/load_and_clean_data.R">cleaning script</a>. The Script cleans the data by keeping only the columns that have enough responses to the questions and also are highly relevant questions that can be used in understanding the data. As explained in our blog post, our strategy is too use the columns with the most value in analysis.</p>
 <hr>
 </section>
 </section>
