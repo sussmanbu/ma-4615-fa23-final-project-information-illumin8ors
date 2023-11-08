@@ -41,7 +41,7 @@ drug_health_data_clean_new <- PUF2021_100622 |>
          DSTNRV30, suiplanyr,
          irmedicr, irmcdchp, irchmpus, irchmpus, irprvhlt, irothhlt, irfamsoc, irfamssi, irfstamp, irfampmt, IRPINC3, IRFAMIN3,
          PDEN10, COUTYP4, MAIIN102, AIIND102, 
-         ENRLCOLLFT2, wrkhadjob, sexident, milstat)
+         ENRLCOLLFT2, wrkhadjob, sexident, milstat, NEWRACE2)
 
 
 # Save the cleaned data to a new CSV file
