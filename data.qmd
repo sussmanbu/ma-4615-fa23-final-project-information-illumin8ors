@@ -75,6 +75,7 @@ The primary purpose of this data and the NSDUH organization was to measure the f
 
 ### Different data files used 
 While we used the R file available to download to make the cleaned data set in our final project repository, we used the codebook to actually understand the data set csv file. The codebook contained information about each column and it was broken down into sections of self-administered substance abuse, imputed substance abuse, other self-administered sections, demographics, and geographic. We divided the sections and went through them, when sorting through the substance abuse sections, we stayed consistent in the types of columns we chose, those were: “age when first used”, “time since last used”, “number of days per week used in last 12 months”, and “best estimate of how many times used in last 30 days”. 
+
 ### Cleaning for the data
 
 This is the link to the script, [cleaning script](/scripts/load_and_clean_data.R). The Script cleans the data by keeping only the columns that have enough responses to the questions and also are highly relevant questions that can be used in understanding the data. As explained in our blog post, our strategy is too use the columns with the most value in analysis.
