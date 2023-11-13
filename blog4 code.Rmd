@@ -1,0 +1,65 @@
+---
+title: "blog 4 :code"
+author: "Tongdan Shentu"
+date: "2023-11-13"
+output: html_document
+---
+
+load("C:/Users/73113/Downloads/NSDUH-2021-DS0001-bndl-data-r_v3/NSDUH_2021.RData")
+library(tidyverse)
+library(readr)
+drug_health_data_clean_new <- PUF2021_100622 |>
+  select(QUESTID2, filedate,
+         cigwilyr,cigtry,cigrec,CIG30AV, 
+         alctry, alcrec, aldaypwk, ALCUS30D, AL30EST,
+         mjage, mjrec, mrdaypwk, MJDAY30A, MR30EST,
+         cocage, cocrec, ccdaypwk, CC30EST,
+         crkage, crdaypwk, crakrec, CR30EST,
+         herage, herrec, hrdaypwk, HR30EST,
+         hallucage, hallucrec, halldypwk, HALLUC30E, lsdage, pcpage, ecstmoage,
+         inhalage, inhalrec, inhdypwk, INHAL30ES,
+         methamage, methamrec, methdypwk, METHAM30E,
+         oxcnanyyr, oxcnnmage, fentanyyr, pnranyrec, PNRNM30ES, PNRNM30AL, pnrwygamt, pnrwygamt, pnrwyoftn, pnrwylngr,
+         trqanylif, trqanyrec,
+         stmanylif, stmanyrec,
+         sedanylif, sedanyrec,
+         iicigrc, II2CIGRC, iralcrc, II2ALCRC, iicrkrc, II2CRKRC,
+         alcyrtot, cocyrtot, crkyrtot, heryrtot, hallucyfq, methamyfq,
+         ircigfm, ircgrfm, IRSMKLSS30N, iralcfm, irmjfm, ircocfm, ircrkfm,
+         cigflag, cigyr, cigmon, cgrflag, cgryr, cgrmon, pipflag, pipmon, smklssflag, smklssyr, smklssmon, tobflag, tobyr, tobmon,
+         AD_MDEA1,AD_MDEA2, AD_MDEA3, AD_MDEA4,
+         yther, yshsw, YUMHTELYR2,
+         yowrslow, yowrdcsn, YO_MDEA1, YO_MDEA2, YO_MDEA3, YO_MDEA4, YO_MDEA5, YO_MDEA6, YO_MDEA7, YO_MDEA8, yopsrels, ymdelt,
+         cadrpeop, casurcvr, camhprob, vapanyevr,
+         irvapanyrec, CAMHPROB2, vaptypemon,
+         udaltimeget, udaltrystop, udalstopact, udalwdsweat, udalavwsvtr,
+         udmjtimeget, udmjlesseff, udmjnotstop, udmjwddeprs,
+         udcctimeget, udccwantbad, udccstrurge, udccstopact,
+         udhetimeuse, udhenotstop,udhehlthprb, udhestopact, udhatimeuse,
+         booked, bkdrvinf,
+         txevrrcvd, txyrprisn, txyrslfhp, txltpyhins,
+         snysell, snyattak, snrldcsn, 
+         yeatndyr, yehmslyr, yestscig,
+         DSTNRV30, suiplanyr,
+         irmedicr, irmcdchp, irchmpus, irchmpus, irprvhlt, irothhlt, irfamsoc, irfamssi, irfstamp, irfampmt, IRPINC3, IRFAMIN3,
+         PDEN10, COUTYP4, MAIIN102, AIIND102, 
+         ENRLCOLLFT2, wrkhadjob, sexident, milstat, NEWRACE2, income, POVERTY3, PDEN10, COUTYP4) |> 
+  mutate(NEWRACE2 = recode(NEWRACE2, "1" = "NonHisp White", "2" = "NonHisp Black/Afr Am", "3" = "NonHisp Native Am/AK Native", "4" = "NonHisp Native HI/Other Pac Isl", "5" = "NonHisp Asian", "6" = "NonHisp more than one race", "7" = "Hispanic"))
+
+summary_by_race <- drug_health_data_clean_new %>%
+  filter(MJDAY30A <= 30) %>%
+  group_by(NEWRACE2) %>%
+  summarise(
+    Mean_MJDAY30A = mean(MJDAY30A, na.rm = TRUE),
+    Median_MJDAY30A = median(MJDAY30A, na.rm = TRUE),
+    Max_MJDAY30A = max(MJDAY30A, na.rm = TRUE),
+    Min_MJDAY30A = min(MJDAY30A, na.rm = TRUE)
+  )
+ggplot(summary_by_race, aes(x = NEWRACE2, y = Mean_MJDAY30A, fill = NEWRACE2)) +
+ geom_bar(stat = "identity") +
+labs(title = "Mean Marijuana Use in the Last 30 Days by Race", x = "Race", y = "Mean Days of Marijuana Use") +
+theme(axis.text.x = element_text(angle = 45, hjust = 1),legend.position = "none") +
+  coord_cartesian(ylim = c(1, 30))
+
+glm_model <- glm(MJDAY30A ~ NEWRACE2, data = drug_health_data_clean_new, family = poisson(link = "log"))
+
