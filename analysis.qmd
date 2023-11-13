@@ -29,7 +29,28 @@ In general, you should try to provide links to relevant resources, especially th
 
 
 If you are directly quoting from a source, please make that clear. You can show quotes using `>` like this
+```{r}
+library(ggplot2)
+library(readr)
+library(dplyr)
 
+file_path <- "dataset/cleaned_data_new.rds"
+
+cleaned_data <- readRDS(file_path)
+
+# Filter out records where alcyrtot is greater than 365
+filtered_data <- cleaned_data %>% 
+  filter(alcyrtot <= 365)
+
+boxplot_alcohol_use <- ggplot(filtered_data, aes(x = factor(NEWRACE2), y = alcyrtot, fill = factor(NEWRACE2))) +
+  geom_boxplot() +
+  labs(title = "TOTAL # OF DAYS USED ALCOHOL IN PAST 12 MOS by RACE (Excluding >365 days)",
+       x = "Race",
+       y = "Total Days of Alcohol Use") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+
+print(boxplot_alcohol_use)
 ```
 > To be or not to be.
 ```
