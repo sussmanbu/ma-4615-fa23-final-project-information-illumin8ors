@@ -155,7 +155,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#where-to-find-dataset" id="toc-where-to-find-dataset" class="nav-link" data-scroll-target="#where-to-find-dataset">Where to find Dataset</a></li>
   <li><a href="#how-was-the-data-collected" id="toc-how-was-the-data-collected" class="nav-link" data-scroll-target="#how-was-the-data-collected">How was the data collected</a></li>
   <li><a href="#different-data-files-used" id="toc-different-data-files-used" class="nav-link" data-scroll-target="#different-data-files-used">Different data files used</a></li>
-  <li><a href="#cleaning-for-the-data" id="toc-cleaning-for-the-data" class="nav-link" data-scroll-target="#cleaning-for-the-data">Cleaning for the data</a></li>
   </ul></li>
   <li><a href="#rubric-on-this-page" id="toc-rubric-on-this-page" class="nav-link" data-scroll-target="#rubric-on-this-page">Rubric: On this page</a></li>
   </ul>
@@ -244,9 +243,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 &gt; load("./dataset/NSDUH_2021.RData")
 
-&gt; drug_health_data_clean_new &lt;- select(PUF2021_100622, 
+&gt; drug_health_data_clean_new &lt;- mutate(select(PUF2021_100622, 
 +     QUESTID2, filedate, cigwilyr, cigtry, cigrec, CIG30AV, alctry, 
-+     alcrec, aldaypwk,  .... [TRUNCATED] 
++     alcrec, ald .... [TRUNCATED] 
 
 &gt; saveRDS(drug_health_data_clean_new, "./dataset/cleaned_data_new.rds")</code></pre>
 </div>
@@ -263,10 +262,7 @@ https://www.datafiles.samhsa.gov/sites/default/files/field-uploads-protected/stu
 </section>
 <section id="different-data-files-used" class="level3">
 <h3 class="anchored" data-anchor-id="different-data-files-used">Different data files used</h3>
-<p>While we used the R file available to download to make the cleaned data set in our final project repository, we used the codebook to actually understand the data set csv file. The codebook contained information about each column and it was broken down into sections of self-administered substance abuse, imputed substance abuse, other self-administered sections, demographics, and geographic. We divided the sections and went through them, when sorting through the substance abuse sections, we stayed consistent in the types of columns we chose, those were: “age when first used”, “time since last used”, “number of days per week used in last 12 months”, and “best estimate of how many times used in last 30 days”.</p>
-</section>
-<section id="cleaning-for-the-data" class="level3">
-<h3 class="anchored" data-anchor-id="cleaning-for-the-data">Cleaning for the data</h3>
+<p>While we used the R file available to download to make the cleaned data set in our final project repository, we used the codebook to actually understand the data set csv file. The codebook contained information about each column and it was broken down into sections of self-administered substance abuse, imputed substance abuse, other self-administered sections, demographics, and geographic. We divided the sections and went through them, when sorting through the substance abuse sections, we stayed consistent in the types of columns we chose, those were: “age when first used”, “time since last used”, “number of days per week used in last 12 months”, and “best estimate of how many times used in last 30 days”. ### Cleaning for the data</p>
 <p>This is the link to the script, <a href="./scripts/load_and_clean_data.R">cleaning script</a>. The Script cleans the data by keeping only the columns that have enough responses to the questions and also are highly relevant questions that can be used in understanding the data. As explained in our blog post, our strategy is too use the columns with the most value in analysis.</p>
 <hr>
 </section>
