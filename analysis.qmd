@@ -41,17 +41,17 @@ cleaned_data <- readRDS(file_path)
 
 # Filter out records where alcyrtot is greater than 365
 filtered_data <- cleaned_data %>% 
-  filter(alcyrtot <= 365)
+  filter(hallucyfq <= 365)
 
-boxplot_alcohol_use <- ggplot(filtered_data, aes(x = factor(NEWRACE2), y = alcyrtot, fill = factor(NEWRACE2))) +
+boxplot_hallucinogens_use <- ggplot(filtered_data, aes(x = factor(NEWRACE2), y = hallucyfq, fill = factor(NEWRACE2))) +
   geom_boxplot() +
-  labs(title = "TOTAL # OF DAYS USED ALCOHOL IN PAST 12 MOS by RACE (Excluding >365 days)",
+  labs(title = "TOTAL # OF DAYS USED HALLUCINOGENS IN PAST 12 MOS by RACE",
        x = "Race",
-       y = "Total Days of Alcohol Use") +
+       y = "Total Days of Hallucinogens Use") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
 
-print(boxplot_alcohol_use)
+print(boxplot_hallucinogens_use)
 ```
 > To be or not to be.
 ```
