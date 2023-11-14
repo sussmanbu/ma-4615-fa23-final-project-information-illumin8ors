@@ -27,7 +27,8 @@ print(ls())
 library(ggthemes)
 drug_health_data_clean_new |>
   filter(cocage < 120) |>
-  ggplot(aes(x = cocage)) + geom_bar(show.legend = TRUE) + facet_wrap(vars(NEWRACE2))
+  ggplot(aes(x = cocage)) + geom_bar(show.legend = TRUE) + facet_wrap(vars(NEWRACE2)) +
+  labs(title = "Age When First Used Cocaine by Race", x = "Age", y = "Frequency")
 
 drug_health_data_clean_new |>
   filter(if_all(c(AL30EST, MR30EST), \(v) v < 85)) |>
@@ -48,6 +49,10 @@ drug_health_data_clean_new |>
   select(MR30EST) |>
   arrange(desc(MR30EST)) |>
   distinct() 
+
+drug_health_data_clean_new |>
+  select(NEWRACE2) |>
+  count(NEWRACE2) 
 
 drug_health_data_clean_new |>
   filter(AL30EST < 85) |>
@@ -107,7 +112,7 @@ drug_health_data_clean_new |>
   geom_bar(aes(fill = NEWRACE2)) + 
   scale_fill_colorblind() + 
   theme_minimal() +
-  labs(title = "Estimated Number of Days Alcohol Used in Past 30 Days by Race", x = "AL30EST", y = "Frequency")
+  labs(title = "Estimated Number of Days Alcohol Used in Past 30 Days by Race", x = "AL30EST", y = "")
 
 ```
 
