@@ -1,0 +1,22 @@
+---
+title: "Blog Post 5"
+description:  |
+  Exploring other datasets as compliments to the original dataset.
+author: "Information Illumin8ors"
+date: "2023-11-20"
+categories: [Data Combination]
+date-modified: "2023-11-20"
+draft: FALSE
+---
+
+## Understanding the datasets 
+  To find appropriate data sets that would align with our data, we had to first look into how the location data was collected. The public access data file for the SAMHSA NSDUH 2021 has somewhat limited geographic information, but we have come up with some creative ways to exploit what is there. They provide a variable, “PDEN10”, with information about population density, telling us how many respondents live in a CBSA with 1 million or more people, less than 1 million people, or not in a CBSA, where CBSA stands for “Core-based statistical area”. This variable also uses 2010 census data. To expand upon this variable, we have downloaded data sets from the 2009 CBSA and the 2010 census, which match the data that the original researchers used in the survey. Our plan is to combine the census and CBSA codes, we will divide the census data set by filtering for counties with 1 million and less than 1 million inhabitants, then we will match those with CBSA codes and group/match the survey answers to those counties/CBSA codes. We will group all counties with no CBSA code into an “other” category. 
+  
+  Another variable of interest is the “COUNTYP4” column, which describes how many people are in large, small, or non-metro areas. This variable is based on 2013 Rural/Urban continuum codes. We have found that dataset and we will be using it to break down the counties that are classified as large, small, or non-metro to provide further information about which counties and states the respondents of the data set come from. These are the two most general variables concerning location information, but there are others that use the 2010 census data to describe how many people taking the survey live in an American-Indian census block or not. Thus we can also use the 2010 census data set to discover where those areas are to better inform our geographic data. 
+  
+  Through such integration, we can establish a more comprehensive, multidimensional dataset, providing a deeper background for our analysis. The selection and integration of these datasets will enable us to explore patterns of drug and substance abuse from various perspectives, gaining a more comprehensive understanding of this issue under the influence of geographical and demographic factors.
+
+## Process and Next Steps
+  We did not combine the data yet as we are viewing it first individually and then we will combine the data. We do not expect any difficulties with combining it because we can use the RUCC and the CBSA with the census data to get a better understanding of the metro data from the NSDUH data. The process to join the data is to first take the RUCC and associate it with the names of counties in the United States. Then using the CBSA and the census data, we can associate the CBSA with an area in the United States, giving us access to census population which is correlated to the NSDUH calculation of population metric for respondents and where they can be from. This gives us a deeper understanding of where respondents are most likely to be from based off of CBSA and Census data and whether they are from large or small cities based on RUCC as well. 
+
+  Our next steps for these data sets would be to combine and then create relationships between drug use and certain large metros that can be correlated with the population of such top metros. This data gives us the best approximation of where respondents may be from and also gives correlations for how these large or small metros and also CBSA codes with the counties census can be seen with drug related problems. We want to take our analysis even further and hopefully use some models that can help give a deeper understanding of what is going on with such respondent info. We also want to explore more relationships between certain variables in the NSDUH dataset and see if we can use such relationships to go even deeper into how location plays a role in affecting such relationships. Exploring this further is crucial in understanding drug and substance abuse.
