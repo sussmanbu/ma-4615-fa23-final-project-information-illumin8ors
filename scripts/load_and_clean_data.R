@@ -1,5 +1,6 @@
 library(tidyverse)
 library(readr)
+library(readxl)
 
 # Read the CSV data file (make sure to provide the correct arguments)
 load("./dataset/NSDUH_2021.RData")
@@ -48,5 +49,16 @@ drug_health_data_clean_new <- PUF2021_100622 |>
 
 # Save the cleaned data to a new CSV file
 saveRDS(drug_health_data_clean_new, "./dataset/cleaned_data_new.rds")
+
+getwd()
+
+
+Census <- read_excel(path = "./dataset/Census2010_2019data.xlsx", range = "A3:H3194", 
+col_names = c("SUMLEV", "REGION", "DIVISION", "STATE", "COUNTY", "STNAME", "CITYNAME",
+"CENSUS2010POP"), col_types = c("guess", "text", "text", "guess", 
+                                "guess", "text", "text", "numeric"))
+
+saveRDS(Census, "./dataset/Census_2010_data.rds")
+getwd()
 
 
