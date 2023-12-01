@@ -23,6 +23,123 @@ cleaned_data
 # print(ls())
 ```
 
+
+
+```{r, test plots}
+library(ggthemes)
+drug_health_data_clean_new |>
+  filter(cocage < 120) |>
+  ggplot(aes(x = cocage)) + geom_bar(show.legend = TRUE) + facet_wrap(vars(NEWRACE2)) +
+  labs(title = "Age When First Used Cocaine by Race", x = "Age", y = "Frequency")
+
+drug_health_data_clean_new |>
+  filter(if_all(c(AL30EST, MR30EST), \(v) v < 85)) |>
+  arrange(desc(AL30EST)) |>
+  arrange(desc(MR30EST)) |>
+  select(AL30EST, MR30EST) |>
+  count()
+# distinct on 2 columns only shows combinations
+
+drug_health_data_clean_new |>
+  filter(AL30EST < 85) |>
+  select(AL30EST) |>
+  arrange(desc(AL30EST)) |>
+  distinct() 
+
+drug_health_data_clean_new |>
+  filter(MR30EST < 85) |>
+  select(MR30EST) |>
+  arrange(desc(MR30EST)) |>
+  distinct() 
+
+drug_health_data_clean_new |>
+  select(NEWRACE2) |>
+  count(NEWRACE2) 
+
+drug_health_data_clean_new |>
+  filter(AL30EST < 85) |>
+  group_by(NEWRACE2, AL30EST) |>
+  summarize(AL30EST = mean(AL30EST)) |>
+  ggplot(aes(x = AL30EST, y = NEWRACE2)) + 
+  geom_line() + 
+  theme_minimal()
+
+drug_health_data_clean_new |>
+  filter(AL30EST < 85) |>
+  group_by(NEWRACE2, AL30EST) |>
+  summarize(AL30EST = mean(AL30EST)) |>
+  ggplot(aes(x = AL30EST)) + 
+  geom_bar(aes(fill = NEWRACE2)) + 
+  scale_fill_colorblind() + 
+  theme_minimal()
+  
+
+drug_health_data_clean_new |>
+  filter(AL30EST < 85) |>
+ # filter(MR30EST < 85) |>
+  filter(HR30EST < 85) |>
+  select(AL30EST, MR30EST, HR30EST)
+  arrange(desc(AL30EST)) |>
+  arrange(desc(MR30EST)) |>
+  arrange(desc(CC30EST)) |>
+  arrange(desc(CR30EST)) |>
+  arrange(desc(HR30EST)) |>
+  filter(AL30EST == first(AL30EST)) |>
+  filter(MR30EST == first(MR30EST)) |>
+  filter(CC30EST == first(CC30EST)) |>
+  filter(CR30EST == first(CR30EST)) |>
+  filter(HR30EST == first(HR30EST)) |>
+  select(AL30EST, MR30EST, CC30EST, CR30EST, HR30EST)
+
+```
+
+``` {r, good plots}
+
+# option 1 for estimated number of days alcohol used in past 30 days by race
+drug_health_data_clean_new |>
+  filter(AL30EST < 85) |>
+  group_by(NEWRACE2, AL30EST) |>
+  summarize(AL30EST = mean(AL30EST)) |>
+  ggplot(aes(x = AL30EST, y = NEWRACE2)) + 
+  geom_line() + 
+  theme_minimal() +
+  labs(title = "Estimated Number of Days Alcohol Used in Past 30 Days by Race", x = "Estimated number of days", y = "Race Category")
+
+# option 2 for estimated number of days alcohol used in past 30 days by race
+drug_health_data_clean_new |>
+  filter(AL30EST < 85) |>
+  group_by(NEWRACE2, AL30EST) |>
+  summarize(AL30EST = mean(AL30EST)) |>
+  ggplot(aes(x = AL30EST)) + 
+  geom_bar(aes(fill = NEWRACE2)) + 
+  scale_fill_colorblind() + 
+  theme_minimal() +
+  labs(title = "Estimated Number of Days Alcohol Used in Past 30 Days by Race", x = "AL30EST", y = "")
+
+
+# updated the cocaine age plot to make it easier to read
+drug_health_data_clean_new |>
+  filter(cocage < 120) |>
+  ggplot(aes(x = cocage)) + geom_bar(show.legend = TRUE) + facet_wrap(vars(NEWRACE2), scales = "free") +
+  labs(title = "Age When First Used Cocaine by Race", x = "Age", y = "Frequency")
+
+
+drug_health_data_clean_new |>
+  ggplot() +
+  geom_line(aes(x = NEWRACE2, y = AL30EST, color = "red")) + geom_line(aes(x = NEWRACE2, y = AL30EST, color = "blue"))
+
+
+
+```
+
+
+
+If you are directly quoting from a source, please make that clear. You can show quotes using `>` like this
+
+
+
+
+
 ```{r}
 library(ggplot2)
 library(readr)
@@ -83,6 +200,7 @@ odds_ratios_df
 	The coefficient for the intercept/Hispanic population shows that when all other variables are being held constant, the log odds for Hispanic population is  -0.70059. This is just in a sense the baseline to compare to the other races. For the Asian population of this dataset, when converting the log odds to odd ratio, the odds of an Asian population smoking cigarettes is 0.6482 times the odds of Hispanics smoking cigarettes. This means that the odds of the Asian population smoking cigarettes is lower than the Hispanic population. In terms of the numbers from the model, White people in the dataset have 1.9676 times the odds of smoking cigarettes compared to Hispanics.
 
 
+>>>>>>> d5024b3c7b609b592e8256a3822d161f37af89d7
 ## Note on Attribution
 
 In general, you should try to provide links to relevant resources, especially those that helped you. You don't have to link to every StackOverflow post you used but if there are explainers on aspects of the data or specific models that you found helpful, try to link to those. Also, try to link to other sources that might support (or refute) your analysis. These can just be regular hyperlinks. You don't need a formal citation.
