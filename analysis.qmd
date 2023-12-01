@@ -114,6 +114,20 @@ drug_health_data_clean_new |>
   theme_minimal() +
   labs(title = "Estimated Number of Days Alcohol Used in Past 30 Days by Race", x = "AL30EST", y = "")
 
+
+# updated the cocaine age plot to make it easier to read
+drug_health_data_clean_new |>
+  filter(cocage < 120) |>
+  ggplot(aes(x = cocage)) + geom_bar(show.legend = TRUE) + facet_wrap(vars(NEWRACE2), scales = "free") +
+  labs(title = "Age When First Used Cocaine by Race", x = "Age", y = "Frequency")
+
+
+drug_health_data_clean_new |>
+  ggplot() +
+  geom_line(aes(x = NEWRACE2, y = AL30EST, color = "red")) + geom_line(aes(x = NEWRACE2, y = AL30EST, color = "blue"))
+
+
+
 ```
 
 ## Note on Attribution
