@@ -25,7 +25,6 @@ cleaned_data
 
 
 
-<<<<<<< HEAD
 ```{r, test plots}
 library(ggthemes)
 drug_health_data_clean_new |>
