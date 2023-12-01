@@ -23,47 +23,108 @@ cleaned_data
 # print(ls())
 ```
 
-## Logisitic Regression on Cigeratte Use and Race
-
-```{r}
-# Filtering the model such that we have binary values
-log_mod <- cleaned_data |>
-  select(NEWRACE2, cigtry, cigrec) |>
-  filter(cigtry < 984 | cigtry == 991) |>
-  mutate(cigtry = ifelse(cigtry == 991, 0, cigtry)) |>
-  mutate(cigrec = ifelse(cigrec == 91, 0, cigrec)) |>
-  mutate(cigtry_binary = ifelse(cigtry > 0, 1, 0))
-
-# Creating Logistic Regression model
-model <- glm(cigtry_binary ~ NEWRACE2, data = log_mod, family = "binomial")
-
-odds_ratios <- exp(coef(model))
-
-log_mod
-
-summary(model)
-
-odds_ratios_df <- data.frame(
-  Race_Category = ifelse(names(odds_ratios) == "(Intercept)", "Hispanic",
-                     ifelse(names(odds_ratios) == "NEWRACE2NonHisp Asian", "Asian",
-                     ifelse(names(odds_ratios) == "NEWRACE2NonHisp Black/Afr Am", "Black/Afr Am",
-                     ifelse(names(odds_ratios) == "NEWRACE2NonHisp more than one race", "NonHisp more than one race",
-                     ifelse(names(odds_ratios) == "NEWRACE2NonHisp Native Am/AK Native", "Native Am/AK Native",
-                     ifelse(names(odds_ratios) == "NEWRACE2NonHisp Native HI/Other Pac Isl", "Native HI/Other Pac Isl",
-                     ifelse(names(odds_ratios) == "NEWRACE2NonHisp White", "White", names(odds_ratios)))))))),
-  Odds_Ratio = odds_ratios
-)
-
-odds_ratios_df
-```
-	The coefficient for the intercept/Hispanic population shows that when all other variables are being held constant, the log odds for Hispanic population is  -0.70059. This is just in a sense the baseline to compare to the other races. For the Asian population of this dataset, when converting the log odds to odd ratio, the odds of an Asian population smoking cigarettes is 0.6482 times the odds of Hispanics smoking cigarettes. This means that the odds of the Asian population smoking cigarettes is lower than the Hispanic population. In terms of the numbers from the model, White people in the dataset have 1.9676 times the odds of smoking cigarettes compared to Hispanics.
 
 
-## Note on Attribution
 
-In general, you should try to provide links to relevant resources, especially those that helped you. You don't have to link to every StackOverflow post you used but if there are explainers on aspects of the data or specific models that you found helpful, try to link to those. Also, try to link to other sources that might support (or refute) your analysis. These can just be regular hyperlinks. You don't need a formal citation.
 
-If you are directly quoting from a source, please make that clear. You can show quotes using `>` like this
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ```{r}
@@ -90,13 +151,6 @@ boxplot_alcohol_use <- ggplot(filtered_data, aes(x = factor(NEWRACE2), y = alcyr
 print(boxplot_alcohol_use)
 ```
 > To be or not to be.
-```
-
-```{r}
-library(tidyverse)
-print(getwd())
-cleaned_data <- readRDS(here::here("dataset/cleaned_data_new.rds"))
-# print(ls())
 ```
 
 ## Logisitic Regression on Cigeratte Use and Race
