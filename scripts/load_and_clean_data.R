@@ -59,6 +59,14 @@ col_names = c("SUMLEV", "REGION", "DIVISION", "STATE", "COUNTY", "STNAME", "CITY
                                 "guess", "text", "text", "numeric"))
 
 saveRDS(Census, "./dataset/Census_2010_data.rds")
-getwd()
+
+CBSA <- read_excel(path = "./dataset/CBSAdata.xlsx", 
+                   col_names = c("CBSA Code", "Metro Division Code", "CSA Code", "CBSA Title", 
+                                 "Level of CBSA", "Status", "Metropolitan Division Title", 
+                                 "CSA Title", "Component Name", "State", "FIPS", "County Status"), 
+                   col_types = c("guess", "guess", "guess", "text", "text", "guess", 
+                                 "text", "text", "text", "text", "guess", "text"), skip = 3, na = c("missing", "NA"))
+
+saveRDS(CBSA, "./dataset/CBSA_data_clean.rds")
 
 
