@@ -61,12 +61,27 @@ col_names = c("SUMLEV", "REGION", "DIVISION", "STATE", "COUNTY", "STNAME", "CITY
 saveRDS(Census, "./dataset/Census_2010_data.rds")
 
 CBSA <- read_excel(path = "./dataset/CBSAdata.xlsx", 
-                   col_names = c("CBSA Code", "Metro Division Code", "CSA Code", "CBSA Title", 
-                                 "Level of CBSA", "Status", "Metropolitan Division Title", 
-                                 "CSA Title", "Component Name", "State", "FIPS", "County Status"), 
+                   col_names = c("CBSA_Code", "Metro_Division_Code", "CSA_Code", "CBSA Title", 
+                                 "Level_of_CBSA", "Status", "Metropolitan_Division_Title", 
+                                 "CSA_Title", "Component_Name", "State", "FIPS", "County_Status"), 
                    col_types = c("guess", "guess", "guess", "text", "text", "guess", 
                                  "text", "text", "text", "text", "guess", "text"), skip = 3, na = c("missing", "NA"))
 
 saveRDS(CBSA, "./dataset/CBSA_data_clean.rds")
+
+#creating a merged data set with location information:
+
+(counties_in_census <- Census |> distinct(CITYNAME))
+
+CBSA_grouped <- CBSA |> group_by(State)
+
+CBSA_grouped |>
+  filter(Component_Name %in% counties_in_census)
+
+(counties_in_CBSA <- CBSA |> filter(str("County") %in% Component_Name) |> distinct(Component_Name))
+
+
+
+
 
 
