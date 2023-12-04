@@ -79,12 +79,13 @@ county_overlap <- CBSA |>
   filter(Component_Name %in% counties_areas_in_census) |>
   select(4, 5, 6, 7, 8, 9, 10, 11, 12)
 
-(overlapping <- county_overlap |>
-    distinct(Component_Name) |>
-    pull(Component_Name))
+pop_by_county <- Census |>
+  filter(COUNTY != 0) |>
+  group_by(CITYNAME) |>
+  select(STNAME, CITYNAME, CENSUS2010POP) 
+  #now need to order alphabetically
 
-clean_census <- Census |>
-  filter(CITYNAME %in% overlapping)
+
 
 
 
