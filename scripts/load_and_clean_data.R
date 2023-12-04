@@ -52,10 +52,9 @@ saveRDS(drug_health_data_clean_new, "./dataset/cleaned_data_new.rds")
 
 getwd()
 
-
 Census <- read_excel(path = "./dataset/co-est2019-alldata(1).xlsx", range = "A2:H3194", 
-                   col_names = c("SUMLEV", "REGION", "DIVISION", "STATE", "COUNTY", "STNAME", "CITYNAME","CENSUS2010POP"), 
-                   col_types = c("guess", "text", "text", "guess", "guess", "text", "text", "numeric"))
+                     col_names = c("SUMLEV", "REGION", "DIVISION", "STATE", "COUNTY", "STNAME", "CITYNAME","CENSUS2010POP"), 
+                     col_types = c("guess", "text", "text", "guess", "guess", "text", "text", "numeric"))
 
 
 saveRDS(Census, "./dataset/Census_2010_data.rds")
@@ -71,13 +70,23 @@ saveRDS(CBSA, "./dataset/CBSA_data_clean.rds")
 
 #creating a merged data set with location information:
 
-(counties_in_census <- Census |> distinct(CITYNAME))
+(counties_areas_in_census <- Census |> distinct(CITYNAME) |> pull(CITYNAME))
 
-(counties_in_CBSA <- CBSA |> filter(str_detect(Component_Name, "County")) |> distinct(Component_Name))
+#CBSA_w_counties_only <- CBSA |> 
+#filter(str_detect(Component_Name, "County") == TRUE)
 
-county_overlap <- counties_in_CBSA |>
-  filter(counties_in_CBSA %in% counties_in_census) |>
-  pull(counties_in_CBSA)
+county_overlap <- CBSA |>
+  filter(Component_Name %in% counties_areas_in_census) |>
+  select(4, 5, 6, 7, 8, 9, 10, 11, 12)
+
+(overlapping <- county_overlap |>
+    distinct(Component_Name) |>
+    pull(Component_Name))
+
+clean_census <- Census |>
+  filter(CITYNAME %in% overlapping)
+
+
 
 
 
