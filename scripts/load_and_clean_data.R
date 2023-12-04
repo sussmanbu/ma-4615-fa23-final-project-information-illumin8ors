@@ -53,10 +53,10 @@ saveRDS(drug_health_data_clean_new, "./dataset/cleaned_data_new.rds")
 getwd()
 
 
-Census <- read_excel(path = "./dataset/Census2010_2019data.xlsx", range = "A3:H3194", 
-col_names = c("SUMLEV", "REGION", "DIVISION", "STATE", "COUNTY", "STNAME", "CITYNAME",
-"CENSUS2010POP"), col_types = c("guess", "text", "text", "guess", 
-                                "guess", "text", "text", "numeric"))
+Census <- read_excel(path = "./dataset/co-est2019-alldata(1).xlsx", range = "A2:H3194", 
+                   col_names = c("SUMLEV", "REGION", "DIVISION", "STATE", "COUNTY", "STNAME", "CITYNAME","CENSUS2010POP"), 
+                   col_types = c("guess", "text", "text", "guess", "guess", "text", "text", "numeric"))
+
 
 saveRDS(Census, "./dataset/Census_2010_data.rds")
 
@@ -65,7 +65,7 @@ CBSA <- read_excel(path = "./dataset/CBSAdata.xlsx",
                                  "Level_of_CBSA", "Status", "Metropolitan_Division_Title", 
                                  "CSA_Title", "Component_Name", "State", "FIPS", "County_Status"), 
                    col_types = c("guess", "guess", "guess", "text", "text", "guess", 
-                                 "text", "text", "text", "text", "guess", "text"), skip = 3, na = c("missing", "NA"))
+                                 "text", "text", "text", "text", "guess", "text"), skip = 4, na = c("missing", "NA"))
 
 saveRDS(CBSA, "./dataset/CBSA_data_clean.rds")
 
@@ -73,15 +73,11 @@ saveRDS(CBSA, "./dataset/CBSA_data_clean.rds")
 
 (counties_in_census <- Census |> distinct(CITYNAME))
 
-CBSA_grouped <- CBSA |> group_by(State)
+(counties_in_CBSA <- CBSA |> filter(str_detect(Component_Name, "County")) |> distinct(Component_Name))
 
-CBSA_grouped |>
-  filter(Component_Name %in% counties_in_census)
-
-(counties_in_CBSA <- CBSA |> filter(str("County") %in% Component_Name) |> distinct(Component_Name))
-
-
-
+county_overlap <- counties_in_CBSA |>
+  filter(counties_in_CBSA %in% counties_in_census) |>
+  pull(counties_in_CBSA)
 
 
 
