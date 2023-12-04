@@ -27,12 +27,12 @@ cleaned_data
 
 ```{r, test plots}
 library(ggthemes)
-drug_health_data_clean_new |>
+cleaned_data |>
   filter(cocage < 120) |>
   ggplot(aes(x = cocage)) + geom_bar(show.legend = TRUE) + facet_wrap(vars(NEWRACE2)) +
   labs(title = "Age When First Used Cocaine by Race", x = "Age", y = "Frequency")
 
-drug_health_data_clean_new |>
+cleaned_data |>
   filter(if_all(c(AL30EST, MR30EST), \(v) v < 85)) |>
   arrange(desc(AL30EST)) |>
   arrange(desc(MR30EST)) |>
@@ -40,23 +40,23 @@ drug_health_data_clean_new |>
   count()
 # distinct on 2 columns only shows combinations
 
-drug_health_data_clean_new |>
+cleaned_data |>
   filter(AL30EST < 85) |>
   select(AL30EST) |>
   arrange(desc(AL30EST)) |>
   distinct() 
 
-drug_health_data_clean_new |>
+cleaned_data |>
   filter(MR30EST < 85) |>
   select(MR30EST) |>
   arrange(desc(MR30EST)) |>
   distinct() 
 
-drug_health_data_clean_new |>
+cleaned_data |>
   select(NEWRACE2) |>
   count(NEWRACE2) 
 
-drug_health_data_clean_new |>
+cleaned_data |>
   filter(AL30EST < 85) |>
   group_by(NEWRACE2, AL30EST) |>
   summarize(AL30EST = mean(AL30EST)) |>
@@ -64,7 +64,7 @@ drug_health_data_clean_new |>
   geom_line() + 
   theme_minimal()
 
-drug_health_data_clean_new |>
+cleaned_data |>
   filter(AL30EST < 85) |>
   group_by(NEWRACE2, AL30EST) |>
   summarize(AL30EST = mean(AL30EST)) |>
@@ -74,29 +74,29 @@ drug_health_data_clean_new |>
   theme_minimal()
   
 
-drug_health_data_clean_new |>
-  filter(AL30EST < 85) |>
+#cleaned_data |>
+ # filter(AL30EST < 85) |>
  # filter(MR30EST < 85) |>
-  filter(HR30EST < 85) |>
-  select(AL30EST, MR30EST, HR30EST)
-  arrange(desc(AL30EST)) |>
-  arrange(desc(MR30EST)) |>
-  arrange(desc(CC30EST)) |>
-  arrange(desc(CR30EST)) |>
-  arrange(desc(HR30EST)) |>
-  filter(AL30EST == first(AL30EST)) |>
-  filter(MR30EST == first(MR30EST)) |>
-  filter(CC30EST == first(CC30EST)) |>
-  filter(CR30EST == first(CR30EST)) |>
-  filter(HR30EST == first(HR30EST)) |>
-  select(AL30EST, MR30EST, CC30EST, CR30EST, HR30EST)
+#  filter(HR30EST < 85) |>
+ # select(AL30EST, MR30EST, HR30EST)
+#  arrange(desc(AL30EST)) |>
+#  arrange(desc(MR30EST)) |>
+#  arrange(desc(CC30EST)) |>
+#  arrange(desc(CR30EST)) |>
+# arrange(desc(HR30EST)) |>
+# filter(AL30EST == first(AL30EST)) |>
+# filter(MR30EST == first(MR30EST)) |>
+# filter(CC30EST == first(CC30EST)) |>
+# filter(CR30EST == first(CR30EST)) |>
+# filter(HR30EST == first(HR30EST)) |>
+# select(AL30EST, MR30EST, CC30EST, CR30EST, HR30EST)
 
 ```
 
 ``` {r, good plots}
 
 # option 1 for estimated number of days alcohol used in past 30 days by race
-drug_health_data_clean_new |>
+cleaned_data |>
   filter(AL30EST < 85) |>
   group_by(NEWRACE2, AL30EST) |>
   summarize(AL30EST = mean(AL30EST)) |>
@@ -106,7 +106,7 @@ drug_health_data_clean_new |>
   labs(title = "Estimated Number of Days Alcohol Used in Past 30 Days by Race", x = "Estimated number of days", y = "Race Category")
 
 # option 2 for estimated number of days alcohol used in past 30 days by race
-drug_health_data_clean_new |>
+cleaned_data |>
   filter(AL30EST < 85) |>
   group_by(NEWRACE2, AL30EST) |>
   summarize(AL30EST = mean(AL30EST)) |>
@@ -118,13 +118,13 @@ drug_health_data_clean_new |>
 
 
 # updated the cocaine age plot to make it easier to read
-drug_health_data_clean_new |>
+cleaned_data |>
   filter(cocage < 120) |>
   ggplot(aes(x = cocage)) + geom_bar(show.legend = TRUE) + facet_wrap(vars(NEWRACE2), scales = "free") +
   labs(title = "Age When First Used Cocaine by Race", x = "Age", y = "Frequency")
 
 
-drug_health_data_clean_new |>
+cleaned_data |>
   ggplot() +
   geom_line(aes(x = NEWRACE2, y = AL30EST, color = "red")) + geom_line(aes(x = NEWRACE2, y = AL30EST, color = "blue"))
 
