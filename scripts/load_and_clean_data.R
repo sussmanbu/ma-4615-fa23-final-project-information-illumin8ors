@@ -52,10 +52,9 @@ saveRDS(drug_health_data_clean_new, "./dataset/cleaned_data_new.rds")
 
 getwd()
 
-
 Census <- read_excel(path = "./dataset/co-est2019-alldata(1).xlsx", range = "A2:H3194", 
-                   col_names = c("SUMLEV", "REGION", "DIVISION", "STATE", "COUNTY", "STNAME", "CITYNAME","CENSUS2010POP"), 
-                   col_types = c("guess", "text", "text", "guess", "guess", "text", "text", "numeric"))
+                     col_names = c("SUMLEV", "REGION", "DIVISION", "STATE", "COUNTY", "STNAME", "CITYNAME","CENSUS2010POP"), 
+                     col_types = c("guess", "text", "text", "guess", "guess", "text", "text", "numeric"))
 
 
 saveRDS(Census, "./dataset/Census_2010_data.rds")
@@ -69,15 +68,47 @@ CBSA <- read_excel(path = "./dataset/CBSAdata.xlsx",
 
 saveRDS(CBSA, "./dataset/CBSA_data_clean.rds")
 
+RUCC <- read_excel(path = "./dataset/ruralurbancodes2013.xls",
+                   col_names = c("FIPS", "State", "County_Name", "Population_2010",
+                   "RUCC_2013", "Description"), 
+                   col_types = c("guess", "text", "text", "numeric", "numeric", "text"),
+                   skip = 1, na = c("missing", NA))
+
+saveRDS(RUCC, "./dataset/RUCC_clean.rds")
+
+
 #creating a merged data set with location information:
 
-(counties_in_census <- Census |> distinct(CITYNAME))
+#(counties_areas_in_census <- Census |> distinct(CITYNAME, STNAME, .keep_all = TRUE) |> pull(CITYNAME, STNAME))
 
-(counties_in_CBSA <- CBSA |> filter(str_detect(Component_Name, "County")) |> distinct(Component_Name))
+#CBSA_w_counties_only <- CBSA |> 
+#filter(str_detect(Component_Name, "County") == TRUE)
 
-county_overlap <- counties_in_CBSA |>
-  filter(counties_in_CBSA %in% counties_in_census) |>
-  pull(counties_in_CBSA)
+county_overlap <- CBSA |>
+  filter(Component_Name %in% counties_areas_in_census) |>
+  pull(Component_Name)
+
+pop_by_county <- Census |>
+  distinct(CITYNAME) |>
+  filter(CITYNAME %in% county_overlap)
+  #now need to order alphabetically
+
+# join Census |> distinct(CITYNAME, STNAME, .keep_all = TRUE) with CBSA data set
+
+(Clean_census <- Census |> distinct(CITYNAME, STNAME, .keep_all = TRUE))
+
+by <- join_by(CITYNAME == Component_Name, STNAME == State) 
+merged <- inner_join(Clean_census, CBSA, by)
+
+# Breakdown of the PDEN10 variable:
+
+more_than_equalto_mil_CBSA <- merged |>
+  filter(CENSUS2010POP >= 1000000)
+
+less_than_mil_CBSA <- merged |>
+  filter(CENSUS2010POP < 1000000)
+
+
 
 
 
