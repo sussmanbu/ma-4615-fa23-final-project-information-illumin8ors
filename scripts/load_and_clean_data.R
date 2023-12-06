@@ -68,6 +68,15 @@ CBSA <- read_excel(path = "./dataset/CBSAdata.xlsx",
 
 saveRDS(CBSA, "./dataset/CBSA_data_clean.rds")
 
+RUCC <- read_excel(path = "./dataset/ruralurbancodes2013.xls",
+                   col_names = c("FIPS", "State", "County_Name", "Population_2010",
+                   "RUCC_2013", "Description"), 
+                   col_types = c("guess", "text", "text", "numeric", "numeric", "text"),
+                   skip = 1, na = c("missing", NA))
+
+saveRDS(RUCC, "./dataset/RUCC_clean.rds")
+
+
 #creating a merged data set with location information:
 
 #(counties_areas_in_census <- Census |> distinct(CITYNAME, STNAME, .keep_all = TRUE) |> pull(CITYNAME, STNAME))
@@ -90,6 +99,14 @@ pop_by_county <- Census |>
 
 by <- join_by(CITYNAME == Component_Name, STNAME == State) 
 merged <- inner_join(Clean_census, CBSA, by)
+
+# Breakdown of the PDEN10 variable:
+
+more_than_equalto_mil_CBSA <- merged |>
+  filter(CENSUS2010POP >= 1000000)
+
+less_than_mil_CBSA <- merged |>
+  filter(CENSUS2010POP < 1000000)
 
 
 
