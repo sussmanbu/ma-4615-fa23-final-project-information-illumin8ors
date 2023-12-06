@@ -70,22 +70,26 @@ saveRDS(CBSA, "./dataset/CBSA_data_clean.rds")
 
 #creating a merged data set with location information:
 
-(counties_areas_in_census <- Census |> distinct(CITYNAME) |> pull(CITYNAME))
+#(counties_areas_in_census <- Census |> distinct(CITYNAME, STNAME, .keep_all = TRUE) |> pull(CITYNAME, STNAME))
 
 #CBSA_w_counties_only <- CBSA |> 
 #filter(str_detect(Component_Name, "County") == TRUE)
 
 county_overlap <- CBSA |>
   filter(Component_Name %in% counties_areas_in_census) |>
-  select(4, 5, 6, 7, 8, 9, 10, 11, 12)
+  pull(Component_Name)
 
 pop_by_county <- Census |>
-  filter(COUNTY != 0) |>
-  group_by(CITYNAME) |>
-  select(STNAME, CITYNAME, CENSUS2010POP) 
+  distinct(CITYNAME) |>
+  filter(CITYNAME %in% county_overlap)
   #now need to order alphabetically
 
+# join Census |> distinct(CITYNAME, STNAME, .keep_all = TRUE) with CBSA data set
 
+(Clean_census <- Census |> distinct(CITYNAME, STNAME, .keep_all = TRUE))
+
+by <- join_by(CITYNAME == Component_Name, STNAME == State) 
+merged <- inner_join(Clean_census, CBSA, by)
 
 
 
