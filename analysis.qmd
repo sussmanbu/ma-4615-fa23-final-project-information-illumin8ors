@@ -17,9 +17,9 @@ You'll also reflect on next steps and further analysis.
 
 ```{r}
 library(tidyverse)
+library(broom)
 print(getwd())
 cleaned_data <- readRDS(here::here("dataset/cleaned_data_new.rds"))
-cleaned_data
 # print(ls())
 ```
 
@@ -92,6 +92,7 @@ cleaned_data |>
 # select(AL30EST, MR30EST, CC30EST, CR30EST, HR30EST)
 
 ```
+## Alcohol Use Plots
 
 ``` {r, good plots}
 
@@ -139,6 +140,7 @@ If you are directly quoting from a source, please make that clear. You can show 
 
 
 
+## Plot for Alcohol Use last 12 months by Race
 
 ```{r}
 library(ggplot2)
@@ -163,22 +165,21 @@ boxplot_alcohol_use <- ggplot(filtered_data, aes(x = factor(NEWRACE2), y = alcyr
 
 print(boxplot_alcohol_use)
 ```
-> To be or not to be.
-```
 
-## Logisitic Regression on Cigeratte Use and Race
+
+## Logisitic Regression on Cigeratte Tried and Race
 
 ```{r}
 # Filtering the model such that we have binary values
 log_mod <- cleaned_data |>
-  select(NEWRACE2, cigtry, cigrec) |>
+  select(NEWRACE2, cigtry, cigrec, cigage) |>
   filter(cigtry < 984 | cigtry == 991) |>
   mutate(cigtry = ifelse(cigtry == 991, 0, cigtry)) |>
   mutate(cigrec = ifelse(cigrec == 91, 0, cigrec)) |>
-  mutate(cigtry_binary = ifelse(cigtry > 0, 1, 0))
+  mutate(cigtry_binary = ifelse(cigtry > 0, 1, 0)) 
 
 # Creating Logistic Regression model
-model <- glm(cigtry_binary ~ NEWRACE2, data = log_mod, family = "binomial")
+model <- glm(cigtry_binary ~ NEWRACE2 , data = log_mod, family = "binomial")
 
 odds_ratios <- exp(coef(model))
 
@@ -198,7 +199,59 @@ odds_ratios_df <- data.frame(
 odds_ratios_df
 ```
 	The coefficient for the intercept/Hispanic population shows that when all other variables are being held constant, the log odds for Hispanic population is  -0.70059. This is just in a sense the baseline to compare to the other races. For the Asian population of this dataset, when converting the log odds to odd ratio, the odds of an Asian population smoking cigarettes is 0.6482 times the odds of Hispanics smoking cigarettes. This means that the odds of the Asian population smoking cigarettes is lower than the Hispanic population. In terms of the numbers from the model, White people in the dataset have 1.9676 times the odds of smoking cigarettes compared to Hispanics.
+	
+	
+	
+## Plot for Marijuna Use at certain Age with Race
 
+```{r}
+
+marj_data <- cleaned_data |>
+  select(NEWRACE2, mjage, mjrec, mrdaypwk, MJDAY30A, MR30EST) |>
+  filter(mjage < 83)
+
+# First tried marijuana plot
+marj_age_plot <- ggplot(marj_data, aes(x = factor(NEWRACE2), y = mjage, color = factor(NEWRACE2), fill=factor(NEWRACE2))) +
+  geom_boxplot() +
+  labs(title = "Age at which People First Tried Using Marijuana",
+       x = "Race",
+       y = "Age when First Tried") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+
+marj_age_plot
+```
+
+
+## Model for Substance Use and Race with Age
+
+We are gonna assume for the model here that the hypothesis is that there is no association between likelihood of trying drugs ever and race group.
+
+```{r}
+drug_use_with_race <- cleaned_data |>
+  select(NEWRACE2, cigever, cigage, mjever, mjage, alcever, cocever, cocage, crkever, crkage, herever, herage) |>
+  mutate(drug_use = ifelse(cigever==1 | mjever==1 | alcever==1 | cocever==1 | crkever==1 | herever==1, 1, 0))
+
+count_result <- drug_use_with_race |>
+  count(drug_use)
+
+# Display the count result
+print(count_result)
+
+# Model for the Substance Use vs Race
+model_sub <- glm(drug_use ~ NEWRACE2, data = drug_use_with_race, family = "binomial")
+
+summary(model_sub)
+
+tidy_output <- tidy(model_sub)|>
+  mutate(term = ifelse(term == "(Intercept)", "Asian", str_replace(term, "NEWRACE2", "")))
+
+  
+
+print(tidy_output)
+
+```
+The log-odds for individuals identified as "Asian," "Black/Afr Am," "Hispanic," "More than one race," "Native Am/AK Native," "Native HI/Other Pac Isl," and "White" are 0.4230185, 0.2169798, 0.3064576, 0.5386455, 0.9149979, 0.2967970, and 0.9660087, respectively. These estimates indicate the direction and the size of the log-odds of change in drug use likelihood for each race group compared to the baseline race group which for this one was set to Asian Race Group. For instance, for the White race group have log-odds of drug use that are 0.9660087 higher than Asians log-odds of drug use. Each have significant p values meaning that there is a relationship between drugs likelihood and race.
 
 >>>>>>> d5024b3c7b609b592e8256a3822d161f37af89d7
 ## Note on Attribution
