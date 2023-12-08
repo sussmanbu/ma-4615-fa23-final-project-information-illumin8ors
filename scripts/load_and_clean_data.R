@@ -9,6 +9,7 @@ load("./dataset/NSDUH_2021.RData")
 # Use select to filter columns by name and store the result in a new dataframe
 drug_health_data_clean_new <- PUF2021_100622 |>
   select(QUESTID2, filedate,
+         cigever, cigage, mjever, mjage, alcever, cocever, cocage, crkever, crkage, herever, herage, UD5ILLANY, 
          cigwilyr,cigtry,cigrec,CIG30AV, 
          alctry, alcrec, aldaypwk, ALCUS30D, AL30EST,
          mjage, mjrec, mrdaypwk, MJDAY30A, MR30EST,
@@ -43,19 +44,18 @@ drug_health_data_clean_new <- PUF2021_100622 |>
          irmedicr, irmcdchp, irchmpus, irchmpus, irprvhlt, irothhlt, irfamsoc, irfamssi, irfstamp, irfampmt, IRPINC3, IRFAMIN3,
          PDEN10, COUTYP4, MAIIN102, AIIND102, 
          ENRLCOLLFT2, wrkhadjob, sexident, milstat, NEWRACE2, income, POVERTY3, PDEN10, COUTYP4) |> 
-  mutate(NEWRACE2 = recode(NEWRACE2, "1" = "NonHisp White", "2" = "NonHisp Black/Afr Am", "3" = "NonHisp Native Am/AK Native", "4" = "NonHisp Native HI/Other Pac Isl", "5" = "NonHisp Asian", "6" = "NonHisp more than one race", "7" = "Hispanic"))
+  mutate(NEWRACE2 = recode(NEWRACE2, "1" = "White", "2" = "Black/Afr Am", "3" = "Native Am/AK Native", "4" = "Native HI/Other Pac Isl", "5" = "Asian", "6" = "More than one race", "7" = "Hispanic"))
   
-
+  
 
 # Save the cleaned data to a new CSV file
 saveRDS(drug_health_data_clean_new, "./dataset/cleaned_data_new.rds")
 
 getwd()
 
-
 Census <- read_excel(path = "./dataset/co-est2019-alldata(1).xlsx", range = "A2:H3194", 
-                   col_names = c("SUMLEV", "REGION", "DIVISION", "STATE", "COUNTY", "STNAME", "CITYNAME","CENSUS2010POP"), 
-                   col_types = c("guess", "text", "text", "guess", "guess", "text", "text", "numeric"))
+                     col_names = c("SUMLEV", "REGION", "DIVISION", "STATE", "COUNTY", "STNAME", "CITYNAME","CENSUS2010POP"), 
+                     col_types = c("guess", "text", "text", "guess", "guess", "text", "text", "numeric"))
 
 
 saveRDS(Census, "./dataset/Census_2010_data.rds")
@@ -69,15 +69,73 @@ CBSA <- read_excel(path = "./dataset/CBSAdata.xlsx",
 
 saveRDS(CBSA, "./dataset/CBSA_data_clean.rds")
 
+RUCC <- read_excel(path = "./dataset/ruralurbancodes2013.xls",
+                   col_names = c("FIPS", "State", "County_Name", "Population_2010",
+                   "RUCC_2013", "Description"), 
+                   col_types = c("guess", "text", "text", "numeric", "numeric", "text"),
+                   skip = 1, na = c("missing", NA))
+
+saveRDS(RUCC, "./dataset/RUCC_clean.rds")
+
+
 #creating a merged data set with location information:
 
-(counties_in_census <- Census |> distinct(CITYNAME))
+#(counties_areas_in_census <- Census |> distinct(CITYNAME, STNAME, .keep_all = TRUE) |> pull(CITYNAME, STNAME))
 
-(counties_in_CBSA <- CBSA |> filter(str_detect(Component_Name, "County")) |> distinct(Component_Name))
+#CBSA_w_counties_only <- CBSA |> 
+#filter(str_detect(Component_Name, "County") == TRUE)
 
-county_overlap <- counties_in_CBSA |>
-  filter(counties_in_CBSA %in% counties_in_census) |>
-  pull(counties_in_CBSA)
+county_overlap <- CBSA |>
+  filter(Component_Name %in% counties_areas_in_census) |>
+  pull(Component_Name)
+
+pop_by_county <- Census |>
+  distinct(CITYNAME) |>
+  filter(CITYNAME %in% county_overlap)
+  #now need to order alphabetically
+
+# join Census |> distinct(CITYNAME, STNAME, .keep_all = TRUE) with CBSA data set
+
+(Clean_census <- Census |> distinct(CITYNAME, STNAME, .keep_all = TRUE))
+
+by <- join_by(CITYNAME == Component_Name, STNAME == State) 
+merged <- inner_join(Clean_census, CBSA, by)
+
+# Breakdown of the PDEN10 variable:
+
+more_than_equalto_mil_CBSA <- merged |>
+  filter(CENSUS2010POP >= 1000000)
+
+less_than_mil_CBSA <- merged |>
+  filter(CENSUS2010POP < 1000000)
+
+not_in_CBSA <- Clean_census |>
+  filter(!CITYNAME %in% county_overlap) |>
+  select(CITYNAME, CENSUS2010POP)
+
+# COUNTYP4 Breakdowns:
+
+by <- join_by(CITYNAME == County_Name, FIPS == FIPS)
+merged_all <- inner_join(merged, RUCC, by)
+
+Large_metro_county <- merged_all |>
+  filter(RUCC_2013 == 1)
+
+Small_metro_county <- merged_all |>
+  filter(RUCC_2013 %in% c(2, 3))
+
+Non_metro_county <- merged_all |>
+  filter(RUCC_2013 > 3)
+
+
+
+
+
+
+
+
+
+
 
 
 
