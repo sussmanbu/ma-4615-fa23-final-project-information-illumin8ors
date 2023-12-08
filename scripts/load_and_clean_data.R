@@ -1,6 +1,8 @@
 library(tidyverse)
 library(readr)
 library(readxl)
+library(tidycensus)
+options(tigris_use_cache = TRUE)
 
 # Read the CSV data file (make sure to provide the correct arguments)
 load("./dataset/NSDUH_2021.RData")
@@ -124,7 +126,16 @@ Small_metro_county <- merged_all |>
   filter(RUCC_2013 %in% c(2, 3))
 
 Non_metro_county <- merged_all |>
-  filter(RUCC_2013 > 3)
+  filter(RUCC_2013 > 3) |>
+  group_by(RUCC_2013) |>
+  summary(pop_2013 = sum(Population_2010))
+
+Large_metro_county |>
+  ggplot(aes(x = CITYNAME, y = alcever)) + geom_point()
+
+# from COUNTYP4: 1 = from large metro (25956), 2 = small metro (21883), 3 = nonmetro (10195)
+
+
 
 
 
