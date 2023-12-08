@@ -108,6 +108,32 @@ more_than_equalto_mil_CBSA <- merged |>
 less_than_mil_CBSA <- merged |>
   filter(CENSUS2010POP < 1000000)
 
+not_in_CBSA <- Clean_census |>
+  filter(!CITYNAME %in% county_overlap) |>
+  select(CITYNAME, CENSUS2010POP)
+
+# COUNTYP4 Breakdowns:
+
+by <- join_by(CITYNAME == County_Name, FIPS == FIPS)
+merged_all <- inner_join(merged, RUCC, by)
+
+Large_metro_county <- merged_all |>
+  filter(RUCC_2013 == 1)
+
+Small_metro_county <- merged_all |>
+  filter(RUCC_2013 %in% c(2, 3))
+
+Non_metro_county <- merged_all |>
+  filter(RUCC_2013 > 3)
+
+
+
+
+
+
+
+
+
 
 
 
