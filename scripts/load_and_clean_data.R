@@ -7,6 +7,10 @@ suppressPackageStartupMessages(library(tmap))
 options(tigris_use_cache = TRUE)
 census_api_key(c5c850588b50b20572e9b6df39c63b6923bcee30, overwrite = TRUE, install = TRUE)
 library("stringr")     
+install.packages("usmap")
+library(usmap)
+library(ggplot2)
+
 
 # Read the CSV data file (make sure to provide the correct arguments)
 load("./dataset/NSDUH_2021.RData")
@@ -124,16 +128,16 @@ not_in_CBSA <- Clean_census |>
   filter(!CITYNAME %in% county_overlap) |>
   select(CITYNAME, CENSUS2010POP)
 
-more_than_equalto_mil_CBSA <- get_acs(geography = "county", 
-                                      state = "all", 
-                                      county = "all", 
-                                      geometry = TRUE,
-                                      survey = "acs1",
-                                      year = 2010)
+Census_counties <- Census |> filter(STNAME != CITYNAME) |> pull(CITYNAME)
+census_pops <- Census |> filter(STNAME != CITYNAME) |> pull(CENSUS2010POP)
 
-us.map <- tigris::counties(cb = TRUE, year = 2010) |>
-  str_remove(COUNTY, "^0+")
+county_pop <- countypop |>
+  filter(county %in% Census_counties)
+  mutate("2010_pop" = census_pops)
 
+plot_usmap(regions = "counties", ) + 
+  labs(title = "U.S. counties") +
+  theme(panel.background=element_blank())
 
 # COUNTYP4 Breakdowns:
 
