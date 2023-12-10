@@ -154,8 +154,10 @@ ul.task-list li input[type="checkbox"] {
 <section id="where-to-find-the-datasets" class="level3">
 <h3 class="anchored" data-anchor-id="where-to-find-the-datasets">Where to find the Datasets</h3>
 <p>We found the data set by googling keywords such as “mental health, race, age, substance abuse” accompanied with “data set, csv, R”. This allowed us to find the codebook from the “Substance Abuse and Mental Health Services Administration”, describing a survey on substance abuse, mental health, and race from 2021. This survey was the “National Survey on Drug Use and Health”. We deemed this source reputable and we found an R file to download from: https://www.datafiles.samhsa.gov/dataset/national-survey-drug-use-and-health-2021-nsduh-2021-ds0001. The link to the codebook is here:<br>
-https://www.datafiles.samhsa.gov/sites/default/files/field-uploads-protected/studies/NSDUH-2021/NSDUH-2021-datasets/NSDUH-2021-DS0001/NSDUH-2021-DS0001-info/NSDUH-2021-DS0001-info-codebook.pdf. The survey was conducted by SAMSHA - Substance Abuse and Mental Health Services Administration which is a government agency for the United States of America.</p>
+https://www.datafiles.samhsa.gov/sites/default/files/field-uploads-protected/studies/NSDUH-2021/NSDUH-2021-datasets/NSDUH-2021-DS0001/NSDUH-2021-DS0001-info/NSDUH-2021-DS0001-info-codebook.pdf.</p>
+<p><img src="./images/samhsaimage.jpeg" class="img-fluid"> The survey was conducted by SAMSHA - Substance Abuse and Mental Health Services Administration which is a government agency for the United States of America.</p>
 <p>Another dataset we found that we needed was the Census data for 2020 and getting the counties with their respective population count. This was important to to plot the counties onto a map of America so to show which cities are clustered with people more and associate it with the survey of which areas are considered large, small, or non metro areas. There are many variables that are collected by the Bureau but the most important ones that are relevant to the main dataset is the county names to get each county and the population size of each county such that it can be plotted onto the map of the United States as a heatmap of population density. The link to the US Census data for 2020 is https://www.census.gov/programs-surveys/decennial-census/decade/2020/2020-census-results.html.</p>
+<p><img src="./images/census.jpeg" class="img-fluid"></p>
 </section>
 <section id="data-collection-and-purpose" class="level3">
 <h3 class="anchored" data-anchor-id="data-collection-and-purpose">Data Collection and Purpose</h3>
@@ -168,7 +170,11 @@ https://www.datafiles.samhsa.gov/sites/default/files/field-uploads-protected/stu
 </section>
 <section id="cleaning-for-the-data" class="level3">
 <h3 class="anchored" data-anchor-id="cleaning-for-the-data">Cleaning for the data</h3>
-<p>This is the link to the script, <a href="./scripts/load_and_clean_data.R">cleaning script</a>. The Script cleans the data by keeping only the columns that have enough responses to the questions and also are highly relevant questions that can be used in understanding the data. Our strategy is too use the columns with the most value in analysis. Questions like “Have you ever smoked a cigarette” have high response rates and gives key insight into how we can associate drug/substance use with what we are trying to look into. The script filtering involved taking all the questions we deemed qualified to be included in and the rest of the 2,800 variables in this dataset to be filtered out and to keep a consistent set of questions for the analysis use. Then we save the dataframe into a rds file for storage purposes.</p>
+<p>This is the link to the script, <a href="./scripts/load_and_clean_data.R">cleaning script</a>. The Script cleans the data by keeping only the columns that have enough responses to the questions and also are highly relevant questions that can be used in understanding the data. Our strategy is too use the columns with the most value in analysis. Questions like “Have you ever smoked a cigarette” have high response rates and gives key insight into how we can associate drug/substance use with what we are trying to look into. The script filtering involved taking all the questions we deemed qualified to be included in and the rest of the 2,800 variables in this dataset to be filtered out and to keep a consistent set of questions for the analysis use. Such selecting looks like:</p>
+<pre><code>drug_health_data_clean_new &lt;- PUF2021_100622 |&gt;
+  select(QUESTID2, filedate,
+         cigever, cigage, mjever, mjage, alcever, cocever, cocage, crkever, crkage, herever, herage, UD5ILLANY, ... (other variables)</code></pre>
+<p>Then we save the dataframe into a rds file for storage purposes and continue to the other datasets.</p>
 <p>The cleaning for the census dataset goes</p>
 <hr>
 </section>
