@@ -151,13 +151,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#interested-variables" id="toc-interested-variables" class="nav-link" data-scroll-target="#interested-variables">Interested Variables</a></li>
   <li><a href="#questions-for-analysis" id="toc-questions-for-analysis" class="nav-link" data-scroll-target="#questions-for-analysis">Questions for Analysis</a></li>
   <li><a href="#analysis-portion" id="toc-analysis-portion" class="nav-link" data-scroll-target="#analysis-portion">Analysis Portion</a></li>
+  <li><a href="#initial-findings-and-relationships" id="toc-initial-findings-and-relationships" class="nav-link" data-scroll-target="#initial-findings-and-relationships">Initial Findings and Relationships</a></li>
   <li><a href="#alcohol-use-plots" id="toc-alcohol-use-plots" class="nav-link" data-scroll-target="#alcohol-use-plots">Alcohol Use Plots</a></li>
   <li><a href="#plot-for-alcohol-use-last-12-months-by-race" id="toc-plot-for-alcohol-use-last-12-months-by-race" class="nav-link" data-scroll-target="#plot-for-alcohol-use-last-12-months-by-race">Plot for Alcohol Use last 12 months by Race</a></li>
   <li><a href="#logisitic-regression-on-cigeratte-tried-and-race" id="toc-logisitic-regression-on-cigeratte-tried-and-race" class="nav-link" data-scroll-target="#logisitic-regression-on-cigeratte-tried-and-race">Logisitic Regression on Cigeratte Tried and Race</a></li>
   <li><a href="#plot-for-marijuna-use-at-certain-age-with-race" id="toc-plot-for-marijuna-use-at-certain-age-with-race" class="nav-link" data-scroll-target="#plot-for-marijuna-use-at-certain-age-with-race">Plot for Marijuna Use at certain Age with Race</a></li>
   <li><a href="#model-for-substance-use-and-race-with-age" id="toc-model-for-substance-use-and-race-with-age" class="nav-link" data-scroll-target="#model-for-substance-use-and-race-with-age">Model for Substance Use and Race with Age</a></li>
   <li><a href="#note-on-attribution" id="toc-note-on-attribution" class="nav-link" data-scroll-target="#note-on-attribution">Note on Attribution</a></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#limitations-of-analysis" id="toc-limitations-of-analysis" class="nav-link" data-scroll-target="#limitations-of-analysis">Limitations of Analysis</a></li>
   <li><a href="#rubric-on-this-page" id="toc-rubric-on-this-page" class="nav-link" data-scroll-target="#rubric-on-this-page">Rubric: On this page</a></li>
   </ul>
 </nav>
@@ -205,8 +206,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="analysis-portion" class="level2">
 <h2 class="anchored" data-anchor-id="analysis-portion">Analysis Portion</h2>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/7/77/Pebbleswithquarzite.jpg" class="img-fluid"></p>
-<p>This comes from the file <code>analysis.qmd</code>.</p>
-<p>We describe here our detailed data analysis. This page will provide an overview of what questions you hope to ask, illustrations relevant aspects of the data with tables and figures, and a statistical model that attempts to answer part of the question. You’ll also reflect on next steps and further analysis.</p>
+<p>Below we start by first introducing the cleaned dataset and also the libraries that are needed to create plots and tables in a nice and aesthetically pleasing fashion.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
@@ -229,6 +229,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>cleaned_data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"dataset/cleaned_data_new.rds"</span>))</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># print(ls())</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="initial-findings-and-relationships" class="level2">
+<h2 class="anchored" data-anchor-id="initial-findings-and-relationships">Initial Findings and Relationships</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>cleaned_data <span class="sc">|&gt;</span></span>
@@ -587,11 +590,12 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </section>
 <section id="note-on-attribution" class="level2">
 <h2 class="anchored" data-anchor-id="note-on-attribution">Note on Attribution</h2>
-</section>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section"></h2>
 <p>In general, you should try to provide links to relevant resources, especially those that helped you. You don’t have to link to every StackOverflow post you used but if there are explainers on aspects of the data or specific models that you found helpful, try to link to those. Also, try to link to other sources that might support (or refute) your analysis. These can just be regular hyperlinks. You don’t need a formal citation.</p>
 <p>If you are directly quoting from a source, please make that clear. You can show quotes using <code>&gt;</code> like this</p>
+</section>
+<section id="limitations-of-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="limitations-of-analysis">Limitations of Analysis</h2>
+<p>Some limitations of the analysis throughout the</p>
 <hr>
 </section>
 <section id="rubric-on-this-page" class="level2">
