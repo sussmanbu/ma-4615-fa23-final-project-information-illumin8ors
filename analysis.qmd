@@ -4,26 +4,39 @@ description: Here we provide a detailed analysis using more sophisticated statis
 toc: true
 draft: false
 ---
+## Motivation for Data Analysis (DA)
 
-![](https://upload.wikimedia.org/wikipedia/commons/7/77/Pebbleswithquarzite.jpg)
+Our motivation for engaging in Data Analysis of the NSDUH survey comes from our shared interest in finding out how drug use affects all areas of life in society. Understanding more about drug use is important because so much is unknown about drug use and being able to uncover certain relationships may be key in understanding and addressing drug use. For us we are super excited to explore such a huge dataset such as the NSDUH because we can take our time to explore the small key relationships between so many different variables throughout the dataset. Navigating through such a dataset took us a long time to find variables that we needed for analysis but it was perfect in the end because we were able to effectively show key relationships that help the general public understand more about drugs and their use. 
 
+Ultimately our goal is to provide key insights into how certain factors play a role in a person’s drug use even if they did a drug for one time. We were initially interested in finding out just about how race and drug use is affecting one another but we then soon realized that we also need to explore the factors for drug use and not just the relationship between the two. We then realized that a more holistic view of each factor into drug use would be more appropriate. These factors of income, age and location can play a role in how drug use and race correlate and associate together.
 
-This comes from the file `analysis.qmd`.
+## Interested Variables
 
-We describe here our detailed data analysis.
-This page will provide an overview of what questions you hope to ask, illustrations relevant aspects of the data with tables and figures, and a statistical model that attempts to answer part of the question.
-You'll also reflect on next steps and further analysis.
+The variables we were highly interested in exploring is the relationship between drugs used and the race of the respondent in this survey. Being able to see the variables that factor into the relationship is important to understand how a person might be influenced to try and do drugs. The most important variables and factors help determine not only such a relationship of race and drug use but also the disparities between racial groups and drug use. 
 
+Going even further, we want to see what factors attribute to drug use in any way, that being income or location. These are important relationships to explore because it could provide insight into why or how someone could be introduced to drug use and what factors play a role. Some specific questions from the survey that play into our analysis are questions asking if a person has ever done such a drug and such a drug could be one of the 6 we are exploring which are cigarettes, marijuana, alcohol, cocaine, crack, heroine. Many factors could influence drug use such that two factors are reliant on each other. For example there could be relationships such that a young person with low income may or may not be more inclined to use drugs. These claims can only be made after such analysis of this dataset and its important to explore them.
 
-```{r}
+Also at what age each person has done any of the respective substances and whether they continue to do those drugs or not. Income, age and location are also important factors when it comes to finding the factors as these can be associated with higher drug use or lower as well. We want to explore relationships like if you are younger will you be trying more drugs or will you try more drugs when you are older and how does the racial group aspect play a role. Age can also play along with income and location and it's important to explore whether these factors intertwine with each other or are they stand alone. We aim to answer these questions and relationships below in the analysis.
+
+## Questions for Analysis
+
+The key question we are trying to answer is firstly how does race affect the drug use of a person. Going further, how does location, age, and income factor into this relationship. 
+
+# Analysis Portion
+
+<!-- ![](https://upload.wikimedia.org/wikipedia/commons/7/77/Pebbleswithquarzite.jpg)-->
+
+## Necessary Libraries and Datasets
+Below we start by first introducing the cleaned dataset and also the libraries that are needed to create plots and tables in a nice and aesthetically pleasing fashion.
+
+```{r, message=FALSE}
+
 library(tidyverse)
 library(broom)
-print(getwd())
 cleaned_data <- readRDS(here::here("dataset/cleaned_data_new.rds"))
-# print(ls())
 ```
 
-
+## Initial Findings and Relationships - EDA
 
 ```{r, test plots}
 library(ggthemes)
@@ -246,20 +259,26 @@ summary(model_sub)
 tidy_output <- tidy(model_sub)|>
   mutate(term = ifelse(term == "(Intercept)", "Asian", str_replace(term, "NEWRACE2", "")))
 
-  
+conf_intervals <- confint(model_sub)
 
-print(tidy_output)
+predicted_probs <- augment(model_sub, type.predict = "response")
+
+print(predicted_probs)
 
 ```
 The log-odds for individuals identified as "Asian," "Black/Afr Am," "Hispanic," "More than one race," "Native Am/AK Native," "Native HI/Other Pac Isl," and "White" are 0.4230185, 0.2169798, 0.3064576, 0.5386455, 0.9149979, 0.2967970, and 0.9660087, respectively. These estimates indicate the direction and the size of the log-odds of change in drug use likelihood for each race group compared to the baseline race group which for this one was set to Asian Race Group. For instance, for the White race group have log-odds of drug use that are 0.9660087 higher than Asians log-odds of drug use. Each have significant p values meaning that there is a relationship between drugs likelihood and race.
 
->>>>>>> d5024b3c7b609b592e8256a3822d161f37af89d7
 ## Note on Attribution
 
 In general, you should try to provide links to relevant resources, especially those that helped you. You don't have to link to every StackOverflow post you used but if there are explainers on aspects of the data or specific models that you found helpful, try to link to those. Also, try to link to other sources that might support (or refute) your analysis. These can just be regular hyperlinks. You don't need a formal citation.
 
 
 If you are directly quoting from a source, please make that clear. You can show quotes using `>` like this
+
+## Limitations of Analysis
+
+In our analysis of the data, there were a few limitations that we had to keep in mind. The first is that both when conducting and reading the analysis, remember that the results on substance use are based on respondent’s memories so that introduces error because people may have falsely reported their true substance use. Another source of error that we had to address was that the results of our plots were pretty skewed because the number of white respondents was much higher than the number of respondents of other race categories. This was falsely making it look like substance use was much higher for the white race category than it was for others. To address this, we tried using proportions instead. 
+
 
 -------
 
