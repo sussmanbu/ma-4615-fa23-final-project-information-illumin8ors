@@ -1,6 +1,12 @@
 library(tidyverse)
 library(readr)
 library(readxl)
+library(tidycensus)
+suppressPackageStartupMessages(library(sf))
+suppressPackageStartupMessages(library(tmap))
+options(tigris_use_cache = TRUE)
+census_api_key(c5c850588b50b20572e9b6df39c63b6923bcee30, overwrite = TRUE, install = TRUE)
+library("stringr")     
 
 # Read the CSV data file (make sure to provide the correct arguments)
 load("./dataset/NSDUH_2021.RData")
@@ -106,12 +112,29 @@ merged <- inner_join(Clean_census, CBSA, by)
 more_than_equalto_mil_CBSA <- merged |>
   filter(CENSUS2010POP >= 1000000)
 
+mil_plus_CBSA_states <- more_than_equalto_mil_CBSA |>
+  pull(STNAME)
+
+mil_plus_CBSA_counties <- more_than_equalto_mil_CBSA |>
+  pull(CITYNAME)
+
 less_than_mil_CBSA <- merged |>
   filter(CENSUS2010POP < 1000000)
 
 not_in_CBSA <- Clean_census |>
   filter(!CITYNAME %in% county_overlap) |>
   select(CITYNAME, CENSUS2010POP)
+
+more_than_equalto_mil_CBSA <- get_acs(geography = "county", 
+                                      state = "all", 
+                                      county = "all", 
+                                      geometry = TRUE,
+                                      survey = "acs1",
+                                      year = 2010)
+
+us.map <- tigris::counties(cb = TRUE, year = 2010) |>
+  str_remove(COUNTY, "^0+")
+
 
 # COUNTYP4 Breakdowns:
 
@@ -125,7 +148,17 @@ Small_metro_county <- merged_all |>
   filter(RUCC_2013 %in% c(2, 3))
 
 Non_metro_county <- merged_all |>
-  filter(RUCC_2013 > 3)
+  filter(RUCC_2013 > 3) |>
+  group_by(RUCC_2013) |>
+  summary(pop_2013 = sum(Population_2010))
+
+Large_metro_county |>
+  ggplot(aes(x = CITYNAME, y = alcever)) + geom_point()
+
+# from COUNTYP4: 1 = from large metro (25956), 2 = small metro (21883), 3 = nonmetro (10195)
+
+
+
 
 
 

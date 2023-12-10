@@ -147,11 +147,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#alcohol-use-plots" id="toc-alcohol-use-plots" class="nav-link active" data-scroll-target="#alcohol-use-plots">Alcohol Use Plots</a></li>
+  <li><a href="#motivation-for-data-analysis-da" id="toc-motivation-for-data-analysis-da" class="nav-link active" data-scroll-target="#motivation-for-data-analysis-da">Motivation for Data Analysis (DA)</a></li>
+  <li><a href="#interested-variables" id="toc-interested-variables" class="nav-link" data-scroll-target="#interested-variables">Interested Variables</a></li>
+  <li><a href="#questions-for-analysis" id="toc-questions-for-analysis" class="nav-link" data-scroll-target="#questions-for-analysis">Questions for Analysis</a></li>
+  <li><a href="#analysis-portion" id="toc-analysis-portion" class="nav-link" data-scroll-target="#analysis-portion">Analysis Portion</a></li>
+  <li><a href="#alcohol-use-plots" id="toc-alcohol-use-plots" class="nav-link" data-scroll-target="#alcohol-use-plots">Alcohol Use Plots</a></li>
   <li><a href="#plot-for-alcohol-use-last-12-months-by-race" id="toc-plot-for-alcohol-use-last-12-months-by-race" class="nav-link" data-scroll-target="#plot-for-alcohol-use-last-12-months-by-race">Plot for Alcohol Use last 12 months by Race</a></li>
   <li><a href="#logisitic-regression-on-cigeratte-tried-and-race" id="toc-logisitic-regression-on-cigeratte-tried-and-race" class="nav-link" data-scroll-target="#logisitic-regression-on-cigeratte-tried-and-race">Logisitic Regression on Cigeratte Tried and Race</a></li>
   <li><a href="#plot-for-marijuna-use-at-certain-age-with-race" id="toc-plot-for-marijuna-use-at-certain-age-with-race" class="nav-link" data-scroll-target="#plot-for-marijuna-use-at-certain-age-with-race">Plot for Marijuna Use at certain Age with Race</a></li>
   <li><a href="#model-for-substance-use-and-race-with-age" id="toc-model-for-substance-use-and-race-with-age" class="nav-link" data-scroll-target="#model-for-substance-use-and-race-with-age">Model for Substance Use and Race with Age</a></li>
+  <li><a href="#note-on-attribution" id="toc-note-on-attribution" class="nav-link" data-scroll-target="#note-on-attribution">Note on Attribution</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
   <li><a href="#rubric-on-this-page" id="toc-rubric-on-this-page" class="nav-link" data-scroll-target="#rubric-on-this-page">Rubric: On this page</a></li>
   </ul>
 </nav>
@@ -181,6 +187,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
+<section id="motivation-for-data-analysis-da" class="level2">
+<h2 class="anchored" data-anchor-id="motivation-for-data-analysis-da">Motivation for Data Analysis (DA)</h2>
+<p>Our motivation for engaging in Data Analysis of the NSDUH survey comes from our shared interest in finding out how drug use affects all areas of life in society. Understanding more about drug use is important because so much is unknown about drug use and being able to uncover certain relationships may be key in understanding and addressing drug use. For us we are super excited to explore such a huge dataset such as the NSDUH because we can take our time to explore the small key relationships between so many different variables throughout the dataset. Navigating through such a dataset took us a long time to find variables that we needed for analysis but it was perfect in the end because we were able to effectively show key relationships that help the general public understand more about drugs and their use.</p>
+<p>Ultimately our goal is to provide key insights into how certain factors play a role in a person’s drug use even if they did a drug for one time. We were initially interested in finding out just about how race and drug use is affecting one another but we then soon realized that we also need to explore the factors for drug use and not just the relationship between the two. We then realized that a more holistic view of each factor into drug use would be more appropriate. These factors of income, age and location can play a role in how drug use and race correlate and associate together.</p>
+</section>
+<section id="interested-variables" class="level2">
+<h2 class="anchored" data-anchor-id="interested-variables">Interested Variables</h2>
+<p>The variables we were highly interested in exploring is the relationship between drugs used and the race of the respondent in this survey. Being able to see the variables that factor into the relationship is important to understand how a person might be influenced to try and do drugs. The most important variables and factors help determine not only such a relationship of race and drug use but also the disparities between racial groups and drug use.</p>
+<p>Going even further, we want to see what factors attribute to drug use in any way, that being income or location. These are important relationships to explore because it could provide insight into why or how someone could be introduced to drug use and what factors play a role. Some specific questions from the survey that play into our analysis are questions asking if a person has ever done such a drug and such a drug could be one of the 6 we are exploring which are cigarettes, marijuana, alcohol, cocaine, crack, heroine. Many factors could influence drug use such that two factors are reliant on each other. For example there could be relationships such that a young person with low income may or may not be more inclined to use drugs. These claims can only be made after such analysis of this dataset and its important to explore them.</p>
+<p>Also at what age each person has done any of the respective substances and whether they continue to do those drugs or not. Income, age and location are also important factors when it comes to finding the factors as these can be associated with higher drug use or lower as well. We want to explore relationships like if you are younger will you be trying more drugs or will you try more drugs when you are older and how does the racial group aspect play a role. Age can also play along with income and location and it’s important to explore whether these factors intertwine with each other or are they stand alone. We aim to answer these questions and relationships below in the analysis.</p>
+</section>
+<section id="questions-for-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="questions-for-analysis">Questions for Analysis</h2>
+<p>The key question we are trying to answer is firstly how does race affect the drug use of a person. Going further, how does location, age, and income factor into this relationship.</p>
+</section>
+<section id="analysis-portion" class="level2">
+<h2 class="anchored" data-anchor-id="analysis-portion">Analysis Portion</h2>
 <p><img src="https://upload.wikimedia.org/wikipedia/commons/7/77/Pebbleswithquarzite.jpg" class="img-fluid"></p>
 <p>This comes from the file <code>analysis.qmd</code>.</p>
 <p>We describe here our detailed data analysis. This page will provide an overview of what questions you hope to ask, illustrations relevant aspects of the data with tables and figures, and a statistical model that attempts to answer part of the question. You’ll also reflect on next steps and further analysis.</p>
@@ -313,6 +336,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a><span class="co"># filter(HR30EST == first(HR30EST)) |&gt;</span></span>
 <span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a><span class="co"># select(AL30EST, MR30EST, CC30EST, CR30EST, HR30EST)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
 <section id="alcohol-use-plots" class="level2">
 <h2 class="anchored" data-anchor-id="alcohol-use-plots">Alcohol Use Plots</h2>
 <div class="cell">
@@ -535,38 +559,37 @@ Number of Fisher Scoring iterations: 4</code></pre>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>tidy_output <span class="ot">&lt;-</span> <span class="fu">tidy</span>(model_sub)<span class="sc">|&gt;</span></span>
 <span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">term =</span> <span class="fu">ifelse</span>(term <span class="sc">==</span> <span class="st">"(Intercept)"</span>, <span class="st">"Asian"</span>, <span class="fu">str_replace</span>(term, <span class="st">"NEWRACE2"</span>, <span class="st">""</span>)))</span>
 <span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(tidy_output)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>conf_intervals <span class="ot">&lt;-</span> <span class="fu">confint</span>(model_sub)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Waiting for profiling to be done...</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>predicted_probs <span class="ot">&lt;-</span> <span class="fu">augment</span>(model_sub, <span class="at">type.predict =</span> <span class="st">"response"</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(predicted_probs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 7 × 5
-  term                    estimate std.error statistic   p.value
-  &lt;chr&gt;                      &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
-1 Asian                      0.423    0.0360     11.8  5.98e- 32
-2 Black/Afr Am               0.217    0.0441      4.91 8.89e-  7
-3 Hispanic                   0.306    0.0419      7.32 2.45e- 13
-4 More than one race         0.539    0.0572      9.41 4.74e- 21
-5 Native Am/AK Native        0.915    0.108       8.48 2.24e- 17
-6 Native HI/Other Pac Isl    0.297    0.146       2.03 4.24e-  2
-7 White                      0.966    0.0384     25.2  8.51e-140</code></pre>
+<pre><code># A tibble: 58,034 × 8
+   drug_use NEWRACE2     .fitted .resid      .hat .sigma    .cooksd .std.resid
+      &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+ 1        1 White          0.800  0.667 0.0000287   1.05 0.00000102      0.667
+ 2        1 White          0.800  0.667 0.0000287   1.05 0.00000102      0.667
+ 3        1 White          0.800  0.667 0.0000287   1.05 0.00000102      0.667
+ 4        1 White          0.800  0.667 0.0000287   1.05 0.00000102      0.667
+ 5        0 Hispanic       0.675 -1.50  0.000101    1.05 0.0000298      -1.50 
+ 6        1 Hispanic       0.675  0.887 0.000101    1.05 0.00000694      0.887
+ 7        1 Asian          0.604  1.00  0.000309    1.05 0.0000290       1.00 
+ 8        1 White          0.800  0.667 0.0000287   1.05 0.00000102      0.667
+ 9        0 Black/Afr Am   0.655 -1.46  0.000148    1.05 0.0000402      -1.46 
+10        1 Hispanic       0.675  0.887 0.000101    1.05 0.00000694      0.887
+# ℹ 58,024 more rows</code></pre>
 </div>
 </div>
 <p>The log-odds for individuals identified as “Asian,” “Black/Afr Am,” “Hispanic,” “More than one race,” “Native Am/AK Native,” “Native HI/Other Pac Isl,” and “White” are 0.4230185, 0.2169798, 0.3064576, 0.5386455, 0.9149979, 0.2967970, and 0.9660087, respectively. These estimates indicate the direction and the size of the log-odds of change in drug use likelihood for each race group compared to the baseline race group which for this one was set to Asian Race Group. For instance, for the White race group have log-odds of drug use that are 0.9660087 higher than Asians log-odds of drug use. Each have significant p values meaning that there is a relationship between drugs likelihood and race.</p>
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<p>d5024b3c7b609b592e8256a3822d161f37af89d7 ## Note on Attribution</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+</section>
+<section id="note-on-attribution" class="level2">
+<h2 class="anchored" data-anchor-id="note-on-attribution">Note on Attribution</h2>
+</section>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"></h2>
 <p>In general, you should try to provide links to relevant resources, especially those that helped you. You don’t have to link to every StackOverflow post you used but if there are explainers on aspects of the data or specific models that you found helpful, try to link to those. Also, try to link to other sources that might support (or refute) your analysis. These can just be regular hyperlinks. You don’t need a formal citation.</p>
 <p>If you are directly quoting from a source, please make that clear. You can show quotes using <code>&gt;</code> like this</p>
 <hr>
