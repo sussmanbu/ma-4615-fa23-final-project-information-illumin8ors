@@ -15,6 +15,7 @@ load("./dataset/NSDUH_2021.RData")
 # Use select to filter columns by name and store the result in a new dataframe
 drug_health_data_clean_new <- PUF2021_100622 |>
   select(QUESTID2, filedate,
+         cigever, cigage, mjever, mjage, alcever, cocever, cocage, crkever, crkage, herever, herage, UD5ILLANY, 
          cigwilyr,cigtry,cigrec,CIG30AV, 
          alctry, alcrec, aldaypwk, ALCUS30D, AL30EST,
          mjage, mjrec, mrdaypwk, MJDAY30A, MR30EST,
@@ -49,9 +50,9 @@ drug_health_data_clean_new <- PUF2021_100622 |>
          irmedicr, irmcdchp, irchmpus, irchmpus, irprvhlt, irothhlt, irfamsoc, irfamssi, irfstamp, irfampmt, IRPINC3, IRFAMIN3,
          PDEN10, COUTYP4, MAIIN102, AIIND102, 
          ENRLCOLLFT2, wrkhadjob, sexident, milstat, NEWRACE2, income, POVERTY3, PDEN10, COUTYP4) |> 
-  mutate(NEWRACE2 = recode(NEWRACE2, "1" = "NonHisp White", "2" = "NonHisp Black/Afr Am", "3" = "NonHisp Native Am/AK Native", "4" = "NonHisp Native HI/Other Pac Isl", "5" = "NonHisp Asian", "6" = "NonHisp more than one race", "7" = "Hispanic"))
+  mutate(NEWRACE2 = recode(NEWRACE2, "1" = "White", "2" = "Black/Afr Am", "3" = "Native Am/AK Native", "4" = "Native HI/Other Pac Isl", "5" = "Asian", "6" = "More than one race", "7" = "Hispanic"))
   
-
+  
 
 # Save the cleaned data to a new CSV file
 saveRDS(drug_health_data_clean_new, "./dataset/cleaned_data_new.rds")
