@@ -253,6 +253,18 @@ print(tidy_output)
 ```
 The log-odds for individuals identified as "Asian," "Black/Afr Am," "Hispanic," "More than one race," "Native Am/AK Native," "Native HI/Other Pac Isl," and "White" are 0.4230185, 0.2169798, 0.3064576, 0.5386455, 0.9149979, 0.2967970, and 0.9660087, respectively. These estimates indicate the direction and the size of the log-odds of change in drug use likelihood for each race group compared to the baseline race group which for this one was set to Asian Race Group. For instance, for the White race group have log-odds of drug use that are 0.9660087 higher than Asians log-odds of drug use. Each have significant p values meaning that there is a relationship between drugs likelihood and race.
 
+
+## Testing the plot of location with substance use
+
+``` {r}
+metro_test <- cleaned_data |>
+  filter(CIG30AV < 94) |>
+  ggplot(aes(x = CIG30AVG)) + geom_bar(aes(fill = NEWRACE2)) + facet_wrap(vars(COUTYP4))
+
+
+```
+
+
 >>>>>>> d5024b3c7b609b592e8256a3822d161f37af89d7
 ## Note on Attribution
 
