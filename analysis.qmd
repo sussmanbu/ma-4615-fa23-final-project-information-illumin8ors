@@ -200,6 +200,18 @@ odds_ratios_df
 	The coefficient for the intercept/Hispanic population shows that when all other variables are being held constant, the log odds for Hispanic population is  -0.70059. This is just in a sense the baseline to compare to the other races. For the Asian population of this dataset, when converting the log odds to odd ratio, the odds of an Asian population smoking cigarettes is 0.6482 times the odds of Hispanics smoking cigarettes. This means that the odds of the Asian population smoking cigarettes is lower than the Hispanic population. In terms of the numbers from the model, White people in the dataset have 1.9676 times the odds of smoking cigarettes compared to Hispanics.
 
 
+
+## Testing the plot of location with substance use
+
+``` {r}
+metro_test <- cleaned_data |>
+  filter(CIG30AV < 94) |>
+  ggplot(aes(x = CIG30AVG)) + geom_bar(aes(fill = NEWRACE2)) + facet_wrap(vars(COUTYP4))
+
+
+```
+
+
 >>>>>>> d5024b3c7b609b592e8256a3822d161f37af89d7
 ## Note on Attribution
 
