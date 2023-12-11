@@ -159,7 +159,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#logisitic-regression-on-cigeratte-tried-and-race" id="toc-logisitic-regression-on-cigeratte-tried-and-race" class="nav-link" data-scroll-target="#logisitic-regression-on-cigeratte-tried-and-race">Logisitic Regression on Cigeratte Tried and Race</a></li>
   <li><a href="#plot-for-marijuna-use-at-certain-age-with-race" id="toc-plot-for-marijuna-use-at-certain-age-with-race" class="nav-link" data-scroll-target="#plot-for-marijuna-use-at-certain-age-with-race">Plot for Marijuna Use at certain Age with Race</a></li>
   <li><a href="#model-for-substance-use-and-race-with-age" id="toc-model-for-substance-use-and-race-with-age" class="nav-link" data-scroll-target="#model-for-substance-use-and-race-with-age">Model for Substance Use and Race with Age</a></li>
-  <li><a href="#note-on-attribution" id="toc-note-on-attribution" class="nav-link" data-scroll-target="#note-on-attribution">Note on Attribution</a></li>
+  </ul></li>
+  <li><a href="#head" id="toc-head" class="nav-link" data-scroll-target="#head">&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</a>
+  <ul class="collapse">
+  <li><a href="#testing-the-plot-of-location-with-substance-use" id="toc-testing-the-plot-of-location-with-substance-use" class="nav-link" data-scroll-target="#testing-the-plot-of-location-with-substance-use">Testing the plot of location with substance use</a></li>
   <li><a href="#limitations-of-analysis" id="toc-limitations-of-analysis" class="nav-link" data-scroll-target="#limitations-of-analysis">Limitations of Analysis</a></li>
   <li><a href="#rubric-on-this-page" id="toc-rubric-on-this-page" class="nav-link" data-scroll-target="#rubric-on-this-page">Rubric: On this page</a></li>
   </ul></li>
@@ -215,7 +218,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>cleaned_data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"dataset/cleaned_data_new.rds"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(usmap)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>cleaned_data <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"dataset/cleaned_data_new.rds"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="initial-findings-and-relationships---eda" class="level2">
@@ -576,8 +580,31 @@ Number of Fisher Scoring iterations: 4</code></pre>
 </div>
 <p>The log-odds for individuals identified as “Asian,” “Black/Afr Am,” “Hispanic,” “More than one race,” “Native Am/AK Native,” “Native HI/Other Pac Isl,” and “White” are 0.4230185, 0.2169798, 0.3064576, 0.5386455, 0.9149979, 0.2967970, and 0.9660087, respectively. These estimates indicate the direction and the size of the log-odds of change in drug use likelihood for each race group compared to the baseline race group which for this one was set to Asian Race Group. For instance, for the White race group have log-odds of drug use that are 0.9660087 higher than Asians log-odds of drug use. Each have significant p values meaning that there is a relationship between drugs likelihood and race.</p>
 </section>
-<section id="note-on-attribution" class="level2">
-<h2 class="anchored" data-anchor-id="note-on-attribution">Note on Attribution</h2>
+</section>
+<section id="head" class="level1">
+<h1>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</h1>
+<section id="testing-the-plot-of-location-with-substance-use" class="level2">
+<h2 class="anchored" data-anchor-id="testing-the-plot-of-location-with-substance-use">Testing the plot of location with substance use</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>metro_test <span class="ot">&lt;-</span> cleaned_data <span class="sc">|&gt;</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(CIG30AV <span class="sc">&lt;</span> <span class="dv">94</span>) <span class="sc">|&gt;</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> CIG30AVG)) <span class="sc">+</span> <span class="fu">geom_bar</span>(<span class="fu">aes</span>(<span class="at">fill =</span> NEWRACE2)) <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(COUTYP4))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<blockquote class="blockquote">
+<p>d5024b3c7b609b592e8256a3822d161f37af89d7 79d3bad8bf602c398a0901b502c65439746b0df8 ## Note on Attribution</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
 <p>In general, you should try to provide links to relevant resources, especially those that helped you. You don’t have to link to every StackOverflow post you used but if there are explainers on aspects of the data or specific models that you found helpful, try to link to those. Also, try to link to other sources that might support (or refute) your analysis. These can just be regular hyperlinks. You don’t need a formal citation.</p>
 <p>If you are directly quoting from a source, please make that clear. You can show quotes using <code>&gt;</code> like this</p>
 </section>
