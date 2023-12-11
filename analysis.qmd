@@ -33,6 +33,7 @@ Below we start by first introducing the cleaned dataset and also the libraries t
 
 library(tidyverse)
 library(broom)
+library(usmap)
 cleaned_data <- readRDS(here::here("dataset/cleaned_data_new.rds"))
 ```
 
