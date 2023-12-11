@@ -209,6 +209,7 @@ metro_test <- cleaned_data |>
   ggplot(aes(x = CIG30AVG)) + geom_bar(aes(fill = NEWRACE2)) + facet_wrap(vars(COUTYP4))
 
 
+
 ```
 
 
