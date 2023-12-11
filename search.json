@@ -86,7 +86,7 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "MA [46]15 Final Project",
+    "title": "MA [46]15 Final Project: Exploring Drug Use and Contributing Factors",
     "section": "",
     "text": "Blog Post 6\n\n\n\n\n\n\n\nEnding\n\n\n\n\nWrapping the Project All Together (Part 1)\n\n\n\n\n\n\nDec 4, 2023\n\n\nInformation Illumin8ors\n\n\n\n\n\n\n  \n\n\n\n\nBlog Post 5\n\n\n\n\n\n\n\nData Combination\n\n\n\n\nExploring other datasets as compliments to the original dataset.\n\n\n\n\n\n\nNov 20, 2023\n\n\nInformation Illumin8ors\n\n\n\n\n\n\n  \n\n\n\n\nBlog Post 4\n\n\n\n\n\n\n\nEDA\n\n\n\n\nTalking about EDA and some notable relationships\n\n\n\n\n\n\nNov 13, 2023\n\n\nInformation Illumin8ors\n\n\n\n\n\n\n  \n\n\n\n\nBlog Post 3\n\n\n\n\n\n\n\nData Cleaning\n\n\n\n\nGoing into the data cleaning process for the dataset used\n\n\n\n\n\n\nNov 6, 2023\n\n\nInformation Illumin8ors\n\n\n\n\n\n\n  \n\n\n\n\nBlog Post 2\n\n\n\n\n\n\n\nDataset Ethics and Equity\n\n\n\n\nData for Equity Understanding for our Data Set\n\n\n\n\n\n\nOct 30, 2023\n\n\nInformation Illumin8ors\n\n\n\n\n\n\n  \n\n\n\n\nBlog Post 1 - Datasets Search\n\n\n\n\n\n\n\nDataset Start\n\n\n\n\nDatasets Reasearch for beginning the Final Project\n\n\n\n\n\n\nOct 23, 2023\n\n\nInformation Illumin8ors\n\n\n\n\n\n\nNo matching items"
   },
@@ -207,7 +207,14 @@
     "href": "analysis.html#testing-the-plot-of-location-with-substance-use",
     "title": "Analysis",
     "section": "Testing the plot of location with substance use",
-    "text": "Testing the plot of location with substance use\n\nmetro_test &lt;- cleaned_data |&gt;\n  filter(CIG30AV &lt; 94) |&gt;\n  ggplot(aes(x = CIG30AVG)) + geom_bar(aes(fill = NEWRACE2)) + facet_wrap(vars(COUTYP4))\n\n\n\n\n\n\n\n\nd5024b3c7b609b592e8256a3822d161f37af89d7 79d3bad8bf602c398a0901b502c65439746b0df8 ## Note on Attribution\n\n\n\n\n\n\n\nIn general, you should try to provide links to relevant resources, especially those that helped you. You don’t have to link to every StackOverflow post you used but if there are explainers on aspects of the data or specific models that you found helpful, try to link to those. Also, try to link to other sources that might support (or refute) your analysis. These can just be regular hyperlinks. You don’t need a formal citation.\nIf you are directly quoting from a source, please make that clear. You can show quotes using &gt; like this"
+    "text": "Testing the plot of location with substance use\n\nmetro_test &lt;- cleaned_data |&gt;\n  filter(CIG30AV &lt; 94) |&gt;\n  ggplot(aes(x = CIG30AVG)) + geom_bar(aes(fill = NEWRACE2)) + facet_wrap(vars(COUTYP4))\n\n\n\n\n\n\n\n\nd5024b3c7b609b592e8256a3822d161f37af89d7 79d3bad8bf602c398a0901b502c65439746b0df8"
+  },
+  {
+    "objectID": "analysis.html#note-on-attribution",
+    "href": "analysis.html#note-on-attribution",
+    "title": "Analysis",
+    "section": "Note on Attribution",
+    "text": "Note on Attribution\nIn general, you should try to provide links to relevant resources, especially those that helped you. You don’t have to link to every StackOverflow post you used but if there are explainers on aspects of the data or specific models that you found helpful, try to link to those. Also, try to link to other sources that might support (or refute) your analysis. These can just be regular hyperlinks. You don’t need a formal citation.\nIf you are directly quoting from a source, please make that clear. You can show quotes using &gt; like this"
   },
   {
     "objectID": "analysis.html#limitations-of-analysis",
