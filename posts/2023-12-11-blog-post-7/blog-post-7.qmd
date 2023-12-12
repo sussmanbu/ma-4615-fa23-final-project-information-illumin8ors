@@ -1,0 +1,22 @@
+---
+title: "Blog Post 7"
+description:  |
+  Wrapping the Project All Together (Part 2)
+author: "Information Illumin8ors"
+date: "2023-12-11"
+categories: [Ending]
+date-modified: "2023-12-11"
+draft: FALSE
+---
+
+## Tentative Thesis (Continued)
+Some main questions we have been trying to answer are: What are the key factors that play into a person’s tendency to use substances? How large of a factor is race? Is race or income a better predictor of substance use? Do large, small, or non-metro areas use more substances? Do mental health and/or education have a larger effect than any of the previously mentioned factors? 
+
+We have kept these questions in mind when constructing our thesis. A current working thesis is: There are many factors that play into substance use, including but not limited to race, income, location, and mental health; however, race is one of the most important factors, and there is a clear relationship that shows certain races tend to use more substances than others. 
+
+To support this thesis, we have done a logistical regression to investigate and visualize the relationship between substance use and race and it was clear that there is a strong enough correlation to draw conclusions. To explore other factors that influence drug use and to as a result strengthen the relationship between drug use and race, we will include linear models that, when compared, will show us whether race, income, or mental health is a better predictor of substance use. Furthermore, it is important to ensure the validity after building these linear models. For example, using the statistical tests and evaluating the AIC or BIC to find out the accuracy of the model, careful interpretation is also needed.
+
+## Polishing and Wrapping Up
+We will make sure to include titles that explain the variables we are plotting. We will also include appropriately labeled axes and figure legends. In the figure legends under each figure, we will briefly describe how the plot was made, why it was made, and what conclusions can be drawn. To keep everything cohesive, we have discussed using theme_minimal() which would keep the data visuals from looking cluttered. We have also carefully thought about the order in which the figures should be included on our website so that anyone reading through it would be able to follow. By this we mean that we want the knowledge gained by each figure to build on each other, starting basic and then building into relationships displaying more complex relationships between variables so that the reader could easily keep track of our thought process and how we have supported our thesis.
+
+We also plan to ensure the order in which we present the plots in the analysis page and the big picture page are greatly placed. We are in the process of including relevant images and information for the finished product and making it flow easier from one page to the next. Order is a key aspect which is focused on so that the viewer can understand everything in a manner that isn’t fast paced and well ordered. Wrapping everything up is key in making our project look visually appealing while also displaying the message and thesis to our audience. 

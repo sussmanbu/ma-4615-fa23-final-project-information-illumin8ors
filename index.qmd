@@ -1,5 +1,5 @@
 ---
-title: "MA [46]15 Final Project"
+title: "MA [46]15 Final Project: Exploring Drug Use and Contributing Factors"
 listing:
   contents: "posts/*/*.qmd"
   sort: "date desc"
@@ -11,4 +11,4 @@ page-layout: full
 title-block-banner: true
 ---
 
-![](images/data-science.png)
+![](images/drugs.png)
