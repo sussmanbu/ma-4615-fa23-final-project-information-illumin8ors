@@ -4,23 +4,22 @@ description: Here we provide a detailed analysis using more sophisticated statis
 toc: true
 draft: false
 ---
+# Early Insights
 ## Motivation for Data Analysis (DA)
 
 Our motivation for engaging in Data Analysis of the NSDUH survey comes from our shared interest in finding out how drug use affects all areas of life in society. Understanding more about drug use is important because so much is unknown about drug use and being able to uncover certain relationships may be key in understanding and addressing drug use. For us we are super excited to explore such a huge dataset such as the NSDUH because we can take our time to explore the small key relationships between so many different variables throughout the dataset. Navigating through such a dataset took us a long time to find variables that we needed for analysis but it was perfect in the end because we were able to effectively show key relationships that help the general public understand more about drugs and their use. 
 
-Ultimately our goal is to provide key insights into how certain factors play a role in a person’s drug use even if they did a drug for one time. We were initially interested in finding out just about how race and drug use is affecting one another but we then soon realized that we also need to explore the factors for drug use and not just the relationship between the two. We then realized that a more holistic view of each factor into drug use would be more appropriate. These factors of income, age and location can play a role in how drug use and race correlate and associate together.
+Ultimately our goal is to provide key insights into how certain factors play a role in a person’s drug use even if they did a drug for one time. We were initially interested in finding out just about how race and drug use is affecting one another but we then soon realized that we also need to explore the factors for drug use and not just the relationship between the two. We then realized that a more holistic view of each factor into drug use would be more appropriate. These factors of income,and location can play a role in how drug use and race correlate and associate together.
 
 ## Interested Variables
 
 The variables we were highly interested in exploring is the relationship between drugs used and the race of the respondent in this survey. Being able to see the variables that factor into the relationship is important to understand how a person might be influenced to try and do drugs. The most important variables and factors help determine not only such a relationship of race and drug use but also the disparities between racial groups and drug use. 
 
-Going even further, we want to see what factors attribute to drug use in any way, that being income or location. These are important relationships to explore because it could provide insight into why or how someone could be introduced to drug use and what factors play a role. Some specific questions from the survey that play into our analysis are questions asking if a person has ever done such a drug and such a drug could be one of the 6 we are exploring which are cigarettes, marijuana, alcohol, cocaine, crack, heroine. Many factors could influence drug use such that two factors are reliant on each other. For example there could be relationships such that a young person with low income may or may not be more inclined to use drugs. These claims can only be made after such analysis of this dataset and its important to explore them.
-
-Also at what age each person has done any of the respective substances and whether they continue to do those drugs or not. Income, age and location are also important factors when it comes to finding the factors as these can be associated with higher drug use or lower as well. We want to explore relationships like if you are younger will you be trying more drugs or will you try more drugs when you are older and how does the racial group aspect play a role. Age can also play along with income and location and it's important to explore whether these factors intertwine with each other or are they stand alone. We aim to answer these questions and relationships below in the analysis.
+Going even further, we want to see what factors attribute to drug use in any way, that being income or location. These are important relationships to explore because it could provide insight into why or how someone could be introduced to drug use and what factors play a role. Some specific questions from the survey that play into our analysis are questions asking if a person has ever done such a drug and such a drug could be one of the 6 we are exploring which are cigarettes, marijuana, alcohol, cocaine, crack, heroine. Many factors could influence drug use such that two factors are reliant on each other. For example there could be relationships such that a young person with low income may or may not be more inclined to use drugs. These claims can only be made after such analysis of this dataset and its important to explore them. We aim to answer these questions and relationships below in the analysis.
 
 ## Questions for Analysis
 
-The key question we are trying to answer is firstly how does race affect the drug use of a person. Going further, how does location, age, and income factor into this relationship. 
+The key question we are trying to answer is firstly how does race affect the drug use of a person. Going further, how does location, and income factor into this relationship. 
 
 # Analysis Portion
 
@@ -179,41 +178,6 @@ boxplot_alcohol_use <- ggplot(filtered_data, aes(x = factor(NEWRACE2), y = alcyr
 
 print(boxplot_alcohol_use)
 ```
-
-
-## Logisitic Regression on Cigeratte Tried and Race
-
-```{r}
-# Filtering the model such that we have binary values
-log_mod <- cleaned_data |>
-  select(NEWRACE2, cigtry, cigrec, cigage) |>
-  filter(cigtry < 984 | cigtry == 991) |>
-  mutate(cigtry = ifelse(cigtry == 991, 0, cigtry)) |>
-  mutate(cigrec = ifelse(cigrec == 91, 0, cigrec)) |>
-  mutate(cigtry_binary = ifelse(cigtry > 0, 1, 0)) 
-
-# Creating Logistic Regression model
-model <- glm(cigtry_binary ~ NEWRACE2 , data = log_mod, family = "binomial")
-
-odds_ratios <- exp(coef(model))
-
-summary(model)
-
-odds_ratios_df <- data.frame(
-  Race_Category = ifelse(names(odds_ratios) == "(Intercept)", "Hispanic",
-                     ifelse(names(odds_ratios) == "NEWRACE2NonHisp Asian", "Asian",
-                     ifelse(names(odds_ratios) == "NEWRACE2NonHisp Black/Afr Am", "Black/Afr Am",
-                     ifelse(names(odds_ratios) == "NEWRACE2NonHisp more than one race", "NonHisp more than one race",
-                     ifelse(names(odds_ratios) == "NEWRACE2NonHisp Native Am/AK Native", "Native Am/AK Native",
-                     ifelse(names(odds_ratios) == "NEWRACE2NonHisp Native HI/Other Pac Isl", "Native HI/Other Pac Isl",
-                     ifelse(names(odds_ratios) == "NEWRACE2NonHisp White", "White", names(odds_ratios)))))))),
-  Odds_Ratio = odds_ratios
-)
-
-odds_ratios_df
-```
-	The coefficient for the intercept/Hispanic population shows that when all other variables are being held constant, the log odds for Hispanic population is  -0.70059. This is just in a sense the baseline to compare to the other races. For the Asian population of this dataset, when converting the log odds to odd ratio, the odds of an Asian population smoking cigarettes is 0.6482 times the odds of Hispanics smoking cigarettes. This means that the odds of the Asian population smoking cigarettes is lower than the Hispanic population. In terms of the numbers from the model, White people in the dataset have 1.9676 times the odds of smoking cigarettes compared to Hispanics.
-	
 	
 	
 ## Plot for Marijuna Use at certain Age with Race
@@ -235,42 +199,138 @@ marj_age_plot <- ggplot(marj_data, aes(x = factor(NEWRACE2), y = mjage, color = 
 
 marj_age_plot
 ```
+## Logisitic Regression Models
 
+Important to note that the baselines/intercepts are the Asian Population
 
-## Model for Substance Use and Race with Age
-
-We are gonna assume for the model here that the hypothesis is that there is no association between likelihood of trying drugs ever and race group.
-
+### Substance Use with Race
 ```{r}
 drug_use_with_race <- cleaned_data |>
-  select(NEWRACE2, cigever, cigage, mjever, mjage, alcever, cocever, cocage, crkever, crkage, herever, herage) |>
+  select(NEWRACE2, cigever, cigage, mjever, mjage, alcever, cocever, cocage, crkever, crkage, herever, herage, income, COUTYP4) |>
   mutate(drug_use = ifelse(cigever==1 | mjever==1 | alcever==1 | cocever==1 | crkever==1 | herever==1, 1, 0))
 
-count_result <- drug_use_with_race |>
-  count(drug_use)
-
-# Display the count result
-print(count_result)
-
-# Model for the Substance Use vs Race
+# Model for the Substance Use vs Race 
 model_sub <- glm(drug_use ~ NEWRACE2, data = drug_use_with_race, family = "binomial")
-
-summary(model_sub)
 
 tidy_output <- tidy(model_sub)|>
   mutate(term = ifelse(term == "(Intercept)", "Asian", str_replace(term, "NEWRACE2", "")))
 
 conf_intervals <- confint(model_sub)
 
-predicted_probs <- augment(model_sub, type.predict = "response")
+odds_ratios <- exp(coef(model_sub))
 
-print(predicted_probs)
+odds_ratios_df <- data.frame(
+  Odds_Ratio = odds_ratios
+)
 
+output_table <- cbind(tidy_output, conf_intervals,odds_ratios_df) |>
+  rename(Race = term) |>
+  select(-statistic,-std.error) |>
+  rownames_to_column(var = "RowNames") |>
+  select(-RowNames)
+
+output_table
 ```
-The log-odds for individuals identified as "Asian," "Black/Afr Am," "Hispanic," "More than one race," "Native Am/AK Native," "Native HI/Other Pac Isl," and "White" are 0.4230185, 0.2169798, 0.3064576, 0.5386455, 0.9149979, 0.2967970, and 0.9660087, respectively. These estimates indicate the direction and the size of the log-odds of change in drug use likelihood for each race group compared to the baseline race group which for this one was set to Asian Race Group. For instance, for the White race group have log-odds of drug use that are 0.9660087 higher than Asians log-odds of drug use. Each have significant p values meaning that there is a relationship between drugs likelihood and race.
 
-<<<<<<< HEAD
-=======
+
+
+### Substance Use with Race and Income as a Factor of Each Other 
+
+We are gonna assume for the model here that the hypothesis is that there is no association between likelihood of trying drugs ever and race group as well as Income.
+
+```{r}
+drug_use_with_race <- cleaned_data |>
+  select(NEWRACE2, cigever, cigage, mjever, mjage, alcever, cocever, cocage, crkever, crkage, herever, herage, income, COUTYP4) |>
+  mutate(drug_use = ifelse(cigever==1 | mjever==1 | alcever==1 | cocever==1 | crkever==1 | herever==1, 1, 0))
+
+# Model for the Substance Use vs Race and Income being Independent
+model_sub <- glm(drug_use ~ NEWRACE2 + factor(income), data = drug_use_with_race, family = "binomial")
+
+tidy_output <- tidy(model_sub)|>
+  mutate(term = ifelse(term == "(Intercept)", "Asian", str_replace(term, "NEWRACE2", "")))
+
+conf_intervals <- confint(model_sub)
+
+odds_ratios <- exp(coef(model_sub))
+
+odds_ratios_df <- data.frame(
+  Odds_Ratio = odds_ratios
+)
+
+output_table <- cbind(tidy_output, conf_intervals,odds_ratios_df) |>
+  rename(Race = term) |>
+  select(-statistic,-std.error) |>
+  rownames_to_column(var = "RowNames") |>
+  select(-RowNames)
+
+output_table
+```
+
+
+### Substance Use with Race and Income as a Factor of Each Other 
+
+Same as before, we are gonna assume for the model here that the hypothesis is that there is no association between likelihood of trying drugs ever and race group as well as Income.
+```{r}
+# Model for the Substance Use vs Race and Income
+model_sub_income <- glm(drug_use ~ NEWRACE2*factor(income), data = drug_use_with_race, family = "binomial")
+
+tidy_output_income <- tidy(model_sub_income)|>
+  mutate(term = ifelse(term == "(Intercept)", "Asian", str_replace(term, "NEWRACE2", "")))
+
+conf_intervals_income <- confint(model_sub_income)
+
+odds_ratios_income <- exp(coef(model_sub_income))
+
+output_table <- cbind(tidy_output_income,conf_intervals_income, odds_ratios_income) |>
+  select(-statistic,-std.error) |>
+  rownames_to_column(var = "RowNames") |>
+  select(-RowNames)
+
+output_table
+```
+
+
+### Substance Use with Race and Location
+
+```{r}
+# Model for the Substance Use vs Race and Location Independent
+model_sub_loc <- glm(drug_use ~ NEWRACE2+factor(COUTYP4), data = drug_use_with_race, family = "binomial")
+
+tidy_output_loc <- tidy(model_sub_loc)|>
+  mutate(term = ifelse(term == "(Intercept)", "Asian", str_replace(term, "NEWRACE2", "")))
+
+conf_intervals_loc <- confint(model_sub_loc)
+
+odds_ratios_loc <- exp(coef(model_sub_loc))
+
+output_table <- cbind(tidy_output_loc,conf_intervals_loc, odds_ratios_loc) |>
+  select(-statistic,-std.error) |>
+  rownames_to_column(var = "RowNames") |>
+  select(-RowNames)
+
+output_table
+```
+
+### Substance Use with Race and Location as a Factor of Each Other 
+```{r}
+# Model for the Substance Use vs Race and Location
+model_sub_loc <- glm(drug_use ~ NEWRACE2*factor(COUTYP4), data = drug_use_with_race, family = "binomial")
+
+tidy_output_loc <- tidy(model_sub_loc)|>
+  mutate(term = ifelse(term == "(Intercept)", "Asian", str_replace(term, "NEWRACE2", "")))
+
+conf_intervals_loc <- confint(model_sub_loc)
+
+odds_ratios_loc <- exp(coef(model_sub_loc))
+
+output_table <- cbind(tidy_output_loc,conf_intervals_loc, odds_ratios_loc) |>
+  select(-statistic,-std.error) |>
+  rownames_to_column(var = "RowNames") |>
+  select(-RowNames)
+
+output_table
+```
+
 
 ## Testing the plot of location with substance use
 
@@ -282,8 +342,10 @@ metro_test <- cleaned_data |>
 ```
 
 
->>>>>>> d5024b3c7b609b592e8256a3822d161f37af89d7
->>>>>>> 79d3bad8bf602c398a0901b502c65439746b0df8
+<!-- >>>>>>> d5024b3c7b609b592e8256a3822d161f37af89d7
+>>>>>>> 79d3bad8bf602c398a0901b502c65439746b0df8 -->
+
+# Conclusions
 
 ## Note on Attribution
 
