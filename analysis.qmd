@@ -176,6 +176,28 @@ boxplot_alcohol_use <- ggplot(filtered_data, aes(x = factor(NEWRACE2), y = alcyr
 
 print(boxplot_alcohol_use)
 ```
+## Proportion of Race to Try Drugs
+
+```{r}
+drug_use_with_race <- cleaned_data |>
+  select(NEWRACE2, cigever, cigage, mjever, mjage, alcever, alctry, cocever, cocage, crkever, crkage, herever, herage, income, COUTYP4) |>
+  mutate(drug_use = ifelse(cigever==1 | mjever==1 | alcever==1 | cocever==1 | crkever==1 | herever==1, 1, 0))
+
+proportions_table <- drug_use_with_race |>
+  group_by(NEWRACE2) |>
+  summarize(percent_try_drugs = 100*(mean(drug_use)),
+            percent_do_not = 100 - percent_try_drugs) |>
+  pivot_longer(cols = starts_with("percent"), names_to = "Drug_Status", values_to = "Percentage")
+
+# Create a bar plot 
+ggplot(proportions_table, aes(x = NEWRACE2, y = Percentage, fill = Drug_Status)) +
+  geom_bar(stat = "identity", position = "stack") +
+  labs(title = "Percentage of People Who Tried/Did Not Try Drugs by Race",
+       x = "Race",
+       y = "Percentage",
+       fill = "Drug Status")
+```
+
 	
 ## Plots for Race and Age when First Tried and Drug Used
 
@@ -229,9 +251,6 @@ Important to note that the baselines/intercepts are the Asian Population
 
 ### Substance Use with Race
 ```{r}
-drug_use_with_race <- cleaned_data |>
-  select(NEWRACE2, cigever, cigage, mjever, mjage, alcever, alctry, cocever, cocage, crkever, crkage, herever, herage, income, COUTYP4) |>
-  mutate(drug_use = ifelse(cigever==1 | mjever==1 | alcever==1 | cocever==1 | crkever==1 | herever==1, 1, 0))
 
 # Model for the Substance Use vs Race 
 model_sub <- glm(drug_use ~ NEWRACE2, data = drug_use_with_race, family = "binomial")
