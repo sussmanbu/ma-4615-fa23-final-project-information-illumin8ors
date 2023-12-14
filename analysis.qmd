@@ -213,12 +213,12 @@ metro_test <- cleaned_data |>
 ## Testing the maps
 
 ``` {r}
-
+library(tidyverse)
 library(tigris)
 
-counties = counties()
+counties = counties(cb = TRUE)
 
-plot(counties$geometry)
+counties %>% filter(STUSPS != "AK", STUSPS != "HI", STUSPS != "MP", STUSPS != "AS", STUSPS != "PR", STUSPS != "GU") %>% ggplot() + geom_sf()
 
 
 ```
