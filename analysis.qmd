@@ -40,6 +40,7 @@ library(ggplot2)
 library(readr)
 library(dplyr)
 library(ggthemes)
+library(gt)
 cleaned_data <- readRDS(here::here("dataset/cleaned_data_new.rds"))
 ```
 
@@ -272,7 +273,11 @@ output_table <- cbind(tidy_output, conf_intervals,odds_ratios_df) |>
   rownames_to_column(var = "RowNames") |>
   select(-RowNames)
 
-output_table
+output <- output_table |> 
+  gt() |>
+  as_raw_html()
+
+output
 ```
 
 
@@ -306,7 +311,11 @@ output_table <- cbind(tidy_output, conf_intervals,odds_ratios_df) |>
   rownames_to_column(var = "RowNames") |>
   select(-RowNames)
 
-output_table
+output <- output_table |> 
+  gt() |>
+  as_raw_html()
+
+output
 ```
 
 
@@ -329,7 +338,11 @@ output_table <- cbind(tidy_output_income,conf_intervals_income, odds_ratios_inco
   rownames_to_column(var = "RowNames") |>
   select(-RowNames)
 
-output_table
+output <- output_table |> 
+  gt() |>
+  as_raw_html()
+
+output
 ```
 
 
@@ -351,7 +364,11 @@ output_table <- cbind(tidy_output_loc,conf_intervals_loc, odds_ratios_loc) |>
   rownames_to_column(var = "RowNames") |>
   select(-RowNames)
 
-output_table
+output <- output_table |> 
+  gt() |>
+  as_raw_html()
+
+output
 ```
 
 ### Substance Use with Race and Location as a Factor of Each Other 
@@ -371,26 +388,21 @@ output_table <- cbind(tidy_output_loc,conf_intervals_loc, odds_ratios_loc) |>
   rownames_to_column(var = "RowNames") |>
   select(-RowNames)
 
-output_table
+output <- output_table |> 
+  gt() |>
+  as_raw_html()
+
+output
 ```
 
 
-## Testing the plot of location with substance use
-
-``` {r}
-metro_test <- cleaned_data |>
-  filter(CIG30AV < 94) |>
-  ggplot(aes(x = CIG30AVG)) + geom_bar(aes(fill = NEWRACE2)) + facet_wrap(vars(COUTYP4))
-
-```
-
-``` {r}
+``` {r, messsages=FALSE}
 library(tidyverse)
 library(tigris)
 
-counties = counties(cb = TRUE)
+counties = counties(cb = TRUE, progress = FALSE)
 
-counties %>% filter(STUSPS != "AK", STUSPS != "HI", STUSPS != "MP", STUSPS != "AS", STUSPS != "PR", STUSPS != "GU") %>% ggplot() + geom_sf()
+counties |> filter(STUSPS != "AK", STUSPS != "HI", STUSPS != "MP", STUSPS != "AS", STUSPS != "PR", STUSPS != "GU") %>% ggplot() + geom_sf()
 
 ```
 
