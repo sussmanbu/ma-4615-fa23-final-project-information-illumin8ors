@@ -17,9 +17,12 @@ The variables we were highly interested in exploring is the relationship between
 
 Going even further, we want to see what factors attribute to drug use in any way, that being income or location. These are important relationships to explore because it could provide insight into why or how someone could be introduced to drug use and what factors play a role. Some specific questions from the survey that play into our analysis are questions asking if a person has ever done such a drug and such a drug could be one of the 6 we are exploring which are cigarettes, marijuana, alcohol, cocaine, crack, heroine. Many factors could influence drug use such that two factors are reliant on each other. For example there could be relationships such that a young person with low income may or may not be more inclined to use drugs. These claims can only be made after such analysis of this dataset and its important to explore them. We aim to answer these questions and relationships below in the analysis.
 
+Also at what age each person has done any of the respective substances and whether they continue to do those drugs or not. Income, age and location are also important factors when it comes to finding the factors as these can be associated with higher drug use or lower as well. We want to explore relationships like if you are younger will you be trying more drugs or will you try more drugs when you are older and how does the racial group aspect play a role. Age can also play along with income and location and it's important to explore whether these factors intertwine with each other or are they stand alone. We aim to answer these questions and relationships below in the analysis.
+
+
 ## Questions for Analysis
 
-The key question we are trying to answer is firstly how does race affect the drug use of a person. Going further, how does location, and income factor into this relationship. 
+The key question we are trying to answer is firstly how does race affect the drug use of a person. Going further, how does location, age, and income factor into this relationship.
 
 # Analysis Portion
 
@@ -33,13 +36,16 @@ Below we start by first introducing the cleaned dataset and also the libraries t
 library(tidyverse)
 library(broom)
 library(usmap)
+library(ggplot2)
+library(readr)
+library(dplyr)
+library(ggthemes)
 cleaned_data <- readRDS(here::here("dataset/cleaned_data_new.rds"))
 ```
 
 ## Initial Findings and Relationships - EDA
 
 ```{r, test plots}
-library(ggthemes)
 cleaned_data |>
   filter(cocage < 120) |>
   ggplot(aes(x = cocage)) + geom_bar(show.legend = TRUE) + facet_wrap(vars(NEWRACE2)) +
@@ -156,14 +162,6 @@ If you are directly quoting from a source, please make that clear. You can show 
 ## Plot for Alcohol Use last 12 months by Race
 
 ```{r}
-library(ggplot2)
-library(readr)
-library(dplyr)
-
-file_path <- "dataset/cleaned_data_new.rds"
-
-cleaned_data <- readRDS(file_path)
-
 # Filter out records where alcyrtot is greater than 365
 filtered_data <- cleaned_data %>% 
   filter(alcyrtot <= 365)
@@ -179,26 +177,52 @@ boxplot_alcohol_use <- ggplot(filtered_data, aes(x = factor(NEWRACE2), y = alcyr
 print(boxplot_alcohol_use)
 ```
 	
-	
-## Plot for Marijuna Use at certain Age with Race
+## Plots for Race and Age when First Tried and Drug Used
 
 ```{r}
 
-marj_data <- cleaned_data |>
-  select(NEWRACE2, mjage, mjrec, mrdaypwk, MJDAY30A, MR30EST) |>
-  filter(mjage < 83)
+drug_race_age <- cleaned_data |>
+  select(NEWRACE2, cigever, cigage, mjever, mjage, alcever, alctry, cocever, cocage, crkever, crkage, herever, herage)
 
-# First tried marijuana plot
-marj_age_plot <- ggplot(marj_data, aes(x = factor(NEWRACE2), y = mjage, color = factor(NEWRACE2), fill=factor(NEWRACE2))) +
+cocaine_data <- drug_race_age |>
+  filter(cocage < 86)
+
+# Cocaine Plot
+ggplot(cocaine_data, aes(x = NEWRACE2, y = cocage, fill = NEWRACE2)) +
   geom_boxplot() +
-  labs(title = "Age at which People First Tried Using Marijuana",
+  labs(title = "Boxplot of Age of First Drug Use of Cocaine by Race",
        x = "Race",
-       y = "Age when First Tried") +
+       y = "Age of First Use",
+       fill = "Race Type") +   
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
 
-marj_age_plot
+crack_data <- drug_race_age |>
+  filter(crkage < 86)
+
+ggplot(crack_data, aes(x = NEWRACE2, y = crkage, fill = NEWRACE2)) +
+  geom_boxplot() +
+  labs(title = "Boxplot of Age of First Drug Use of Crack by Race",
+       x = "Race",
+       y = "Age of First Use",
+       fill = "Race Type") +   
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+
+her_data <- drug_race_age |>
+  filter(herage < 86)
+
+ggplot(her_data, aes(x = NEWRACE2, y = herage, fill = NEWRACE2)) +
+  geom_boxplot() +
+  labs(title = "Boxplot of Age of First Drug Use of Heroine by Race",
+       x = "Race",
+       y = "Age of First Use",
+       fill = "Race Type") +   
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+
 ```
+
 ## Logisitic Regression Models
 
 Important to note that the baselines/intercepts are the Asian Population
@@ -206,7 +230,7 @@ Important to note that the baselines/intercepts are the Asian Population
 ### Substance Use with Race
 ```{r}
 drug_use_with_race <- cleaned_data |>
-  select(NEWRACE2, cigever, cigage, mjever, mjage, alcever, cocever, cocage, crkever, crkage, herever, herage, income, COUTYP4) |>
+  select(NEWRACE2, cigever, cigage, mjever, mjage, alcever, alctry, cocever, cocage, crkever, crkage, herever, herage, income, COUTYP4) |>
   mutate(drug_use = ifelse(cigever==1 | mjever==1 | alcever==1 | cocever==1 | crkever==1 | herever==1, 1, 0))
 
 # Model for the Substance Use vs Race 
