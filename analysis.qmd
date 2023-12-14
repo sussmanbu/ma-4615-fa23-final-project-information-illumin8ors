@@ -208,6 +208,17 @@ metro_test <- cleaned_data |>
   filter(CIG30AV < 94) |>
   ggplot(aes(x = CIG30AVG)) + geom_bar(aes(fill = NEWRACE2)) + facet_wrap(vars(COUTYP4))
 
+```
+
+## Testing the maps
+
+``` {r}
+
+library(tigris)
+
+counties = counties()
+
+plot(counties$geometry)
 
 
 ```
