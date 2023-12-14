@@ -3,7 +3,6 @@ library(readr)
 library(readxl)
 library(tidycensus)
 suppressPackageStartupMessages(library(sf))
-suppressPackageStartupMessages(library(tmap))
 options(tigris_use_cache = TRUE)
 census_api_key(c5c850588b50b20572e9b6df39c63b6923bcee30, overwrite = TRUE, install = TRUE)
 library("stringr")     
@@ -19,7 +18,7 @@ load("./dataset/NSDUH_2021.RData")
 # Use select to filter columns by name and store the result in a new dataframe
 drug_health_data_clean_new <- PUF2021_100622 |>
   select(QUESTID2, filedate,
-         cigever, cigage, mjever, mjage, alcever, cocever, cocage, crkever, crkage, herever, herage, UD5ILLANY, 
+         cigever, cigage, mjever, mjage, alcever, cocever, cocage, crkever, crkage, herever, herage, UD5ILLANY, alcage, 
          cigwilyr,cigtry,cigrec,CIG30AV, 
          alctry, alcrec, aldaypwk, ALCUS30D, AL30EST,
          mjage, mjrec, mrdaypwk, MJDAY30A, MR30EST,
