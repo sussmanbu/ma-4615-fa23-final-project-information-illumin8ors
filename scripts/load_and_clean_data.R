@@ -3,12 +3,9 @@ library(readr)
 library(readxl)
 library(tidycensus)
 suppressPackageStartupMessages(library(sf))
-suppressPackageStartupMessages(library(tmap))
 options(tigris_use_cache = TRUE)
-census_api_key(c5c850588b50b20572e9b6df39c63b6923bcee30, overwrite = TRUE, install = TRUE)
+census_api_key(c5c850588b50b20572e9b6df39c63b6923bcee30)
 library("stringr")     
-install.packages("usmap")
-library(usmap)
 library(ggplot2)
 
 
@@ -62,12 +59,6 @@ saveRDS(drug_health_data_clean_new, "./dataset/cleaned_data_new.rds")
 
 getwd()
 
-Census <- read_excel(path = "./dataset/co-est2019-alldata(1).xlsx", range = "A2:H3194", 
-                     col_names = c("SUMLEV", "REGION", "DIVISION", "STATE", "COUNTY", "STNAME", "CITYNAME","CENSUS2010POP"), 
-                     col_types = c("guess", "text", "text", "guess", "guess", "text", "text", "numeric"))
-
-
-saveRDS(Census, "./dataset/Census_2010_data.rds")
 
 CBSA <- read_excel(path = "./dataset/CBSAdata.xlsx", 
                    col_names = c("CBSA_Code", "Metro_Division_Code", "CSA_Code", "CBSA Title", 
@@ -86,26 +77,20 @@ RUCC <- read_excel(path = "./dataset/ruralurbancodes2013.xls",
 
 saveRDS(RUCC, "./dataset/RUCC_clean.rds")
 
+Census <- load_variables(2020, "sf1")
 
-#creating a merged data set with location information:
-
-#(counties_areas_in_census <- Census |> distinct(CITYNAME, STNAME, .keep_all = TRUE) |> pull(CITYNAME, STNAME))
-
-#CBSA_w_counties_only <- CBSA |> 
-#filter(str_detect(Component_Name, "County") == TRUE)
+(Clean_census <- Census |> distinct(CITYNAME, STNAME, .keep_all = TRUE))
 
 county_overlap <- CBSA |>
   filter(Component_Name %in% counties_areas_in_census) |>
   pull(Component_Name)
 
-pop_by_county <- Census |>
+pop_by_county <- Clean_census |>
   distinct(CITYNAME) |>
   filter(CITYNAME %in% county_overlap)
   #now need to order alphabetically
 
 # join Census |> distinct(CITYNAME, STNAME, .keep_all = TRUE) with CBSA data set
-
-(Clean_census <- Census |> distinct(CITYNAME, STNAME, .keep_all = TRUE))
 
 by <- join_by(CITYNAME == Component_Name, STNAME == State) 
 merged <- inner_join(Clean_census, CBSA, by)
@@ -131,39 +116,34 @@ not_in_CBSA <- Clean_census |>
 Census_counties <- Census |> filter(STNAME != CITYNAME) |> pull(CITYNAME)
 census_pops <- Census |> filter(STNAME != CITYNAME) |> pull(CENSUS2010POP)
 
-county_pop <- countypop |>
-  filter(county %in% Census_counties)
-  mutate("2010_pop" = census_pops)
-
-plot_usmap(regions = "counties", ) + 
-  labs(title = "U.S. counties") +
-  theme(panel.background=element_blank())
-
 # COUNTYP4 Breakdowns:
 
 by <- join_by(CITYNAME == County_Name, FIPS == FIPS)
 merged_all <- inner_join(merged, RUCC, by)
 
 Large_metro_county <- merged_all |>
-  filter(RUCC_2013 == 1)
+  filter(RUCC_2013 == 1) |>
+  pull(CITYNAME)
 
 Small_metro_county <- merged_all |>
-  filter(RUCC_2013 %in% c(2, 3))
+  filter(RUCC_2013 %in% c(2, 3)) |>
+  pull(CITYNAME)
 
 Non_metro_county <- merged_all |>
   filter(RUCC_2013 > 3) |>
-  group_by(RUCC_2013) |>
-  summary(pop_2013 = sum(Population_2010))
-
-Large_metro_county |>
-  ggplot(aes(x = CITYNAME, y = alcever)) + geom_point()
+  pull(CITYNAME)
+  
+ # group_by(RUCC_2013) |>
+ # summarise(pop_2013 = sum(Population_2010))
 
 # from COUNTYP4: 1 = from large metro (25956), 2 = small metro (21883), 3 = nonmetro (10195)
 
+counties_cleaned <- counties |>
+  mutate(metrostatus = if_else(NAMELSAD %in% Large_metro_county, 1, 
+                             if_else(NAMELSAD %in% Small_metro_county, 2, 
+                                     if_else(NAMELSAD %in% Non_metro_county, 3, 0))))
 
-
-
-
+  
 
 
 

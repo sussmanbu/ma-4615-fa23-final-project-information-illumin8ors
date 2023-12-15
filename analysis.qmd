@@ -402,12 +402,10 @@ library(tigris)
 
 counties = counties(cb = TRUE, progress = FALSE)
 
-counties |> filter(STUSPS != "AK", STUSPS != "HI", STUSPS != "MP", STUSPS != "AS", STUSPS != "PR", STUSPS != "GU") %>% ggplot() + geom_sf()
+counties_cleaned |> filter(STUSPS != "AK", STUSPS != "HI", STUSPS != "MP", STUSPS != "AS", STUSPS != "PR", STUSPS != "GU") %>% ggplot() + geom_sf(aes(fill = metrostatus), alpha = 0.5) + scale_fill_viridis_b() + labs(Title = "Map of the US counties colored by Metro Status") 
 
 ```
 
-<!-- >>>>>>> d5024b3c7b609b592e8256a3822d161f37af89d7
->>>>>>> 79d3bad8bf602c398a0901b502c65439746b0df8 -->
 
 # Conclusions
 
