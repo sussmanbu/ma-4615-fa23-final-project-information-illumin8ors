@@ -161,6 +161,8 @@ counties_cleaned_METRO <- counties |>
                              if_else(NAMELSAD %in% Small_metro_county, 2, 
                                      if_else(NAMELSAD %in% Non_metro_county, 3, 0))))
 
+
+saveRDS(counties_cleaned_METRO, "./dataset/metro_clean.rds")
   
 counties_cleaned_POP2020 <- counties |>
   mutate(metrostatus = if_else(NAMELSAD %in% mil_plus_CBSA_counties, 1, 
