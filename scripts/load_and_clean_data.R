@@ -118,9 +118,15 @@ mil_plus_CBSA_counties <- more_than_equalto_mil_CBSA |>
 less_than_mil_CBSA <- merged |>
   filter(POPESTIMATE2020 < 1000000)
 
+less_than_mil__list <- less_than_mil_CBSA |>
+  pull(CTYNAME)
+
+
 not_in_CBSA <- Clean_census |>
-  filter(!CTYNAME %in% county_overlap) |>
-  select(CTYNAME, POPESTIMATE2020)
+  filter(!CTYNAME %in% county_overlap)
+
+not_CBSA_list < not_in_CBSA |>
+  pull(CTYNAME)
 
 Census_counties <- Clean_census |> filter(STNAME != CTYNAME) |> pull(CTYNAME)
 census_pops <- Clean_census |> filter(STNAME != CTYNAME) |> pull(POPESTIMATE2020)
