@@ -88,6 +88,9 @@ saveRDS(RUCC, "./dataset/RUCC_clean.rds")
 
 (Clean_census <- Census |> distinct(CTYNAME, STNAME, .keep_all = TRUE))
 
+counties_areas_in_census <- Clean_census |>
+  pull(CTYNAME)
+
 county_overlap <- CBSA |>
   filter(Component_Name %in% counties_areas_in_census) |>
   pull(Component_Name)
