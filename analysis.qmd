@@ -35,14 +35,30 @@ Below we start by first introducing the cleaned dataset and also the libraries t
 
 library(tidyverse)
 library(broom)
-library(usmap)
 library(ggplot2)
 library(readr)
 library(dplyr)
+library(tigris)
 library(ggthemes)
 library(gt)
 cleaned_data <- readRDS(here::here("dataset/cleaned_data_new.rds"))
 ```
+
+
+## Setting the Scene - Maps of How Respondents Are Aorted Across the US According to County Metro and Population Status
+
+``` {r, messsages=FALSE}
+
+counties = counties(cb = TRUE, progress = FALSE)
+
+counties_cleaned_METRO |> filter(STUSPS != "AK", STUSPS != "HI", STUSPS != "MP", STUSPS != "AS", STUSPS != "PR", STUSPS != "GU", STUSPS != "VI") %>% ggplot() + geom_sf(aes(fill = metrostatus), alpha = 0.5) + scale_fill_viridis_c() + ggtitle("US Counties Colored by Metro Status") + labs(subtitle = "1 = Large Metro, 2 = Small Metro, 3 = Non-Metro, 0 = Unkown", fill = "Metro Status") + theme(plot.subtitle = element_text(size = 9))
+
+subtitle_text <- "1 = County in CBSA with 1 Million Plus Residents, 2 = County in CBSA with Less Than 1 Million Residents,\n3 = County not in a CBSA"
+
+counties_cleaned_POP2020 |> filter(STUSPS != "AK", STUSPS != "HI", STUSPS != "MP", STUSPS != "AS", STUSPS != "PR", STUSPS != "GU", STUSPS != "VI") %>% ggplot() + geom_sf(aes(fill = popstatus), alpha = 0.5) + scale_fill_viridis_c() + ggtitle("US Counties Colored by Population Status") + labs(subtitle = subtitle_text, fill = "Population Status") + theme(plot.subtitle = element_text(size = 9))
+
+```
+
 
 ## Initial Findings and Relationships - EDA
 
@@ -92,24 +108,13 @@ cleaned_data |>
   geom_bar(aes(fill = NEWRACE2)) + 
   scale_fill_colorblind() + 
   theme_minimal()
-  
 
-#cleaned_data |>
- # filter(AL30EST < 85) |>
- # filter(MR30EST < 85) |>
-#  filter(HR30EST < 85) |>
- # select(AL30EST, MR30EST, HR30EST)
-#  arrange(desc(AL30EST)) |>
-#  arrange(desc(MR30EST)) |>
-#  arrange(desc(CC30EST)) |>
-#  arrange(desc(CR30EST)) |>
-# arrange(desc(HR30EST)) |>
-# filter(AL30EST == first(AL30EST)) |>
-# filter(MR30EST == first(MR30EST)) |>
-# filter(CC30EST == first(CC30EST)) |>
-# filter(CR30EST == first(CR30EST)) |>
-# filter(HR30EST == first(HR30EST)) |>
-# select(AL30EST, MR30EST, CC30EST, CR30EST, HR30EST)
+drug_health_data_clean_new |>
+  filter(AL30EST < 85) |>
+  group_by(NEWRACE2, COUTYP4) |>
+  ggplot(aes(x = NEWRACE2, y = AL30EST)) + geom_col() + facet_wrap(vars(COUTYP4)) +
+  theme(axis.text.x = element_text(angle=90))
+
 
 ```
 ## Alcohol Use Plots
@@ -396,20 +401,7 @@ output
 ```
 
 
-``` {r, messsages=FALSE}
-library(tidyverse)
-library(tigris)
 
-counties = counties(cb = TRUE, progress = FALSE)
-
-counties_cleaned_METRO |> filter(STUSPS != "AK", STUSPS != "HI", STUSPS != "MP", STUSPS != "AS", STUSPS != "PR", STUSPS != "GU", STUSPS != "VI") %>% ggplot() + geom_sf(aes(fill = metrostatus), alpha = 0.5) + scale_fill_viridis_c() + ggtitle("US Counties Colored by Metro Status") + labs(subtitle = "1 = Large Metro, 2 = Small Metro, 3 = Non-Metro, 0 = Unkown", fill = "Metro Status") + theme(plot.subtitle = element_text(size = 9))
-
-subtitle_text <- "1 = County in CBSA with 1 Million Plus Residents, 2 = County in CBSA with Less Than 1 Million Residents,\n3 = County not in a CBSA"
-
-counties_cleaned_POP2020 |> filter(STUSPS != "AK", STUSPS != "HI", STUSPS != "MP", STUSPS != "AS", STUSPS != "PR", STUSPS != "GU", STUSPS != "VI") %>% ggplot() + geom_sf(aes(fill = popstatus), alpha = 0.5) + scale_fill_viridis_c() + ggtitle("US Counties Colored by Population Status") + labs(subtitle = subtitle_text, fill = "Population Status") + theme(plot.subtitle = element_text(size = 9))
-
-
-```
 
 
 # Conclusions
