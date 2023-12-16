@@ -51,11 +51,11 @@ cleaned_data <- readRDS(here::here("dataset/cleaned_data_new.rds"))
 
 counties = counties(cb = TRUE, progress = FALSE)
 
-counties_cleaned_METRO |> filter(STUSPS != "AK", STUSPS != "HI", STUSPS != "MP", STUSPS != "AS", STUSPS != "PR", STUSPS != "GU", STUSPS != "VI") %>% ggplot() + geom_sf(aes(fill = metrostatus), alpha = 0.5) + scale_fill_viridis_c() + ggtitle("US Counties Colored by Metro Status") + labs(subtitle = "1 = Large Metro, 2 = Small Metro, 3 = Non-Metro, 0 = Unkown", fill = "Metro Status") + theme(plot.subtitle = element_text(size = 9))
+metro_map <- counties_cleaned_METRO |> filter(STUSPS != "AK", STUSPS != "HI", STUSPS != "MP", STUSPS != "AS", STUSPS != "PR", STUSPS != "GU", STUSPS != "VI") %>% ggplot() + geom_sf(aes(fill = metrostatus), alpha = 0.5) + scale_fill_viridis_c() + ggtitle("US Counties Colored by Metro Status") + labs(subtitle = "1 = Large Metro, 2 = Small Metro, 3 = Non-Metro, 0 = Unkown", fill = "Metro Status") + theme(plot.subtitle = element_text(size = 9))
 
 subtitle_text <- "1 = County in CBSA with 1 Million Plus Residents, 2 = County in CBSA with Less Than 1 Million Residents,\n3 = County not in a CBSA"
 
-counties_cleaned_POP2020 |> filter(STUSPS != "AK", STUSPS != "HI", STUSPS != "MP", STUSPS != "AS", STUSPS != "PR", STUSPS != "GU", STUSPS != "VI") %>% ggplot() + geom_sf(aes(fill = popstatus), alpha = 0.5) + scale_fill_viridis_c() + ggtitle("US Counties Colored by Population Status") + labs(subtitle = subtitle_text, fill = "Population Status") + theme(plot.subtitle = element_text(size = 9))
+pop_map <- counties_cleaned_POP2020 |> filter(STUSPS != "AK", STUSPS != "HI", STUSPS != "MP", STUSPS != "AS", STUSPS != "PR", STUSPS != "GU", STUSPS != "VI") %>% ggplot() + geom_sf(aes(fill = popstatus), alpha = 0.5) + scale_fill_viridis_c() + ggtitle("US Counties Colored by Population Status") + labs(subtitle = subtitle_text, fill = "Population Status") + theme(plot.subtitle = element_text(size = 9))
 
 ```
 
@@ -109,11 +109,13 @@ cleaned_data |>
   scale_fill_colorblind() + 
   theme_minimal()
 
-drug_health_data_clean_new |>
+facet.labs <- c("Large Metro", "Small Metro", "Non-Metro")
+names(facet.labs) <- c("1", "2", "3")
+
+cleaned_data |>
   filter(AL30EST < 85) |>
   group_by(NEWRACE2, COUTYP4) |>
-  ggplot(aes(x = NEWRACE2, y = AL30EST)) + geom_col() + facet_wrap(vars(COUTYP4)) +
-  theme(axis.text.x = element_text(angle=90))
+  ggplot(aes(x = NEWRACE2, y = AL30EST)) + geom_col() + facet_wrap(vars(COUTYP4),   labeller = labeller(COUTYP4 = facet.labs), scales = "free_y") + theme(axis.text.x = element_text(angle=90)) + labs(title = "Alcohol Use by Race and County Metro Status", x = "Race Category", y = "Estimated Alcohol Use in Past 30 Days") + theme(strip.text.y = element_text(size = 8)) # need to change y axis text size
 
 
 ```
