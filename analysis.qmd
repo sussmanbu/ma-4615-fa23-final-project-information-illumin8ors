@@ -56,6 +56,8 @@ subtitle_text <- "1 = County in CBSA with 1 Million Plus Residents, 2 = County i
 
 pop_map <- counties_cleaned_POP2020 |> filter(STUSPS != "AK", STUSPS != "HI", STUSPS != "MP", STUSPS != "AS", STUSPS != "PR", STUSPS != "GU", STUSPS != "VI") %>% ggplot() + geom_sf(aes(fill = popstatus), alpha = 0.5) + scale_fill_viridis_c() + ggtitle("US Counties Colored by Population Status") + labs(subtitle = subtitle_text, fill = "Population Status") + theme(plot.subtitle = element_text(size = 9))
 
+print(metro_map)
+
 ```
 
 

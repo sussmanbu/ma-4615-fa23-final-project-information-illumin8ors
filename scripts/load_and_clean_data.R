@@ -57,8 +57,16 @@ drug_health_data_clean_new <- PUF2021_100622 |>
 # Save the cleaned data to a new CSV file
 saveRDS(drug_health_data_clean_new, "./dataset/cleaned_data_new.rds")
 
-getwd()
+getwd() 
 
+
+Census <- read_excel(path = "./dataset/co-est2020-2022-alldata.xlsx", range = "A2:I3196",
+                          col_names = c("SUMLEV", "REGION", "DIVISION", "STATE", "COUNTY",
+                                        "STNAME", "CTYNAME", "ESTIMATESBASE2020", "POPESTIMATE2020"),
+                          col_types = c("numeric", "numeric", "numeric", "numeric", "numeric",
+                                        "text", "text", "numeric", "numeric"), na = c("missing", "NA"))
+
+saveRDS(Census, "./dataset/Census_data_clean.rds")
 
 CBSA <- read_excel(path = "./dataset/CBSAdata.xlsx", 
                    col_names = c("CBSA_Code", "Metro_Division_Code", "CSA_Code", "CBSA Title", 
@@ -77,61 +85,59 @@ RUCC <- read_excel(path = "./dataset/ruralurbancodes2013.xls",
 
 saveRDS(RUCC, "./dataset/RUCC_clean.rds")
 
-Census <- load_variables(2020, "sf1")
-
-(Clean_census <- Census |> distinct(CITYNAME, STNAME, .keep_all = TRUE))
+(Clean_census <- Census |> distinct(CTYNAME, STNAME, .keep_all = TRUE))
 
 county_overlap <- CBSA |>
   filter(Component_Name %in% counties_areas_in_census) |>
   pull(Component_Name)
 
 pop_by_county <- Clean_census |>
-  distinct(CITYNAME) |>
-  filter(CITYNAME %in% county_overlap)
+  distinct(CTYNAME) |>
+  filter(CTYNAME %in% county_overlap)
   #now need to order alphabetically
 
 # join Census |> distinct(CITYNAME, STNAME, .keep_all = TRUE) with CBSA data set
 
-by <- join_by(CITYNAME == Component_Name, STNAME == State) 
+by <- join_by(CTYNAME == Component_Name, STNAME == State) 
 merged <- inner_join(Clean_census, CBSA, by)
 
 # Breakdown of the PDEN10 variable:
 
 more_than_equalto_mil_CBSA <- merged |>
-  filter(CENSUS2010POP >= 1000000)
+  filter(POPESTIMATE2020 >= 1000000)
 
 mil_plus_CBSA_states <- more_than_equalto_mil_CBSA |>
   pull(STNAME)
 
 mil_plus_CBSA_counties <- more_than_equalto_mil_CBSA |>
-  pull(CITYNAME)
+  pull(CTYNAME)
 
 less_than_mil_CBSA <- merged |>
-  filter(CENSUS2010POP < 1000000)
+  filter(POPESTIMATE2020 < 1000000)
 
 not_in_CBSA <- Clean_census |>
-  filter(!CITYNAME %in% county_overlap) |>
-  select(CITYNAME, CENSUS2010POP)
+  filter(!CTYNAME %in% county_overlap) |>
+  select(CTYNAME, POPESTIMATE2020)
 
-Census_counties <- Census |> filter(STNAME != CITYNAME) |> pull(CITYNAME)
-census_pops <- Census |> filter(STNAME != CITYNAME) |> pull(CENSUS2010POP)
+Census_counties <- Clean_census |> filter(STNAME != CTYNAME) |> pull(CTYNAME)
+census_pops <- Clean_census |> filter(STNAME != CTYNAME) |> pull(POPESTIMATE2020)
 
 # COUNTYP4 Breakdowns:
 
-by <- join_by(CITYNAME == County_Name, FIPS == FIPS)
+by <- join_by(CTYNAME == County_Name, FIPS == FIPS)
 merged_all <- inner_join(merged, RUCC, by)
 
 Large_metro_county <- merged_all |>
   filter(RUCC_2013 == 1) |>
-  pull(CITYNAME)
+  pull(CTYNAME)
 
 Small_metro_county <- merged_all |>
   filter(RUCC_2013 %in% c(2, 3)) |>
-  pull(CITYNAME)
+  pull(CTYNAME)
 
 Non_metro_county <- merged_all |>
   filter(RUCC_2013 > 3) |>
-  pull(CITYNAME)
+  pull(CTYNAME)
   
  # group_by(RUCC_2013) |>
  # summarise(pop_2013 = sum(Population_2010))
