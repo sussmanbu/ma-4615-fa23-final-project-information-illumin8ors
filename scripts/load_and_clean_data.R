@@ -4,7 +4,6 @@ library(readxl)
 library(tidycensus)
 suppressPackageStartupMessages(library(sf))
 options(tigris_use_cache = TRUE)
-census_api_key(c5c850588b50b20572e9b6df39c63b6923bcee30)
 library("stringr")     
 library(ggplot2)
 
@@ -118,7 +117,7 @@ mil_plus_CBSA_counties <- more_than_equalto_mil_CBSA |>
 less_than_mil_CBSA <- merged |>
   filter(POPESTIMATE2020 < 1000000)
 
-less_than_mil__list <- less_than_mil_CBSA |>
+less_than_mil_list <- less_than_mil_CBSA |>
   pull(CTYNAME)
 
 
