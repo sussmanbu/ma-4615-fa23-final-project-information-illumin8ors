@@ -49,7 +49,6 @@ cleaned_data <- readRDS(here::here("dataset/cleaned_data_new.rds"))
 
 ``` {r, messsages=FALSE}
 
-counties = counties(cb = TRUE, progress = FALSE)
 
 metro_map <- counties_cleaned_METRO |> filter(STUSPS != "AK", STUSPS != "HI", STUSPS != "MP", STUSPS != "AS", STUSPS != "PR", STUSPS != "GU", STUSPS != "VI") %>% ggplot() + geom_sf(aes(fill = metrostatus), alpha = 0.5) + scale_fill_viridis_c() + ggtitle("US Counties Colored by Metro Status") + labs(subtitle = "1 = Large Metro, 2 = Small Metro, 3 = Non-Metro, 0 = Unkown", fill = "Metro Status") + theme(plot.subtitle = element_text(size = 9))
 
