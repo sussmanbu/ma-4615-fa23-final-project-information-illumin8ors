@@ -139,13 +139,19 @@ Non_metro_county <- merged_all |>
 
 # from COUNTYP4: 1 = from large metro (25956), 2 = small metro (21883), 3 = nonmetro (10195)
 
-counties_cleaned <- counties |>
+
+counties = counties(cb = TRUE, progress = FALSE)
+
+counties_cleaned_METRO <- counties |>
   mutate(metrostatus = if_else(NAMELSAD %in% Large_metro_county, 1, 
                              if_else(NAMELSAD %in% Small_metro_county, 2, 
                                      if_else(NAMELSAD %in% Non_metro_county, 3, 0))))
 
   
-
+counties_cleaned_POP2020 <- counties |>
+  mutate(metrostatus = if_else(NAMELSAD %in% mil_plus_CBSA_counties, 1, 
+                               if_else(NAMELSAD %in% less_than_mil_list, 2, 
+                                       if_else(NAMELSAD %in% not_CBSA_list, 3, 0))))
 
 
 
