@@ -402,7 +402,12 @@ library(tigris)
 
 counties = counties(cb = TRUE, progress = FALSE)
 
-counties_cleaned |> filter(STUSPS != "AK", STUSPS != "HI", STUSPS != "MP", STUSPS != "AS", STUSPS != "PR", STUSPS != "GU") %>% ggplot() + geom_sf(aes(fill = metrostatus), alpha = 0.5) + scale_fill_viridis_b() + labs(Title = "Map of the US counties colored by Metro Status") 
+counties_cleaned_METRO |> filter(STUSPS != "AK", STUSPS != "HI", STUSPS != "MP", STUSPS != "AS", STUSPS != "PR", STUSPS != "GU", STUSPS != "VI") %>% ggplot() + geom_sf(aes(fill = metrostatus), alpha = 0.5) + scale_fill_viridis_c() + ggtitle("US Counties Colored by Metro Status") + labs(subtitle = "1 = Large Metro, 2 = Small Metro, 3 = Non-Metro, 0 = Unkown", fill = "Metro Status") + theme(plot.subtitle = element_text(size = 9))
+
+subtitle_text <- "1 = County in CBSA with 1 Million Plus Residents, 2 = County in CBSA with Less Than 1 Million Residents,\n3 = County not in a CBSA"
+
+counties_cleaned_POP2020 |> filter(STUSPS != "AK", STUSPS != "HI", STUSPS != "MP", STUSPS != "AS", STUSPS != "PR", STUSPS != "GU", STUSPS != "VI") %>% ggplot() + geom_sf(aes(fill = popstatus), alpha = 0.5) + scale_fill_viridis_c() + ggtitle("US Counties Colored by Population Status") + labs(subtitle = subtitle_text, fill = "Population Status") + theme(plot.subtitle = element_text(size = 9))
+
 
 ```
 
