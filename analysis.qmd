@@ -114,7 +114,7 @@ names(facet.labs) <- c("1", "2", "3")
 cleaned_data |>
   filter(AL30EST < 85) |>
   group_by(NEWRACE2, COUTYP4) |>
-  ggplot(aes(x = NEWRACE2, y = AL30EST)) + geom_col() + facet_wrap(vars(COUTYP4),   labeller = labeller(COUTYP4 = facet.labs), scales = "free_y") + theme(axis.text.x = element_text(angle=90)) + labs(title = "Alcohol Use by Race and County Metro Status", x = "Race Category", y = "Estimated Alcohol Use in Past 30 Days") + theme(strip.text.y = element_text(size = 8)) # need to change y axis text size
+  ggplot(aes(x = NEWRACE2, y = AL30EST)) + geom_col() + facet_wrap(vars(COUTYP4),   labeller = labeller(COUTYP4 = facet.labs), scales = "free_y") + theme(axis.text.x = element_text(angle=90, size = 8)) + labs(title = "Alcohol Use by Race and County Metro Status", x = "Race Category", y = "Estimated Alcohol Use in Past 30 Days") + theme(axis.text.y = element_text(size = 8)) # need to change y axis text size
 
 
 ```
