@@ -6,6 +6,7 @@ suppressPackageStartupMessages(library(sf))
 options(tigris_use_cache = TRUE)
 library("stringr")     
 library(ggplot2)
+library(tigris)
 
 
 # Read the CSV data file (make sure to provide the correct arguments)
@@ -38,7 +39,7 @@ drug_health_data_clean_new <- PUF2021_100622 |>
          yowrslow, yowrdcsn, YO_MDEA1, YO_MDEA2, YO_MDEA3, YO_MDEA4, YO_MDEA5, YO_MDEA6, YO_MDEA7, YO_MDEA8, yopsrels, ymdelt,
          cadrpeop, casurcvr, camhprob, vapanyevr,
          irvapanyrec, CAMHPROB2, vaptypemon,
-         udaltimeget, udaltrystop, udalstopact, udalwdsweat, udalavwsvtr,
+         udaltimeget, udaltrystop, udalwdsweat, udalavwsvtr,
          udmjtimeget, udmjlesseff, udmjnotstop, udmjwddeprs,
          udcctimeget, udccwantbad, udccstrurge, udccstopact,
          udhetimeuse, udhenotstop,udhehlthprb, udhestopact, udhatimeuse,
