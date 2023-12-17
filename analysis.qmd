@@ -53,7 +53,6 @@ counties_cleaned_METRO <- readRDS(here::here("dataset/metro_clean.rds"))
 metro_map <- counties_cleaned_METRO |> filter(STUSPS != "AK", STUSPS != "HI", STUSPS != "MP", STUSPS != "AS", STUSPS != "PR", STUSPS != "GU", STUSPS != "VI") %>% ggplot() + geom_sf(aes(fill = metrostatus), alpha = 0.5) + scale_fill_viridis_c() + ggtitle("US Counties Colored by Metro Status") + labs(subtitle = "1 = Large Metro, 2 = Small Metro, 3 = Non-Metro, 0 = Unkown", fill = "Metro Status") + theme(plot.subtitle = element_text(size = 9))
 
 metro_map
-
 ```
 
 ## Initial Findings and Relationships - EDA
@@ -63,8 +62,8 @@ metro_map
 
 ```{r}
 drug_use_with_race <- cleaned_data |>
-  select(NEWRACE2, cigever, cigage, mjever, mjage, alcever, alctry, cocever, cocage, crkever, crkage, herever, herage, income, COUTYP4) |>
-  mutate(drug_use = ifelse(cigever==1 | mjever==1 | alcever==1 | cocever==1 | crkever==1 | herever==1, 1, 0))
+  select(NEWRACE2, cocever, cocage, crkever, crkage, herever, herage, income, COUTYP4) |>
+  mutate(drug_use = ifelse( cocever==1 | crkever==1 | herever==1, 1, 0))
 
 proportions_table <- drug_use_with_race |>
   group_by(NEWRACE2) |>
@@ -78,7 +77,7 @@ ggplot(proportions_table, aes(x = NEWRACE2, y = Percentage, fill = Drug_Status))
   labs(title = "Percentage of People Who Tried/Did Not Try Drugs by Race",
        x = "Race",
        y = "Percentage",
-       fill = "Drug Status")
+       fill = "Drug Status") + theme(axis.text.x = element_text(angle = 90, size = 9))
 ```
 ## Plot of Cocaine Use Out of Days per Week by Race
 
@@ -162,12 +161,12 @@ output
 ```
 
 
-### Substance Use with Race and Income as a Factor of Each Other 
+### Substance Use with Race and Income
 
 Same as before, we are gonna assume for the model here that the hypothesis is that there is no association between likelihood of trying drugs ever and race group as well as Income.
 ```{r}
 # Model for the Substance Use vs Race and Income
-model_sub_income <- glm(drug_use ~ NEWRACE2*factor(income), data = drug_use_with_race, family = "binomial")
+model_sub_income <- glm(drug_use ~ NEWRACE2+factor(income) , data = drug_use_with_race, family = "binomial")
 
 tidy_output_income <- tidy(model_sub_income)|>
   mutate(term = ifelse(term == "(Intercept)", "Asian", str_replace(term, "NEWRACE2", "")))
