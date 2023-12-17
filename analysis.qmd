@@ -76,7 +76,7 @@ cleaned_data |>
 cleaned_data |>
   filter(herage < 900) |>
   group_by(NEWRACE2, COUTYP4) |>
-  ggplot(aes(x = NEWRACE2, y = herage)) + geom_boxplot() + facet_wrap(vars(COUTYP4),   labeller = labeller(COUTYP4 = facet.labs), scales = "free_y") + theme(axis.text.x = element_text(angle = 90, size = 7)) + labs(title = "Age When Heroine First Used by Race and County Metro Status", x = "Race Category", y = "Age") + theme(axis.title.y = element_text(size = 9)) 
+  ggplot(aes(x = NEWRACE2, y = herage)) + geom_boxplot() + facet_wrap(vars(COUTYP4),   labeller = labeller(COUTYP4 = facet.labs), scales = "free_y") + theme(axis.text.x = element_text(angle = 90, size = 7)) + labs(title = "Age When Heroin First Used by Race and County Metro Status", x = "Race Category", y = "Age") + theme(axis.title.y = element_text(size = 9)) 
 
 ```
 
