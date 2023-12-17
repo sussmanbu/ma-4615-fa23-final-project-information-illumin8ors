@@ -58,27 +58,6 @@ metro_map
 
 ## Initial Findings and Relationships - EDA
 
-```{r, bargraphs}
-
-facet.labs <- c("Large Metro", "Small Metro", "Non-Metro")
-names(facet.labs) <- c("1", "2", "3")
-
-cleaned_data |>
-  filter(ccdaypwk < 85) |>
-  group_by(NEWRACE2) |>
-  ggplot(aes(x = NEWRACE2, y = ccdaypwk)) + geom_boxplot() + facet_wrap(vars(COUTYP4),   labeller = labeller(COUTYP4 = facet.labs), scales = "free_y") + theme(axis.text.x = element_text(angle = 90, size = 7)) + labs(title = "Days per Week of Cocaine Use by Race and County Metro Status", x = "Race Category", y = "Days Per Week") + theme(axis.title.y = element_text(size = 9)) 
-
-cleaned_data |>
-  filter(crdaypwk < 85) |>
-  group_by(NEWRACE2, COUTYP4) |>
-  ggplot(aes(x = NEWRACE2, y = crdaypwk)) + geom_boxplot() + facet_wrap(vars(COUTYP4),   labeller = labeller(COUTYP4 = facet.labs), scales = "free_y") + theme(axis.text.x = element_text(angle = 90, size = 7)) + labs(title = "Days per Week of Crack Use by Race and County Metro Status", x = "Race Category", y = "Days Per Week") + theme(axis.title.y = element_text(size = 9)) 
-
-cleaned_data |>
-  filter(hrdaypwk < 85) |>
-  group_by(NEWRACE2, COUTYP4) |>
-  ggplot(aes(x = NEWRACE2, y = hrdaypwk)) + geom_boxplot() + facet_wrap(vars(COUTYP4),   labeller = labeller(COUTYP4 = facet.labs), scales = "free_y") + theme(axis.text.x = element_text(angle = 90, size = 7)) + labs(title = "Days per Week of Heroin Use by Race and County Metro Status", x = "Race Category", y = "Days Per Week") + theme(axis.title.y = element_text(size = 9)) 
-
-```
 
 ## Proportion of Race to Try Drugs Based on Race
 
@@ -101,7 +80,19 @@ ggplot(proportions_table, aes(x = NEWRACE2, y = Percentage, fill = Drug_Status))
        y = "Percentage",
        fill = "Drug Status")
 ```
+## Plot of Cocaine Use Out of Days per Week by Race
 
+```{r, bargraphs}
+
+facet.labs <- c("Large Metro", "Small Metro", "Non-Metro")
+names(facet.labs) <- c("1", "2", "3")
+
+cleaned_data |>
+  filter(ccdaypwk < 85) |>
+  group_by(NEWRACE2) |>
+  ggplot(aes(x = NEWRACE2, y = ccdaypwk)) + geom_boxplot() + facet_wrap(vars(COUTYP4),   labeller = labeller(COUTYP4 = facet.labs), scales = "free_y") + theme(axis.text.x = element_text(angle = 90, size = 7)) + labs(title = "Days per Week of Cocaine Use by Race and County Metro Status", x = "Race Category", y = "Days Per Week") + theme(axis.title.y = element_text(size = 9)) 
+
+```
 	
 ## Plots for Race and Age when First Tried and Drug Used
 
