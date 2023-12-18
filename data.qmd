@@ -4,87 +4,46 @@ description: We describe the sources of our data and the cleaning process.
 toc: true
 draft: false
 ---
+## Understanding the Dataset
 
-![](images/data-import-cheatsheet-thumbs.png)
-
-
-This comes from the file `data.qmd`.
-
-Your first steps in this project will be to find data to work on.
-
-I recommend trying to find data that interests you and that you are knowledgeable about. A bad example would be if you have no interest in video games but your data set is about video games. I also recommend finding data that is related to current events, social justice, and other areas that have an impact.
-
-
-Initially, you will study _one dataset_ but later you will need to combine that data with another dataset. For this reason, I recommend finding data that has some date and/or location components. These types of data are conducive to interesting visualizations and analysis and you can also combine this data with other data that also has a date or location variable.
-Data from the census, weather data, economic data, are all relatively easy to combine with other data with time/location components.
-
-
-## What makes a good data set?
-
-* Data you are interested in and care about.
-* Data where there are a lot of potential questions that you can explore.
-* A data set that isn't completely cleaned already.
-* Multiple sources for data that you can combine.
-* Some type of time and/or location component.
-
-
-## Where to keep data?
-
-
-Below 50mb: In `dataset` folder
-
-Above 50mb: In `dataset_ignore` folder. This folder will be ignored by `git` so you'll have to manually sync these files across your team.
-
-### Sharing your data
-
-
-For small datasets (<50mb), you can use the `dataset` folder that is tracked by github. Add the files just like you would any other file.
-
-If you create a folder named `data` this will cause problems.
-
-For larger datasets, you'll need to create a new folder in the project root directory named `dataset-ignore`. This will be ignored by git (based off the `.gitignore` file in the project root directory) which will help you avoid issues with Github's size limits. Your team will have to manually make sure the data files in `dataset-ignore` are synced across team members.
-
-Your [load_and_clean_data.R](/scripts/load_and_clean_data.R) file is how you will load and clean your data. Here is a an example of a very simple one.
-
-You should never use absolute paths (eg. `/Users/danielsussman/path/to/project/` or `C:\MA415\\Final_Project\`).
-
-You might consider using the `here` function fomr the [`here` package](https://here.r-lib.org/articles/here.html) to avoid path problems.
-
-### Load and clean data script
-
-The idea behind this file is that someone coming to your website could largely replicate your analyses after running this script on the original data sets to clean them.
-This file might create a derivative data set that you then use for your subsequent analysis.
-Note that you don't need to run this script from every post/page.
-Instead, you can load in the results of this script, which could be plain text files or `.RData` files. In your data page you'll describe how these results were created. If you have a very large data set, you might save smaller data sets that you can use for exploration purposes.
-To link to this file, you can use `[cleaning script](/scripts/load_and_clean_data.R)` which appears as [cleaning script](/scripts/load_and_clean_data.R). 
-```{r}
-source(
-  "scripts/load_and_clean_data.R",
-  echo = TRUE # Use echo=FALSE or omit it to avoid code output  
-)
-```
-
-
-### Where to find Dataset
+### Where to find the Datasets
 We found the data set by googling keywords such as “mental health, race, age, substance abuse” accompanied with “data set, csv, R”. This allowed us to find the codebook from the “Substance Abuse and Mental Health Services Administration”, describing a survey on substance abuse, mental health, and race from 2021. This survey was the “National Survey on Drug Use and Health”. We deemed this source reputable and we found an R file to download from: https://www.datafiles.samhsa.gov/dataset/national-survey-drug-use-and-health-2021-nsduh-2021-ds0001. 
 The link to the codebook is here:  
-https://www.datafiles.samhsa.gov/sites/default/files/field-uploads-protected/studies/NSDUH-2021/NSDUH-2021-datasets/NSDUH-2021-DS0001/NSDUH-2021-DS0001-info/NSDUH-2021-DS0001-info-codebook.pdf 
+https://www.datafiles.samhsa.gov/sites/default/files/field-uploads-protected/studies/NSDUH-2021/NSDUH-2021-datasets/NSDUH-2021-DS0001/NSDUH-2021-DS0001-info/NSDUH-2021-DS0001-info-codebook.pdf. 
 
-### How was the data collected
+![](./images/samhsaimage.jpeg)
+The survey was conducted by SAMSHA - Substance Abuse and Mental Health Services Administration which is a government agency for the United States of America.
+
+Another dataset we found that we needed was the Census data for 2020 and getting the counties with their respective population count. This was important to to plot the counties onto a map of America so to show which cities are clustered with people more and associate it with the survey of which areas are considered large, small, or non metro areas. There are many variables that are collected by the Bureau but the most important ones that are relevant to the main dataset is the county names to get each county and the population size of each county such that it can be plotted onto the map of the United States as a heatmap of population density. The link to the US Census data for 2020 is https://www.census.gov/programs-surveys/decennial-census/decade/2020/2020-census-results.html. 
+
+![](./images/census1.png){width="75%"}
+
+
+### Data Collection and Purpose
 The primary purpose of this data and the NSDUH organization was to measure the frequency and relationship between substance abuse and mental health issues. The target population is the civilian and noninstitutionalized one. This survey was sent out to and filled out by individual persons in the USA, aged 12 and over, the data was collected cross-sectionally. The survey collectors warn that this data is dependent on respondent’s truthfulness and memory, and should thus be taken with a grain of salt. Also, this survey does not include data from citizens who are active-duty military members or living in institutional group shelters (homeless shelters, hospitals, prisons, etc.). They warn that this may underestimate the use of certain drugs like heroin. 
 
-### Different data files used 
-While we used the R file available to download to make the cleaned data set in our final project repository, we used the codebook to actually understand the data set csv file. The codebook contained information about each column and it was broken down into sections of self-administered substance abuse, imputed substance abuse, other self-administered sections, demographics, and geographic. We divided the sections and went through them, when sorting through the substance abuse sections, we stayed consistent in the types of columns we chose, those were: “age when first used”, “time since last used”, “number of days per week used in last 12 months”, and “best estimate of how many times used in last 30 days”. 
+For the creation of the census, it was created by the United States Census Bureau Agency. It is done every 10 years and is a way to produce data on the American people and the economy of the United States as well. The hope in doing this is that the United States gets a better sense of how the American people are doing and where many people are located and understanding more about what kinds of decisions need to be made for the people or society. The census is conducted through electronic questionnaires to business, homes and many other places where someone may be. Sometimes they will sample people and conduct in person interviews as well but it is not possible to do it for every single person in America so relying on electronic questionnaires and other forms of filling the census are essential in the Bereau's methods of collection.
 
-While the data set we are using from the 2021 NSDUH contains bountiful information concerning substance use, race, income, mental health, education, and age, it does not include very specific location information. The main information provided about the location of the survey respondents is stored in the variables "PDEN10" and "COUTYP4". The PDEN10 variable represents "Population Density 2010" and respondents are sorted into coming from county based statistical areas (CBSAs) of 1 million or more people, less than 1 million people, or as not in a CBSA. The NSDUH survey designers created those classifications based on 2013 CBSA codes and 2010 Census data. They used the Census data to obtain the population counts for the different CBSA or non-CBSA areas. Although it was not available by the survey makers at the time, we decided to use 2020 Census data to provide a more up-to-date visualization of the populations of the three categories of the PDEN10 variable. This more closely reflects the county statuses at the time the survey data was collected in 2021. The COUNTYP4 variable sorts respondents based on rural urban continuum codes (RUCC) from 2013. It places respondents into large metro, small metro, or non-metro counties. To visualize these counties on a US map, we downloaded and cleaned an excel data file of the 2013 RUCC.
+### Different data files used 
+While we used the R file available to download to make the cleaned data set in our final project repository, we used the codebook to actually understand the data set R dataset file. The codebook contained information about each column and it was broken down into sections of self-administered substance abuse, imputed substance abuse, other self-administered sections, demographics, and geographic. We divided the sections and went through them, when sorting through the substance abuse sections, we stayed consistent in the types of columns we chose, those were: “age when first used”, “time since last used”, “number of days per week used in last 12 months”, and “best estimate of how many times used in last 30 days”. 
+
+While the data set we are using from the 2021 NSDUH contains bountiful information concerning substance use, race, income, mental health, education, and age, it does not include very specific location information. The main information provided about the location of the survey respondents is stored in the variables "PDEN10" and "COUTYP4". The PDEN10 variable represents "Population Density 2010" and respondents are sorted into coming from county based statistical areas (CBSAs) of 1 million or more people, less than 1 million people, or as not in a CBSA. The NSDUH survey designers created those classifications based on 2013 CBSA codes and 2010 Census data. They used the Census data to obtain the population counts for the different CBSA or non-CBSA areas. Although it was not available by the survey makers at the time, we decided to use 2020 Census data to provide a more up-to-date visualization of the populations of the three categories of the PDEN10 variable. This more closely reflects the county statuses at the time the survey data was collected in 2021. The COUNTYP4 variable sorts respondents based on rural urban continuum codes (RUCC) from 2013. It places respondents into large metro, small metro, or non-metro counties. To visualize these counties on a US map, we downloaded and cleaned an excel data file of the 2013 RUCC and combined it with Census and CBSA data.
 
 ### Cleaning for the data
 
-This is the link to the script, [cleaning script](/scripts/load_and_clean_data.R). The Script cleans the data by keeping only the columns that have enough responses to the questions and also are highly relevant questions that can be used in understanding the data. As explained in our blog post, our strategy is too use the columns with the most value in analysis.
+This is the link to the script, [cleaning script](/scripts/load_and_clean_data.R). The Script cleans the data by keeping only the columns that have enough responses to the questions and also are highly relevant questions that can be used in understanding the data. Our strategy is too use the columns with the most value in analysis. Questions like "Have you ever smoked a cigarette" have high response rates and gives key insight into how we can associate drug/substance use with what we are trying to look into. The script filtering involved taking all the questions we deemed qualified to be included in and the rest of the 2,800 variables in this dataset to be filtered out and to keep a consistent set of questions for the analysis use. Such selecting looks like:
 
-To clean the CBSA data set, the readxl package was used to read the CBSA excel file. The data was already pretty clean, but in the original file there was a blank row and a few header rows, so we had to make sure to skip those. Then the columns were labeled and any missing values were converted to read as NA. A similar procedure was followed to read in an excel file containing Census data. With the Census data, we were interested in county populations by state. One thing we had to consider with the Census data was that it contained a row at the start of each state where the county name and the state name were the same and this row listed the state’s total population. While we did not remove this row when cleaning the data set, we were aware of it and would filter it out if necessary. For example, it was not necessary to filter out this row when we created a merged CBSA/CENSUS dataset since we joined the datasets on the conditions that a pair of state and county names matched in both datasets and since the CBSA data did not have any such pairs, it would automatically be eliminated. We used this dataset to pull a list of counties in the CBSA that overlapped with the Census, along with their populations, to help make a map visualizing the dataset's PDEN10, or "Population Density 2010" variable.
+```
+drug_health_data_clean_new <- PUF2021_100622 |>
+  select(QUESTID2, filedate,
+         cigever, cigage, mjever, mjage, alcever, cocever, cocage, crkever, crkage, herever, herage, UD5ILLANY, ... (other variables)
+```
+Then we save the dataframe into a rds file for storage purposes and continue to the other datasets.
 
-One important thing that we had to look into when cleaning the CBSA and CENSUS data sets was the column types. We tried using the character() function to tell us the types of columns we were dealing with to pass into the read_excel() function. However, we still ran into parsing errors because the excel files had numeric values stored as texts. To address this issue, we used a feature of read_excel() that allowed us to pass in a column type “guess”, allowing R to guess at/decide on how it wanted to read in the numeric values stored as text which fixed the error message and produced readable data. Once this error had been fixed, we were able to save the cleaned CBSA and Census data sets as RDS files. To support our location information data, we also read in an excel dataset containing rural urban continuum codes which was then saved as an RDS file. This data set was easy enough to clean and we employed the same techniques as those mentioned for the Census and CBSA data sets. 
+For the location analysis portion of our project, we used data from the 2020 Census, the 2009 CBSA, and the 2013 Rural Urban Continuum Codes (RUCC). To clean the CBSA data set, the readxl package was used to read the CBSA excel file. The data was already pretty clean, but in the original file there was a blank row and a few header rows, so we had to make sure to skip those. Then the column names were labeled and any missing values were converted to read as NA. A similar procedure was followed to read in an excel file containing Census data. With the Census data, we were interested in county populations by state. One thing we had to consider with the Census data was that it contained a row at the start of each state where the county name and the state name were the same and this row listed the state’s total population. While we did not remove this row when cleaning the data set, we were aware of it and would filter it out if necessary. For example, it was not necessary to filter out this row when we created a merged CBSA/CENSUS dataset since we joined the datasets on the conditions that a pair of state and county names matched in both datasets and since the CBSA data did not have any such pairs, it would automatically be eliminated. This merged dataset would provide insight into the “PDEN10”, or Population Density 2010, variable, but we did not end up exploring that much further because we became more interested in how the metropolitan status of a county was related to drug use and this insight was provided by combining Census, CBSA, and RUCC data. We ended up using the merged Census/CBSA data to find overlap between the Census and RUCC counties not only to stay true to the techniques of the survey designers, but also because the CBSA data provided FIPS codes of counties in the Census, and in the RUCC dataset counties were identified by their FIPS codes so this made the overlap easy. We then used this 3-way merged data set to create the map visualizing county metro status in the US. 
+
+One important thing that we had to look into when cleaning the CBSA, CENSUS, and RUCC data sets was the column types since they were all excel files. We tried using the character() function to tell us the types of columns we were dealing with to pass into the read_excel() function. However, we still ran into parsing errors because the excel files had numeric values stored as texts. To address this issue, we used a feature of read_excel() that allowed us to pass in a column type called “guess”, allowing R to guess at/decide on how it wanted to read in the numeric values stored as text which fixed the error message and produced readable data. Once this error had been fixed, we were able to save the cleaned CBSA, Census, and RUCC data sets as RDS files.
+
 
 
 ----
