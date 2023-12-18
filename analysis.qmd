@@ -255,7 +255,7 @@ her_data <- drug_race_age |>
 
 ggplot(her_data, aes(x = NEWRACE2, y = herage, fill = NEWRACE2)) +
   geom_boxplot() +
-  labs(title = "Boxplot of Age of First Drug Use of Heroine by Race",
+  labs(title = "Boxplot of Age of First Drug Use of Heroin by Race",
        x = "Race",
        y = "Age of First Use",
        fill = "Race Type") +   
@@ -302,7 +302,7 @@ output
 
 ### Substance Use with Race and Income as a Factor of Each Other 
 
-We are gonna assume for the model here that the hypothesis is that there is no association between likelihood of trying drugs ever and race group as well as Income.
+We assume for the model here that the hypothesis is that there is no association between likelihood of trying drugs ever and race group as well as Income.
 
 ```{r}
 drug_use_with_race <- cleaned_data |>
@@ -339,7 +339,7 @@ output
 
 ### Substance Use with Race and Income as a Factor of Each Other 
 
-Same as before, we are gonna assume for the model here that the hypothesis is that there is no association between likelihood of trying drugs ever and race group as well as Income.
+Same as before, we assume for the model here that the hypothesis is that there is no association between likelihood of trying drugs ever and race group as well as Income.
 ```{r}
 # Model for the Substance Use vs Race and Income
 model_sub_income <- glm(drug_use ~ NEWRACE2*factor(income), data = drug_use_with_race, family = "binomial")
