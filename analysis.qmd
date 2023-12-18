@@ -46,7 +46,7 @@ counties_cleaned_METRO <- readRDS(here::here("dataset/metro_clean.rds"))
 ```
 
 
-## Setting the Scene - Maps of How Respondents Are Aorted Across the US According to County Metro and Population Status
+## Setting the Scene - Maps of How Respondents Are Sorted Across the US According to County Metropolitan Size Status
 
 ``` {r, messsages=FALSE}
 
