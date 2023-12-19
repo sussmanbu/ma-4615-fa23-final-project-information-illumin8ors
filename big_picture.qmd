@@ -23,6 +23,7 @@ We were also interested in the relationship between location and drug use. We wa
 ## Interpretations
 We found some interesting trends between age and drug use as well. We have shown that on average, people try crack at a younger age then they try heroin. This could be due to a variety of factors, and interesting follow-up studies could involve access to those drugs and a survey of the average interest of people of a variety of ages in either drug. We would hypothesize that there is higher accessibility of crack to younger people, but that it is more difficult to acquire heroin. 
 
+In conclusion, our comprehensive analysis of the 2021 National Survey on Drug Use and Health presents a nuanced understanding of the intricate web of factors influencing drug use in the United States. By debunking stereotypes and exploring the real data, we offer insights that can guide effective policy and intervention strategies. It's evident that drug use is not a monolithic issue but a complex interplay of racial, income, location, age, and societal factors. This understanding is crucial for developing targeted and effective approaches to address the challenges of drug abuse in various communities. Our study serves as a stepping stone for further research and discussion, aiming to contribute meaningfully to the ongoing efforts to combat substance abuse and its far-reaching impacts on society.
 
 ---
 
