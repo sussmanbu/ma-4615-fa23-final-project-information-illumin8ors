@@ -1,15 +1,28 @@
 ---
-title: "Big Picture"
-description: "A 538/Upshot style article about the data."
+title: "Drug Use Exposed!"
+description: "Unveiling the Factors of Influences for People with Drugs"
 toc: true
 draft: FALSE
 ---
 
-![](images/The_Big_Picture_2.jpeg)
+## Debunking Myths: Race, Income, and Drug Use Dynamics
 
-This comes from the file `big_picture.Rmd`.
+There are many stereotypes about the relationships between race, annual income, and drug use. What underlies common perceptions linking race, income, and drug use? With this study, we have explored those stereotypes and will tell you everything you need to know about how race and annual income actually influence drug use across the US. The results of our study are based on the National Survey on Drug Use and Health which was conducted in 2021. This survey asked people to report on their drug use, including information about the age when they first used a substance, how often they use it, and how likely they are to use it again in the future. The survey also collected information about the survey taker’s race, income, and location based on county size of where they are located.
 
-Think of this page as your 538/Upshot style article. This means that you should try to tell a story through the data and your analysis. Read articles from those sites and similar sites to get a feeling for what they are like. Importantly, these should be geared towards the general public. You shouldn't assume the reader understands how to interpret a linear regression. Focus on interpretation and visualizations.
+The survey data is very comprehensive, but to focus on the results of our study, we have only looked at factors influencing the use of three substances: heroin, cocaine, and crack. Stereotypes often heard about these substances would be, for example: people with higher yearly incomes tend to use more cocaine, and people with lower yearly incomes would be more prone to using heroin or crack. We wanted to validate and potentially debunk these stereotypes via statistical models and tests that would test the data-based relationships between drug use, race, and income. For more details on those tests and models, please see the Analysis tab of our website. 
+
+## Drug Exploration: Heroin, Cocaine, and Crack
+After we had conducted our analysis, we found that there is a clear relationship between race and drug use. The bar chart indicates varying drug usage patterns among ethnic groups, with Native Americans/Alaska Natives having the highest percentage of people who have tried drugs, while Asians show the lowest. The boxplots examining the age of first drug use among different racial groups reveal variations. In terms of the age of first heroin use, Native Hawaiian/Other Pacific Islanders start early (around 10 years), whereas Asians have a significantly later initiation (around 29 years), the highest among all groups. Logistic regression analysis shows that Black/African Americans have a slightly higher likelihood of drug use, while Native American/Alaska Native populations exhibit the highest odds, emphasizing the need for targeted interventions to address these disparities.
+
+## Income and Drug Use
+We also found that there are relationships between income and drug use. Generally speaking, drugs, especially heroin or cocaine, are extremely expensive. So income is one of the important predictors that we need to consider. This perception may suggest that individuals with higher incomes could have more access to such substances due to their ability to afford them. Since the dependent variable that we apply (drug use), which outcome is binary, we utilized the logistic regression model for analyzing. By including and combining the ‘NEWRACE2’ and ‘income’, we were able to explore how these variables together can influence the drug use pattern. From the output table, the ‘Asian’ racial tends to have a lower odds of drug use while the native American is the highest. However, there are some interesting findings of the income levels. The data of the odds ratio indicates that with lower income levels showing a higher drug use. This is an unexpected result from the perceptions. In this case, the factors like socio-economic or psychological are what we need to consider. 
+
+## Location and Drug Use
+We were also interested in the relationship between location and drug use. We wanted to address the stereotypes that involve substance use and location. There are stereotypes such as “people in large cities/metropolitan areas tend to use more drugs like cocaine than people in rural counties”. We found that this is a claim that the NSDUH data supports. We found that more people use, on average, cocaine more days per week in large metro areas than those in small metro and non-metro areas. It was also found that more race categories use cocaine in a week in those large metro areas than those in non-large metro areas, with the Black/African American race category having the highest median number of days per week of use across all three metro classifications.
+
+## Interpretations
+We found some interesting trends between age and drug use as well. We have shown that on average, people try crack at a younger age then they try heroin. This could be due to a variety of factors, and interesting follow-up studies could involve access to those drugs and a survey of the average interest of people of a variety of ages in either drug. We would hypothesize that there is higher accessibility of crack to younger people, but that it is more difficult to acquire heroin. 
+
 
 ---
 
@@ -30,38 +43,3 @@ You will
   
 **Note**: This page should have no code visible, i.e. use `#| echo: FALSE`.  
 
----
-
-## Rubric: Other components
-
-### Interactive
-
-You will also be required to make an interactive dashboard like [this one](/flex/flex.html).
-
-Your Big Data page should include a link to an interactive dashboard. The dashboard should be created either using Shiny or FlexDashboard (or another tool with professor's approval). This interactive component should in some way support your thesis from your big picture page. Good interactives often provide both high-level understanding of the data while allowing a user to investigate specific scenarios, observations, subgroups, etc.
-
-* Quality and ease of use of the interactive components.
-Is it clear what can be explored using your interactive components?
-Does it enhance and reinforce your conclusions from the Big Picture?
-Plotly with default hover text will get no credit. Be creative!
-
-
-### Video Recording
-
-Make a video recording (probably using Zoom) demonstrating your interactive components.
-You should provide a quick explanation of your data and demonstrate some of the conclusions from your EDA.
-This video should be no longer than 4 minutes.
-Include a link to your video (and password if needed) in your README.md file on your Github repository. You are not required to provide a link on the website.
-This can be presented by any subset of the team members.
-
-
-### Rest of the Site
-
-Finally, here are important things to keep in mind for the rest of the site. 
-
-The main title of your page is informative.
-Each post has an author/description/informative title.
-All lab required posts are present.
-Each page (including the home page) has a nice featured image associated with it.
-Your about page is up to date and clean.
-You have removed the generic posts from the initial site template.

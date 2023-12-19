@@ -7,26 +7,24 @@ draft: false
 # Early Insights
 ## Motivation for Data Analysis (DA)
 
-Our motivation for engaging in Data Analysis of the NSDUH survey comes from our shared interest in finding out how drug use affects all areas of life in society. Understanding more about drug use is important because so much is unknown about drug use and being able to uncover certain relationships may be key in understanding and addressing drug use. For us we are super excited to explore such a huge dataset such as the NSDUH because we can take our time to explore the small key relationships between so many different variables throughout the dataset. Navigating through such a dataset took us a long time to find variables that we needed for analysis but it was perfect in the end because we were able to effectively show key relationships that help the general public understand more about drugs and their use. 
+Our motivation for engaging in Data Analysis of the NSDUH survey comes from our shared interest in finding out how drug use affects all areas of life in society. Understanding more about what motivates drug use is important because so much is unknown about drug use and being able to uncover certain relationships concerning the factors that influence drug use may be key in understanding and addressing drug use. For us, we were super excited to explore such a huge dataset such as the NSDUH because we can take our time to explore the small key relationships between so many different variables throughout the dataset. Navigating through such a dataset meant that it took us a long time to find variables that we needed for analysis but it was perfect in the end because we were able to effectively show key relationships that help the general public understand more about certain drugs and their use.
 
-Ultimately our goal is to provide key insights into how certain factors play a role in a person’s drug use even if they did a drug for one time. We were initially interested in finding out just about how race and drug use is affecting one another but we then soon realized that we also need to explore the factors for drug use and not just the relationship between the two. We then realized that a more holistic view of each factor into drug use would be more appropriate. These factors of income,and location can play a role in how drug use and race correlate and associate together.
+Ultimately our goal is to provide key insights into how certain factors play a role in a person’s drug use even if they tried a drug once. We were initially interested in finding out just about how race and drug use is affecting one another but we then soon realized that we also need to explore all of the factors that influence drug use, not just its relationship with race. We then realized that a more holistic view of each factor into drug use would be more appropriate. The added factors of income and location can play a role in how drug use and race correlate and associate together. 
+
 
 ## Interested Variables
 
-The variables we were highly interested in exploring is the relationship between drugs used and the race of the respondent in this survey. Being able to see the variables that factor into the relationship is important to understand how a person might be influenced to try and do drugs. The most important variables and factors help determine not only such a relationship of race and drug use but also the disparities between racial groups and drug use. 
+To narrow down the results of our findings, we focused on investigating cocaine, crack, and heroine use. We were highly interested in exploring the relationship between the use of those three drugs and the races of the respondents in this survey. Being able to see the variables that factor into the relationship is important to understand how a person might be influenced to try and do drugs. The most important variables and factors in this study will help determine not only such a relationship of race and drug use but also the disparities between racial groups and drug use. 
 
-Going even further, we want to see what factors attribute to drug use in any way, that being income or location. These are important relationships to explore because it could provide insight into why or how someone could be introduced to drug use and what factors play a role. Some specific questions from the survey that play into our analysis are questions asking if a person has ever done such a drug and such a drug could be one of the 6 we are exploring which are cigarettes, marijuana, alcohol, cocaine, crack, heroine. Many factors could influence drug use such that two factors are reliant on each other. For example there could be relationships such that a young person with low income may or may not be more inclined to use drugs. These claims can only be made after such analysis of this dataset and its important to explore them. We aim to answer these questions and relationships below in the analysis.
+We wanted to see what factors attribute to drug use in any way, such as income, location. The influences of income and location are important relationships to explore because they could provide insight into why or how someone could be introduced to drug use and what factors play a role. For example, does a person living in a large metro area make them more or less likely to use a drug? We want to test which of the aforementioned factors are better predictors of drug use, we then want to compare those as predictors versus race as a predictor. Many factors could influence drug use such that two factors are reliant on each other and we want to see which are the most important, or influential, factors.
 
-Also at what age each person has done any of the respective substances and whether they continue to do those drugs or not. Income, age and location are also important factors when it comes to finding the factors as these can be associated with higher drug use or lower as well. We want to explore relationships like if you are younger will you be trying more drugs or will you try more drugs when you are older and how does the racial group aspect play a role. Age can also play along with income and location and it's important to explore whether these factors intertwine with each other or are they stand alone. We aim to answer these questions and relationships below in the analysis.
-
+We also wanted to see at what age each person has done any of the respective substances and whether they continue to do those drugs or not. Income, age, and location are important factors when it comes to finding the factors as these can be associated with higher drug use or lower as well. We want to explore relationships like if you are younger will you be trying more drugs or will you try more drugs when you are older and how does the racial group aspect play a role. Age can also play along with income and location and it's important to explore whether these factors intertwine with each other or are they stand alone. We aim to answer these questions and relationships below in the analysis.
 
 ## Questions for Analysis
 
-The key question we are trying to answer is firstly how does race affect the drug use of a person. Going further, how does location, age, and income factor into this relationship.
+The questions we are interested in answering and have attempted to answer via analyses of this data are as follows: How does race affect a person’s tendency to use crack, cocaine, and heroine? Going further, how do location, age, and income factor into this relationship? 
 
 # Analysis Portion
-
-<!-- ![](https://upload.wikimedia.org/wikipedia/commons/7/77/Pebbleswithquarzite.jpg)-->
 
 ## Necessary Libraries and Datasets
 Below we start by first introducing the cleaned dataset and also the libraries that are needed to create plots and tables in a nice and aesthetically pleasing fashion.
@@ -45,20 +43,26 @@ cleaned_data <- readRDS(here::here("dataset/cleaned_data_new.rds"))
 counties_cleaned_METRO <- readRDS(here::here("dataset/metro_clean.rds"))
 ```
 
+## Initial Findings and Relationships - Context
 
-## Setting the Scene - Maps of How Respondents Are Sorted Across the US According to County Metropolitan Size Status
+Its important to set the scene in a sense for what is to come in this data analysis and understanding the features of the respondents is key. Features such as metro status in the US so that we can have a baseline understanding of where respondents can be located for drug use is significant in understanding. The same applies for understanding the percentage of respondents because of limitations of this dataset. Setting this background is important for understanding our interpretation. 
+
+## Maps of How Respondents Are Sorted Across the US According to County Metropolitan Size Status
 
 ``` {r, messsages=FALSE}
 
-metro_map <- counties_cleaned_METRO |> filter(STUSPS != "AK", STUSPS != "HI", STUSPS != "MP", STUSPS != "AS", STUSPS != "PR", STUSPS != "GU", STUSPS != "VI") %>% ggplot() + geom_sf(aes(fill = metrostatus), alpha = 0.5) + scale_fill_viridis_c() + ggtitle("US Counties Colored by Metro Status") + labs(subtitle = "1 = Large Metro, 2 = Small Metro, 3 = Non-Metro, 0 = Unkown", fill = "Metro Status") + theme(plot.subtitle = element_text(size = 9))
+metro_map <- counties_cleaned_METRO |> filter(STUSPS != "AK", STUSPS != "HI", STUSPS != "MP", STUSPS != "AS", STUSPS != "PR", STUSPS != "GU", STUSPS != "VI") |> 
+  ggplot() + geom_sf(aes(fill = metrostatus), alpha = 0.5) + scale_fill_viridis_c() + 
+  ggtitle("US Counties Colored by Metro Status") + labs(subtitle = "1 = Large Metro, 2 = Small Metro, 3 = Non-Metro, 0 = Unkown", fill = "Metro Status") + 
+  theme(plot.subtitle = element_text(size = 9))
 
 metro_map
 ```
 
-## Initial Findings and Relationships - EDA
-
+<< Set up with 1 paragraph >>
 
 ## Proportion of Race to Try Drugs Based on Race
+It's important to understand not only how many respondents were in this survey but also what percentage of respondents within their respective race have tried any of the 3 drugs mentioned. The reason it is very important to understand the percentage with respect to their race is because in this survey, there was not an equally sized population for each race and some people from a certain race responded more than other people in other races. This can cause representation problems and skews in the dataset so understanding the need for this plot is very important when considering the analysis below.
 
 ```{r}
 drug_use_with_race <- cleaned_data |>
@@ -79,7 +83,13 @@ ggplot(proportions_table, aes(x = NEWRACE2, y = Percentage, fill = Drug_Status))
        y = "Percentage",
        fill = "Drug Status") + theme(axis.text.x = element_text(angle = 90, size = 9))
 ```
-## Plot of Cocaine Use Out of Days per Week by Race
+
+The plot clearly shows that many people have not tried any of the three drugs but Asians have the lowest percentage of people who tried drugs for their respective race group. Native Americans are the race group with the highest percentage of drugs tried and the White race group is in the middle of the rest of the race groups. Asians, Blacks/African Americans, and Hispanics have the lowest percentage of people within their race group that have not tried any of these drugs. This gives us more insight into how our analysis will play out with our plots and models. We can predict that the model may be more accurate in understanding and predicting drug use based on such a predictor variable.
+
+Keeping both the metro area and the percentage of people who tried drugs by race for this survey in mind, we have set the scene for how this survey’s information will play out.
+
+
+## Plot of Cocaine Use Out of Days per Week by Race Faceted by Metro Status
 
 ```{r, bargraphs}
 
@@ -128,7 +138,7 @@ ggplot(her_data, aes(x = NEWRACE2, y = herage, fill = NEWRACE2)) +
 
 ## Logisitic Regression Models
 
-Important to note that the baselines/intercepts are the Asian Population
+Several models were created and then assessed for their usefulness and quality. We tried several different predictors in these models to inform how location or income factor, along with race, into a person’s tendency to use drugs. Out of five original models, we took a few things into consideration when deciding which to keep, such as looking at how many values in the model were significant based on their p-values. Many of the models were great, and had similar amounts of significant values, so to narrow down our selection we then looked at the AIC of each model and compared them. A smaller AIC implies a higher quality model. Overall, the AIC values between each model did not vary too much, so we were also able to simply choose models based on which provided the most interesting results to discuss and to support our thesis. Important to note that the baselines/intercepts are the Asian Population
 
 ### Substance Use with Race
 ```{r}
@@ -219,7 +229,13 @@ output
 
 ## Limitations of Analysis
 
-In our analysis of the data, there were a few limitations that we had to keep in mind. The first is that both when conducting and reading the analysis, remember that the results on substance use are based on respondent’s memories so that introduces error because people may have falsely reported their true substance use. Another source of error that we had to address was that the results of our plots were pretty skewed because the number of white respondents was much higher than the number of respondents of other race categories. This was falsely making it look like substance use was much higher for the white race category than it was for others. To address this, we tried using proportions instead. 
+While our analysis has provided significant findings and we have shown via statistical modeling that there is strong correlation between our variables of interest, there are some flaws and limitations to consider when assessing the results of our study. First, the survey asks the respondent to report on their drug use, race, location, age, and more. Their responses to questions concerning the latter variables need not be taken into question. However, their responses to questions concerning their drug use should be taken with a grain of salt because their responses are based on their memory. This means that they may falsely report on their drug use history which introduces error into our findings. Another limitation we must take into account are the proportions of the number of respondents from each race to the total number of survey respondents. More respondents come from the white race category than from any other race category, so this introduces skew into our results. For example, if we simply said “more white people use cocaine than any other race category”, this may or may not be true because more white people responded to the survey than any people of any other race. To address and minimize this location, we created a plot that uses population proportions in an analysis of drug use frequency. See the section “Proportion of Race to Try Drugs Based on Race”.
+
+## Need for Further Analysis
+
+Based on the boxplots that compare the ages when people first tried crack versus heroine, a data analysis concerning the accessibility of crack versus heroine to younger people would be
+an interesting complement study to further investigate the trend of people trying crack at a younger age than cocaine. This study could look at how people acquire crack versus cocaine, the median cost of either drug, the average interest of younger versus older people in using crack or cocaine, and the access of those groups to mental health resources between the ages of 18 to 30, which are the approximate median ages of first use of crack and heroine, respectively.  
+
 
 ## Table for percentage of Race in Total
 

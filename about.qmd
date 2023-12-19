@@ -36,6 +36,8 @@ Tongdan is a graduate student major in statistics at BU. Link to github: https:/
 
 ## Xiaojing Yang
 
+Xiaojing is a CS & statistics student at BU. Link to github: https://github.com/jessie-yxj
+
 <!-- Please leave in the information below -->
 
 ### About this Template.
