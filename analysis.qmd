@@ -1,6 +1,6 @@
 ---
 title: Analysis
-description: Here we provide a detailed analysis using more sophisticated statistics techniques.
+description: Here we provide a detailed analysis using more sophisticated statistics techniques for drug use.
 toc: true
 draft: false
 ---
@@ -11,6 +11,7 @@ Our motivation for engaging in Data Analysis of the NSDUH survey comes from our 
 
 Ultimately our goal is to provide key insights into how certain factors play a role in a person’s drug use even if they tried a drug once. We were initially interested in finding out just about how race and drug use is affecting one another but we then soon realized that we also need to explore all of the factors that influence drug use, not just its relationship with race. We then realized that a more holistic view of each factor into drug use would be more appropriate. The added factors of income and location can play a role in how drug use and race correlate and associate together. 
 
+![](./images/feet.png)
 
 ## Interested Variables
 
@@ -256,7 +257,7 @@ While our analysis has provided significant findings and we have shown via stati
 Based on the boxplots that compare the ages when people first tried crack versus heroine, a data analysis concerning the accessibility of crack versus heroine to younger people would be
 an interesting complement study to further investigate the trend of people trying crack at a younger age than cocaine. This study could look at how people acquire crack versus cocaine, the median cost of either drug, the average interest of younger versus older people in using crack or cocaine, and the access of those groups to mental health resources between the ages of 18 to 30, which are the approximate median ages of first use of crack and heroine, respectively.  
 
-We can also expand the analysis to include data on specific location which is made private by SAMHSA for the NSDUH to understand which areas may be more prone to drug use than other areas for people. Another way to go even further is to specifiy the income amount to the dollar if possible and not ranges so we can apply linear regression models to get an even better sense of what is going on with drug use factors. We can even go further to include even more factors such as family history, mental health, etc. These all would add significant detail and explore new relationships that can be talked about further in other research.
+We can also expand the analysis to include data on specific location which is made private by SAMHSA for the NSDUH to understand which areas may be more prone to drug use than other areas for people. Another way to go even further is to specify the income amount to the dollar if possible and not ranges so we can apply linear regression models to get an even better sense of what is going on with drug use factors. We can even go further to include even more factors such as family history, mental health, etc. These all would add significant detail and explore new relationships that can be talked about further in other research.
 
 
 ## Attributions/Helpful Links
