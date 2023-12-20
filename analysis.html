@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Here we provide a detailed analysis using more sophisticated statistics techniques.">
+<meta name="description" content="Here we provide a detailed analysis using more sophisticated statistics techniques for drug use.">
 
 <title>Information Illumin8ors Final Project - Analysis</title>
 <style>
@@ -156,25 +156,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#analysis-portion" id="toc-analysis-portion" class="nav-link" data-scroll-target="#analysis-portion">Analysis Portion</a>
   <ul class="collapse">
   <li><a href="#necessary-libraries-and-datasets" id="toc-necessary-libraries-and-datasets" class="nav-link" data-scroll-target="#necessary-libraries-and-datasets">Necessary Libraries and Datasets</a></li>
-  <li><a href="#initial-findings-and-relationships---context" id="toc-initial-findings-and-relationships---context" class="nav-link" data-scroll-target="#initial-findings-and-relationships---context">Initial Findings and Relationships - Context</a></li>
+  <li><a href="#context" id="toc-context" class="nav-link" data-scroll-target="#context">Context</a>
+  <ul class="collapse">
   <li><a href="#maps-of-how-respondents-are-sorted-across-the-us-according-to-county-metropolitan-size-status" id="toc-maps-of-how-respondents-are-sorted-across-the-us-according-to-county-metropolitan-size-status" class="nav-link" data-scroll-target="#maps-of-how-respondents-are-sorted-across-the-us-according-to-county-metropolitan-size-status">Maps of How Respondents Are Sorted Across the US According to County Metropolitan Size Status</a></li>
   <li><a href="#proportion-of-race-to-try-drugs-based-on-race" id="toc-proportion-of-race-to-try-drugs-based-on-race" class="nav-link" data-scroll-target="#proportion-of-race-to-try-drugs-based-on-race">Proportion of Race to Try Drugs Based on Race</a></li>
+  </ul></li>
   <li><a href="#plot-of-cocaine-use-out-of-days-per-week-by-race-faceted-by-metro-status" id="toc-plot-of-cocaine-use-out-of-days-per-week-by-race-faceted-by-metro-status" class="nav-link" data-scroll-target="#plot-of-cocaine-use-out-of-days-per-week-by-race-faceted-by-metro-status">Plot of Cocaine Use Out of Days per Week by Race Faceted by Metro Status</a></li>
   <li><a href="#plots-for-race-and-age-when-first-tried-and-drug-used" id="toc-plots-for-race-and-age-when-first-tried-and-drug-used" class="nav-link" data-scroll-target="#plots-for-race-and-age-when-first-tried-and-drug-used">Plots for Race and Age when First Tried and Drug Used</a></li>
   <li><a href="#logisitic-regression-models" id="toc-logisitic-regression-models" class="nav-link" data-scroll-target="#logisitic-regression-models">Logisitic Regression Models</a>
   <ul class="collapse">
+  <li><a href="#setting-background-and-understanding-choice" id="toc-setting-background-and-understanding-choice" class="nav-link" data-scroll-target="#setting-background-and-understanding-choice">Setting Background and Understanding Choice</a></li>
   <li><a href="#substance-use-with-race" id="toc-substance-use-with-race" class="nav-link" data-scroll-target="#substance-use-with-race">Substance Use with Race</a></li>
   <li><a href="#substance-use-with-race-and-income" id="toc-substance-use-with-race-and-income" class="nav-link" data-scroll-target="#substance-use-with-race-and-income">Substance Use with Race and Income</a></li>
   <li><a href="#substance-use-with-race-and-location-as-a-factor-of-each-other" id="toc-substance-use-with-race-and-location-as-a-factor-of-each-other" class="nav-link" data-scroll-target="#substance-use-with-race-and-location-as-a-factor-of-each-other">Substance Use with Race and Location as a Factor of Each Other</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a>
+  <li><a href="#final-statements" id="toc-final-statements" class="nav-link" data-scroll-target="#final-statements">Final Statements</a>
   <ul class="collapse">
-  <li><a href="#concluding-statements" id="toc-concluding-statements" class="nav-link" data-scroll-target="#concluding-statements">Concluding Statements</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   <li><a href="#limitations-of-analysis" id="toc-limitations-of-analysis" class="nav-link" data-scroll-target="#limitations-of-analysis">Limitations of Analysis</a></li>
   <li><a href="#need-for-further-analysis" id="toc-need-for-further-analysis" class="nav-link" data-scroll-target="#need-for-further-analysis">Need for Further Analysis</a></li>
-  <li><a href="#table-for-percentage-of-race-in-total" id="toc-table-for-percentage-of-race-in-total" class="nav-link" data-scroll-target="#table-for-percentage-of-race-in-total">Table for percentage of Race in Total</a></li>
-  <li><a href="#attributions" id="toc-attributions" class="nav-link" data-scroll-target="#attributions">Attributions</a></li>
+  <li><a href="#attributionshelpful-links" id="toc-attributionshelpful-links" class="nav-link" data-scroll-target="#attributionshelpful-links">Attributions/Helpful Links</a></li>
   <li><a href="#rubric-on-this-page" id="toc-rubric-on-this-page" class="nav-link" data-scroll-target="#rubric-on-this-page">Rubric: On this page</a></li>
   </ul></li>
   </ul>
@@ -190,7 +192,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div>
   <div class="description">
-    Here we provide a detailed analysis using more sophisticated statistics techniques.
+    Here we provide a detailed analysis using more sophisticated statistics techniques for drug use.
   </div>
 </div>
 
@@ -211,6 +213,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="motivation-for-data-analysis-da">Motivation for Data Analysis (DA)</h2>
 <p>Our motivation for engaging in Data Analysis of the NSDUH survey comes from our shared interest in finding out how drug use affects all areas of life in society. Understanding more about what motivates drug use is important because so much is unknown about drug use and being able to uncover certain relationships concerning the factors that influence drug use may be key in understanding and addressing drug use. For us, we were super excited to explore such a huge dataset such as the NSDUH because we can take our time to explore the small key relationships between so many different variables throughout the dataset. Navigating through such a dataset meant that it took us a long time to find variables that we needed for analysis but it was perfect in the end because we were able to effectively show key relationships that help the general public understand more about certain drugs and their use.</p>
 <p>Ultimately our goal is to provide key insights into how certain factors play a role in a person’s drug use even if they tried a drug once. We were initially interested in finding out just about how race and drug use is affecting one another but we then soon realized that we also need to explore all of the factors that influence drug use, not just its relationship with race. We then realized that a more holistic view of each factor into drug use would be more appropriate. The added factors of income and location can play a role in how drug use and race correlate and associate together.</p>
+<p><img src="./images/feet.png" class="img-fluid"></p>
 </section>
 <section id="interested-variables" class="level2">
 <h2 class="anchored" data-anchor-id="interested-variables">Interested Variables</h2>
@@ -241,13 +244,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>counties_cleaned_METRO <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"dataset/metro_clean.rds"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="initial-findings-and-relationships---context" class="level2">
-<h2 class="anchored" data-anchor-id="initial-findings-and-relationships---context">Initial Findings and Relationships - Context</h2>
+<section id="context" class="level2">
+<h2 class="anchored" data-anchor-id="context">Context</h2>
 <p>Its important to set the scene in a sense for what is to come in this data analysis and understanding the features of the respondents is key. Features such as metro status in the US so that we can have a baseline understanding of where respondents can be located for drug use is significant in understanding. The same applies for understanding the percentage of respondents because of limitations of this dataset. Setting this background is important for understanding our interpretation.</p>
-</section>
-<section id="maps-of-how-respondents-are-sorted-across-the-us-according-to-county-metropolitan-size-status" class="level2">
-<h2 class="anchored" data-anchor-id="maps-of-how-respondents-are-sorted-across-the-us-according-to-county-metropolitan-size-status">Maps of How Respondents Are Sorted Across the US According to County Metropolitan Size Status</h2>
-<div class="cell" data-messsages="false">
+<section id="maps-of-how-respondents-are-sorted-across-the-us-according-to-county-metropolitan-size-status" class="level3">
+<h3 class="anchored" data-anchor-id="maps-of-how-respondents-are-sorted-across-the-us-according-to-county-metropolitan-size-status">Maps of How Respondents Are Sorted Across the US According to County Metropolitan Size Status</h3>
+<div class="cell" data-messsage="false">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>metro_map <span class="ot">&lt;-</span> counties_cleaned_METRO <span class="sc">|&gt;</span> <span class="fu">filter</span>(STUSPS <span class="sc">!=</span> <span class="st">"AK"</span>, STUSPS <span class="sc">!=</span> <span class="st">"HI"</span>, STUSPS <span class="sc">!=</span> <span class="st">"MP"</span>, STUSPS <span class="sc">!=</span> <span class="st">"AS"</span>, STUSPS <span class="sc">!=</span> <span class="st">"PR"</span>, STUSPS <span class="sc">!=</span> <span class="st">"GU"</span>, STUSPS <span class="sc">!=</span> <span class="st">"VI"</span>) <span class="sc">|&gt;</span> </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill =</span> metrostatus), <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span> <span class="fu">scale_fill_viridis_c</span>() <span class="sc">+</span> </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"US Counties Colored by Metro Status"</span>) <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">subtitle =</span> <span class="st">"1 = Large Metro, 2 = Small Metro, 3 = Non-Metro, 0 = Unkown"</span>, <span class="at">fill =</span> <span class="st">"Metro Status"</span>) <span class="sc">+</span> </span>
@@ -260,10 +262,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <p>&lt;&lt; Set up with 1 paragraph &gt;&gt;</p>
 </section>
-<section id="proportion-of-race-to-try-drugs-based-on-race" class="level2">
-<h2 class="anchored" data-anchor-id="proportion-of-race-to-try-drugs-based-on-race">Proportion of Race to Try Drugs Based on Race</h2>
+<section id="proportion-of-race-to-try-drugs-based-on-race" class="level3">
+<h3 class="anchored" data-anchor-id="proportion-of-race-to-try-drugs-based-on-race">Proportion of Race to Try Drugs Based on Race</h3>
 <p>It’s important to understand not only how many respondents were in this survey but also what percentage of respondents within their respective race have tried any of the 3 drugs mentioned. The reason it is very important to understand the percentage with respect to their race is because in this survey, there was not an equally sized population for each race and some people from a certain race responded more than other people in other races. This can cause representation problems and skews in the dataset so understanding the need for this plot is very important when considering the analysis below.</p>
-<div class="cell">
+<div class="cell" data-messsage="false">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>drug_use_with_race <span class="ot">&lt;-</span> cleaned_data <span class="sc">|&gt;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(NEWRACE2, cocever, cocage, crkever, crkage, herever, herage, income, COUTYP4) <span class="sc">|&gt;</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">drug_use =</span> <span class="fu">ifelse</span>( cocever<span class="sc">==</span><span class="dv">1</span> <span class="sc">|</span> crkever<span class="sc">==</span><span class="dv">1</span> <span class="sc">|</span> herever<span class="sc">==</span><span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
@@ -288,6 +290,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The plot clearly shows that many people have not tried any of the three drugs but Asians have the lowest percentage of people who tried drugs for their respective race group. Native Americans are the race group with the highest percentage of drugs tried and the White race group is in the middle of the rest of the race groups. Asians, Blacks/African Americans, and Hispanics have the lowest percentage of people within their race group that have not tried any of these drugs. This gives us more insight into how our analysis will play out with our plots and models. We can predict that the model may be more accurate in understanding and predicting drug use based on such a predictor variable.</p>
 <p>Keeping both the metro area and the percentage of people who tried drugs by race for this survey in mind, we have set the scene for how this survey’s information will play out.</p>
 </section>
+</section>
 <section id="plot-of-cocaine-use-out-of-days-per-week-by-race-faceted-by-metro-status" class="level2">
 <h2 class="anchored" data-anchor-id="plot-of-cocaine-use-out-of-days-per-week-by-race-faceted-by-metro-status">Plot of Cocaine Use Out of Days per Week by Race Faceted by Metro Status</h2>
 <div class="cell">
@@ -305,7 +308,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="plots-for-race-and-age-when-first-tried-and-drug-used" class="level2">
 <h2 class="anchored" data-anchor-id="plots-for-race-and-age-when-first-tried-and-drug-used">Plots for Race and Age when First Tried and Drug Used</h2>
-<div class="cell">
+<p>Below are box plots to indicate the age at which people started using crack and heroine for the first time by race.</p>
+<div class="cell" data-messsage="false">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>drug_race_age <span class="ot">&lt;-</span> cleaned_data <span class="sc">|&gt;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(NEWRACE2, cigever, cigage, mjever, mjage, alcever, alctry, cocever, cocage, crkever, crkage, herever, herage)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -323,6 +327,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output-display">
 <p><img src="analysis_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
+</div>
+<p>The boxplot seems to indicate that there is a wide spread of ages for each race group respectively for when they first tried crack. Asian and Black/African American race groups seem to try crack later in their lives compared to other race groups on average. The spread for White and Black/African American race groups seem to be the highest out of all the other race groups as well. Hispanic, Native American, and Native Pacific Island race groups have a tigher spread compared to the others. All the race groups first try crack on average around the late teens to early 20s range if they were to use.</p>
+<div class="cell" data-messsage="false">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>her_data <span class="ot">&lt;-</span> drug_race_age <span class="sc">|&gt;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(herage <span class="sc">&lt;</span> <span class="dv">86</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -335,15 +342,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="analysis_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid" width="672"></p>
+<p><img src="analysis_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>The boxplot above for age of first time heroine use indicates key differences between many of the race groups. The white race group has the most variability compared to the other race groups which would be interesting to explore what is causing people in the white race group to try heroine later in their lives. The average age seems to vary between the race groups compared to crack which is something that can be explored very early on. Something interesting that comes up is that on average the Native Pacific Island groups try heroine when they are around 10 years old which is super interesting to go into.</p>
+<p>This gives us insight that these race groups have differences between one another that can be explored further with what might be affecting the age that people try crack or heroine, whether its income, location or anything else.</p>
 </section>
 <section id="logisitic-regression-models" class="level2">
 <h2 class="anchored" data-anchor-id="logisitic-regression-models">Logisitic Regression Models</h2>
-<p>Several models were created and then assessed for their usefulness and quality. We tried several different predictors in these models to inform how location or income factor, along with race, into a person’s tendency to use drugs. Out of five original models, we took a few things into consideration when deciding which to keep, such as looking at how many values in the model were significant based on their p-values. Many of the models were great, and had similar amounts of significant values, so to narrow down our selection we then looked at the AIC of each model and compared them. A smaller AIC implies a higher quality model. Overall, the AIC values between each model did not vary too much, so we were also able to simply choose models based on which provided the most interesting results to discuss and to support our thesis. Important to note that the baselines/intercepts are the Asian Population</p>
+<section id="setting-background-and-understanding-choice" class="level3">
+<h3 class="anchored" data-anchor-id="setting-background-and-understanding-choice">Setting Background and Understanding Choice</h3>
+<p>Several models were created and then assessed for their usefulness and quality. We tried several different predictors in these models to inform how location or income factor, along with race, into a person’s tendency to use drugs. Out of five original models, we took a few things into consideration when deciding which to keep, such as looking at how many values in the model were significant based on their p-values. Many of the models were great, and had similar amounts of significant values, so to narrow down our selection we then looked at the AIC of each model and compared them. A smaller AIC implies a higher quality model. Overall, the AIC values between each model did not vary too much, so we were also able to simply choose models based on which provided the most interesting results to discuss and to support our thesis.</p>
+<p>Important to note that the baselines/intercepts are the Asian Population for the other variables to baseline and compare to. The reason we chose Asian race group to be the baseline because they had the lower proportion of people doing these 3 drugs so it would be easier to compare the rest to them.We are gonna assume for the model here that the hypothesis is that there is no association between likelihood of trying drugs ever and race group as well as income. To understand what factor(income)1,2,3 or 4, the following is their associated values in the survey: 1:Less than 20,000, 2: 20,000 - 49,999, 3: 50,000 - 74,999, 4: 75,000 or More. These numbers are for American Dollars as well. To understand what factor(COUTYP4)1,2,3 is the following key is important: 1: Non-Metro, 2: Small-Metro, 3: Large-Metro.</p>
+</section>
 <section id="substance-use-with-race" class="level3">
 <h3 class="anchored" data-anchor-id="substance-use-with-race">Substance Use with Race</h3>
+<p>The first model to be explored is whether Race alone is a significant enough of a predictor alone to predict drug use of the three drugs.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model for the Substance Use vs Race </span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>model_sub <span class="ot">&lt;-</span> <span class="fu">glm</span>(drug_use <span class="sc">~</span> NEWRACE2, <span class="at">data =</span> drug_use_with_race, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
@@ -351,30 +365,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>tidy_output <span class="ot">&lt;-</span> <span class="fu">tidy</span>(model_sub)<span class="sc">|&gt;</span></span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">term =</span> <span class="fu">ifelse</span>(term <span class="sc">==</span> <span class="st">"(Intercept)"</span>, <span class="st">"Asian"</span>, <span class="fu">str_replace</span>(term, <span class="st">"NEWRACE2"</span>, <span class="st">""</span>)))</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>conf_intervals <span class="ot">&lt;-</span> <span class="fu">confint</span>(model_sub)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Waiting for profiling to be done...</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>odds_ratios <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">coef</span>(model_sub))</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>odds_ratios_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Odds_Ratio =</span> odds_ratios</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>output_table <span class="ot">&lt;-</span> <span class="fu">cbind</span>(tidy_output, conf_intervals,odds_ratios_df) <span class="sc">|&gt;</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Race =</span> term) <span class="sc">|&gt;</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>statistic,<span class="sc">-</span>std.error) <span class="sc">|&gt;</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="at">var =</span> <span class="st">"RowNames"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>RowNames)</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>output <span class="ot">&lt;-</span> output_table <span class="sc">|&gt;</span> </span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_raw_html</span>()</span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>conf_intervals <span class="ot">&lt;-</span> <span class="fu">confint</span>(model_sub)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>odds_ratios <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">coef</span>(model_sub))</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>odds_ratios_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">Odds_Ratio =</span> odds_ratios</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>output_table <span class="ot">&lt;-</span> <span class="fu">cbind</span>(tidy_output, conf_intervals,odds_ratios_df) <span class="sc">|&gt;</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Race =</span> term) <span class="sc">|&gt;</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>statistic,<span class="sc">-</span>std.error) <span class="sc">|&gt;</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="at">var =</span> <span class="st">"RowNames"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>RowNames)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>output <span class="ot">&lt;-</span> output_table <span class="sc">|&gt;</span> </span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_raw_html</span>()</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="uhyzgdbwzv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="dghdzzxeun" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
@@ -438,36 +450,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p>Based on the results of the model, we can see a couple of things. First being that all the races have a significantly statistical value for the p value which is very important to note. There is also the coefficient estimates for race variables, which indicates that the Asian race (-3.1570003) is the baseline for the other races to be compared too. Black/African American race group has a odds ratio of 1.4662043 indicating that it is positive and thus tend to be associated with drug use that is higher than that of the Asian race group which is used as the baseline. A positive odds ratio is seen for all the race groups. The p-values as mentioned earlier are all significant and therefore this model lets us say that we have race group as a significant predictor for finding whether the person used drugs or not.</p>
 </section>
 <section id="substance-use-with-race-and-income" class="level3">
 <h3 class="anchored" data-anchor-id="substance-use-with-race-and-income">Substance Use with Race and Income</h3>
-<p>Same as before, we are gonna assume for the model here that the hypothesis is that there is no association between likelihood of trying drugs ever and race group as well as Income.</p>
+<p>The second model to be explored is whether Race and Income is a significant enough of predictors to predict drug use of the three drugs. The predictors Race and Income do not effect each other in this model.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model for the Substance Use vs Race and Income</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>model_sub_income <span class="ot">&lt;-</span> <span class="fu">glm</span>(drug_use <span class="sc">~</span> NEWRACE2<span class="sc">+</span><span class="fu">factor</span>(income) , <span class="at">data =</span> drug_use_with_race, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>tidy_output_income <span class="ot">&lt;-</span> <span class="fu">tidy</span>(model_sub_income)<span class="sc">|&gt;</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">term =</span> <span class="fu">ifelse</span>(term <span class="sc">==</span> <span class="st">"(Intercept)"</span>, <span class="st">"Asian"</span>, <span class="fu">str_replace</span>(term, <span class="st">"NEWRACE2"</span>, <span class="st">""</span>)))</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>conf_intervals_income <span class="ot">&lt;-</span> <span class="fu">confint</span>(model_sub_income)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Waiting for profiling to be done...</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>odds_ratios_income <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">coef</span>(model_sub_income))</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>output_table <span class="ot">&lt;-</span> <span class="fu">cbind</span>(tidy_output_income,conf_intervals_income, odds_ratios_income) <span class="sc">|&gt;</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>statistic,<span class="sc">-</span>std.error) <span class="sc">|&gt;</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="at">var =</span> <span class="st">"RowNames"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>RowNames)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>output <span class="ot">&lt;-</span> output_table <span class="sc">|&gt;</span> </span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_raw_html</span>()</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model for the Substance Use vs Race and Income</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>model_sub_income <span class="ot">&lt;-</span> <span class="fu">glm</span>(drug_use <span class="sc">~</span> NEWRACE2<span class="sc">+</span><span class="fu">factor</span>(income) , <span class="at">data =</span> drug_use_with_race, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>tidy_output_income <span class="ot">&lt;-</span> <span class="fu">tidy</span>(model_sub_income)<span class="sc">|&gt;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">term =</span> <span class="fu">ifelse</span>(term <span class="sc">==</span> <span class="st">"(Intercept)"</span>, <span class="st">"Asian"</span>, <span class="fu">str_replace</span>(term, <span class="st">"NEWRACE2"</span>, <span class="st">""</span>)))</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>conf_intervals_income <span class="ot">&lt;-</span> <span class="fu">confint</span>(model_sub_income)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>odds_ratios_income <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">coef</span>(model_sub_income))</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>output_table <span class="ot">&lt;-</span> <span class="fu">cbind</span>(tidy_output_income,conf_intervals_income, odds_ratios_income) <span class="sc">|&gt;</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>statistic,<span class="sc">-</span>std.error) <span class="sc">|&gt;</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="at">var =</span> <span class="st">"RowNames"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>RowNames)</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>output <span class="ot">&lt;-</span> output_table <span class="sc">|&gt;</span> </span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_raw_html</span>()</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="moqvufydex" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="kprlaxhmqb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
@@ -549,35 +560,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p>This statistical output for this logistic regression model contains some important information for the income and race vs drug. The coefficient estimates for race variables, which indicates that the Asian race (-2.7946504) have the lower odds of the outcome compared to the baseline race, and the odds ratio (0.06113625) shows that about 6.1% of the baseline group’s odds, after controlling for other factors in the model. The other races, all with the positive coefficient and odds ratio, suggest that a higher odds of drug use. In this case, the Native Am/AK Native group contains the highest coefficient (1.584202) as well as the odds ratio (4.87539938), which is significantly higher drug use. For the income factors contains the negative coefficient and odds ration less than 1, suggesting a trend of lower drug use with higher income levels. From the section of the p values, with all below 0.05 indicating the associations are statistically significant. Furthermore, the output of the 95% confidence intervals, the result of the Native HI/Other Pac Isl is slightly cross the line of no difference while the others are not crossing 1, also indicate the significance. In general, this model has identified meaningful predictors for the outcome variable. We can assume based of this that income plays a role in predicting drug use as well.</p>
 </section>
 <section id="substance-use-with-race-and-location-as-a-factor-of-each-other" class="level3">
 <h3 class="anchored" data-anchor-id="substance-use-with-race-and-location-as-a-factor-of-each-other">Substance Use with Race and Location as a Factor of Each Other</h3>
+<p>The third model to be explored is whether Race and Location is a significant enough of predictors to predict drug use of the three drugs. The predictors Race and Location do not effect each other in this model.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model for the Substance Use vs Race and Location</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>model_sub_loc <span class="ot">&lt;-</span> <span class="fu">glm</span>(drug_use <span class="sc">~</span> NEWRACE2<span class="sc">*</span><span class="fu">factor</span>(COUTYP4), <span class="at">data =</span> drug_use_with_race, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>tidy_output_loc <span class="ot">&lt;-</span> <span class="fu">tidy</span>(model_sub_loc)<span class="sc">|&gt;</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">term =</span> <span class="fu">ifelse</span>(term <span class="sc">==</span> <span class="st">"(Intercept)"</span>, <span class="st">"Asian"</span>, <span class="fu">str_replace</span>(term, <span class="st">"NEWRACE2"</span>, <span class="st">""</span>)))</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>conf_intervals_loc <span class="ot">&lt;-</span> <span class="fu">confint</span>(model_sub_loc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Waiting for profiling to be done...</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>odds_ratios_loc <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">coef</span>(model_sub_loc))</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>output_table <span class="ot">&lt;-</span> <span class="fu">cbind</span>(tidy_output_loc,conf_intervals_loc, odds_ratios_loc) <span class="sc">|&gt;</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>statistic,<span class="sc">-</span>std.error) <span class="sc">|&gt;</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="at">var =</span> <span class="st">"RowNames"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>RowNames)</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>output <span class="ot">&lt;-</span> output_table <span class="sc">|&gt;</span> </span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_raw_html</span>()</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model for the Substance Use vs Race and Location</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>model_sub_loc <span class="ot">&lt;-</span> <span class="fu">glm</span>(drug_use <span class="sc">~</span> NEWRACE2<span class="sc">*</span><span class="fu">factor</span>(COUTYP4), <span class="at">data =</span> drug_use_with_race, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>tidy_output_loc <span class="ot">&lt;-</span> <span class="fu">tidy</span>(model_sub_loc)<span class="sc">|&gt;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">term =</span> <span class="fu">ifelse</span>(term <span class="sc">==</span> <span class="st">"(Intercept)"</span>, <span class="st">"Asian"</span>, <span class="fu">str_replace</span>(term, <span class="st">"NEWRACE2"</span>, <span class="st">""</span>)))</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>conf_intervals_loc <span class="ot">&lt;-</span> <span class="fu">confint</span>(model_sub_loc)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>odds_ratios_loc <span class="ot">&lt;-</span> <span class="fu">exp</span>(<span class="fu">coef</span>(model_sub_loc))</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>output_table <span class="ot">&lt;-</span> <span class="fu">cbind</span>(tidy_output_loc,conf_intervals_loc, odds_ratios_loc) <span class="sc">|&gt;</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>statistic,<span class="sc">-</span>std.error) <span class="sc">|&gt;</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="at">var =</span> <span class="st">"RowNames"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>RowNames)</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>output <span class="ot">&lt;-</span> output_table <span class="sc">|&gt;</span> </span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_raw_html</span>()</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="ecfqtjmmry" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="szwtysmjdd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
@@ -725,13 +736,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
+<p>This last model also quite interesting relationships between race, location to drug use. As spoken about earlier, the race predictor variable is very good at predicting drug use but when taking into account location, things change a bit. This model takes into account when race and location are factored together. The model shows p values for all the races and the locations and that locations seems to be not statistically significant but close for a Small-Metro area and significant for Non-Metro areas for predicting drug use. When the two are shown together, there are many that have small p-values but not small enough for the 0.05 threshold to be significant. However some variables such as White and Non metro showed a significant p-value and estimates that indicate they were less likely to do drugs than the baseline, which includes Asians and Large Metro. It showed that locations with less people like Non-Metros can be seen to be associated with lower drug use compared to the baseline. In total however, this model is very good at showing that it is not enough to simply put location coded by Large Metro, Small Metro and No Metro and Race together as they seem to have mixed relationships but the p-values are small enough that if we were to have more data available we could make a more defined claim. Therefore, Location and Race are good predictors that have room for improvement.</p>
 </section>
 </section>
 </section>
-<section id="conclusions" class="level1">
-<h1>Conclusions</h1>
-<section id="concluding-statements" class="level2">
-<h2 class="anchored" data-anchor-id="concluding-statements">Concluding Statements</h2>
+<section id="final-statements" class="level1">
+<h1>Final Statements</h1>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>&lt;&lt; Include &gt;&gt;</p>
 </section>
 <section id="limitations-of-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="limitations-of-analysis">Limitations of Analysis</h2>
@@ -740,14 +753,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="need-for-further-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="need-for-further-analysis">Need for Further Analysis</h2>
 <p>Based on the boxplots that compare the ages when people first tried crack versus heroine, a data analysis concerning the accessibility of crack versus heroine to younger people would be an interesting complement study to further investigate the trend of people trying crack at a younger age than cocaine. This study could look at how people acquire crack versus cocaine, the median cost of either drug, the average interest of younger versus older people in using crack or cocaine, and the access of those groups to mental health resources between the ages of 18 to 30, which are the approximate median ages of first use of crack and heroine, respectively.</p>
+<p>We can also expand the analysis to include data on specific location which is made private by SAMHSA for the NSDUH to understand which areas may be more prone to drug use than other areas for people. Another way to go even further is to specify the income amount to the dollar if possible and not ranges so we can apply linear regression models to get an even better sense of what is going on with drug use factors. We can even go further to include even more factors such as family history, mental health, etc. These all would add significant detail and explore new relationships that can be talked about further in other research.</p>
 </section>
-<section id="table-for-percentage-of-race-in-total" class="level2">
-<h2 class="anchored" data-anchor-id="table-for-percentage-of-race-in-total">Table for percentage of Race in Total</h2>
-</section>
-<section id="attributions" class="level2">
-<h2 class="anchored" data-anchor-id="attributions">Attributions</h2>
-<p>In general, you should try to provide links to relevant resources, especially those that helped you. You don’t have to link to every StackOverflow post you used but if there are explainers on aspects of the data or specific models that you found helpful, try to link to those. Also, try to link to other sources that might support (or refute) your analysis. These can just be regular hyperlinks. You don’t need a formal citation.</p>
-<p>If you are directly quoting from a source, please make that clear. You can show quotes using <code>&gt;</code> like this</p>
+<section id="attributionshelpful-links" class="level2">
+<h2 class="anchored" data-anchor-id="attributionshelpful-links">Attributions/Helpful Links</h2>
+<ul>
+<li>https://towardsdatascience.com/simply-explained-logistic-regression-with-example-in-r-b919acb1d6b3 - Understanding Logisitic Regression</li>
+</ul>
 <hr>
 </section>
 <section id="rubric-on-this-page" class="level2">
