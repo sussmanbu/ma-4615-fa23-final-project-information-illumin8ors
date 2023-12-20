@@ -49,23 +49,3 @@ We ended up using the merged Census/CBSA data to find overlap between the Census
 We also had to download and use the 'tigris' package to make this map because we needed the shape files/geometries of the counties of interest. Tigris is an R package that grants you access to the shape files of counties or states based on US Census data. We took advantage of the counties() function within tigris to pull county geometries and then combined them with lists of large, small, and non-metro counties we had made based on the Census, CBSA, and RUCC data sets. With that information, we were able to make a US map that shaded the US counties by metro status. 
 
 One important thing that we had to look into when cleaning the CBSA, CENSUS, and RUCC data sets was the column types since they were all excel files. We tried using the character() function to tell us the types of columns we were dealing with to pass into the read_excel() function. However, we still ran into parsing errors because the excel files had numeric values stored as texts. To address this issue, we used a feature of read_excel() that allowed us to pass in a column type called “guess”, allowing R to guess at/decide on how it wanted to read in the numeric values stored as text which fixed the error message and produced readable data. Once this error had been fixed, we were able to save the cleaned CBSA, Census, and RUCC data sets as RDS files.
-
-----
-
-## Rubric: On this page
-
-You will
-
-* Describe where/how to find data.
-  * You must include a link to the original data source(s). Make sure to provide attribution to those who collected the data.
-  * Why was the data collected/curated? Who put it together? (This is important, if you don't know why it was collected then that might not be a good dataset to look at.
-* Describe the different data files used and what each variable means. 
-  * If you have many variables then only describe the most relevant ones and summarize the rest.
-* Describe any cleaning you had to do for your data.
-  * You *must* include a link to your `load_and_clean_data.R` file.
-  * Also, describe any additional R packages you used outside of those covered in class.
-  * Describe and show code for how you combined multiple data files and any cleaning that was necessary for that.
-  * Some repetition of what you do in your `load_and_clean_data.R` file is fine and encouraged if it helps explain what you did.
-* Organization, clarity, cleanliness of the page
-  * Make sure to remove excessive warnings, use clean easy-to-read code (without side scrolling), organize with sections, use bullets and other organization tools, etc.
-  * This page should be self-contained.
