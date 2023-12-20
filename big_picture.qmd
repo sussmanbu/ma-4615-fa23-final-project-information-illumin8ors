@@ -97,5 +97,5 @@ We found some interesting trends between age and drug use as well. We have shown
 Our analysis of the 2021 National Survey on Drug Use and Health has presented a nuanced understanding of the intricate web of factors influencing the use of cocaine, crack, and heroin in the United States. By exploring the variables in this survey, we have offered insights that could guide effective policy and intervention strategies. To address issues with drug use, we need to know more about why they are tried in the first place. By sorting through the variables in the survey, it has become evident that drug use is not a monolithic issue but a complex interplay of race, income, location, and age. This understanding is crucial for developing targeted and effective approaches to address the challenges of drug abuse in various communities. Our study serves as a stepping stone for further research and discussion, aiming to contribute meaningfully to the ongoing efforts to combat substance abuse.
 
 ## Presentation of Analysis
-This link we have is a link to a presentation we have talking about our analysis here: https://youtu.be/CoQWSLZuXDg
+This link we have is a link to a presentation we have talking about our analysis [here](https://youtu.be/CoQWSLZuXDg).
 
