@@ -1,6 +1,6 @@
 ---
 title: "Drug Use Exposed!"
-description: "Unveiling the Factors of Influences for People with Drugs"
+description: "Unveiling the Factors of Influences for People to Try and Use Drugs"
 toc: true
 draft: FALSE
 ---
@@ -30,6 +30,7 @@ In conclusion, our comprehensive analysis of the 2021 National Survey on Drug Us
 ---
 
 ## Rubric: On this page
+
 
 You will
 

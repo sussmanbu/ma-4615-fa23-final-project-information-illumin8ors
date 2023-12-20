@@ -43,13 +43,13 @@ cleaned_data <- readRDS(here::here("dataset/cleaned_data_new.rds"))
 counties_cleaned_METRO <- readRDS(here::here("dataset/metro_clean.rds"))
 ```
 
-## Initial Findings and Relationships - Context
+## Context
 
 Its important to set the scene in a sense for what is to come in this data analysis and understanding the features of the respondents is key. Features such as metro status in the US so that we can have a baseline understanding of where respondents can be located for drug use is significant in understanding. The same applies for understanding the percentage of respondents because of limitations of this dataset. Setting this background is important for understanding our interpretation. 
 
-## Maps of How Respondents Are Sorted Across the US According to County Metropolitan Size Status
+### Maps of How Respondents Are Sorted Across the US According to County Metropolitan Size Status
 
-``` {r, messsages=FALSE}
+``` {r, messsage=FALSE}
 
 metro_map <- counties_cleaned_METRO |> filter(STUSPS != "AK", STUSPS != "HI", STUSPS != "MP", STUSPS != "AS", STUSPS != "PR", STUSPS != "GU", STUSPS != "VI") |> 
   ggplot() + geom_sf(aes(fill = metrostatus), alpha = 0.5) + scale_fill_viridis_c() + 
@@ -61,10 +61,10 @@ metro_map
 
 << Set up with 1 paragraph >>
 
-## Proportion of Race to Try Drugs Based on Race
+### Proportion of Race to Try Drugs Based on Race
 It's important to understand not only how many respondents were in this survey but also what percentage of respondents within their respective race have tried any of the 3 drugs mentioned. The reason it is very important to understand the percentage with respect to their race is because in this survey, there was not an equally sized population for each race and some people from a certain race responded more than other people in other races. This can cause representation problems and skews in the dataset so understanding the need for this plot is very important when considering the analysis below.
 
-```{r}
+```{r, messsage=FALSE}
 drug_use_with_race <- cleaned_data |>
   select(NEWRACE2, cocever, cocage, crkever, crkage, herever, herage, income, COUTYP4) |>
   mutate(drug_use = ifelse( cocever==1 | crkever==1 | herever==1, 1, 0))
@@ -105,7 +105,8 @@ cleaned_data |>
 	
 ## Plots for Race and Age when First Tried and Drug Used
 
-```{r}
+Below are box plots to indicate the age at which people started using crack and heroine for the first time by race. 
+```{r, messsage=FALSE}
 
 drug_race_age <- cleaned_data |>
   select(NEWRACE2, cigever, cigage, mjever, mjage, alcever, alctry, cocever, cocage, crkever, crkage, herever, herage)
@@ -121,6 +122,11 @@ ggplot(crack_data, aes(x = NEWRACE2, y = crkage, fill = NEWRACE2)) +
        fill = "Race Type") +   
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+```
+
+The boxplot seems to indicate that there is a wide spread of ages for each race group respectively for when they first tried crack. Asian and Black/African American race groups seem to try crack later in their lives compared to other race groups on average. The spread for White and Black/African American race groups seem to be the highest out of all the other race groups as well. Hispanic, Native American, and Native Pacific Island race groups have a tigher spread compared to the others. All the race groups first try crack on average around the late teens to early 20s range if they were to use.
+
+```{r, messsage=FALSE}
 
 her_data <- drug_race_age |>
   filter(herage < 86)
@@ -136,12 +142,21 @@ ggplot(her_data, aes(x = NEWRACE2, y = herage, fill = NEWRACE2)) +
 
 ```
 
+The boxplot above for age of first time heroine use indicates key differences between many of the race groups. The white race group has the most variability compared to the other race groups which would be interesting to explore what is causing people in the white race group to try heroine later in their lives. The average age seems to vary between the race groups compared to crack which is something that can be explored very early on. Something interesting that comes up is that on average the Native Pacific Island groups try heroine when they are around 10 years old which is super interesting to go into. 
+
+
+This gives us insight that these race groups have differences between one another that can be explored further with what might be affecting the age that people try crack or heroine, whether its income, location or anything else.
+
 ## Logisitic Regression Models
 
-Several models were created and then assessed for their usefulness and quality. We tried several different predictors in these models to inform how location or income factor, along with race, into a person’s tendency to use drugs. Out of five original models, we took a few things into consideration when deciding which to keep, such as looking at how many values in the model were significant based on their p-values. Many of the models were great, and had similar amounts of significant values, so to narrow down our selection we then looked at the AIC of each model and compared them. A smaller AIC implies a higher quality model. Overall, the AIC values between each model did not vary too much, so we were also able to simply choose models based on which provided the most interesting results to discuss and to support our thesis. Important to note that the baselines/intercepts are the Asian Population
+### Setting Background and Understanding Choice
+Several models were created and then assessed for their usefulness and quality. We tried several different predictors in these models to inform how location or income factor, along with race, into a person’s tendency to use drugs. Out of five original models, we took a few things into consideration when deciding which to keep, such as looking at how many values in the model were significant based on their p-values. Many of the models were great, and had similar amounts of significant values, so to narrow down our selection we then looked at the AIC of each model and compared them. A smaller AIC implies a higher quality model. Overall, the AIC values between each model did not vary too much, so we were also able to simply choose models based on which provided the most interesting results to discuss and to support our thesis. 
+
+Important to note that the baselines/intercepts are the Asian Population for the other variables to baseline and compare to. The reason we chose Asian race group to be the baseline because they had the lower proportion of people doing these 3 drugs so it would be easier to compare the rest to them.We are gonna assume for the model here that the hypothesis is that there is no association between likelihood of trying drugs ever and race group as well as income. To understand what factor(income)1,2,3 or 4, the following is their associated values in the survey: 1:Less than 20,000, 2: 20,000 - 49,999, 3: 50,000 - 74,999, 4: 75,000 or More. These numbers are for American Dollars as well. To understand what factor(COUTYP4)1,2,3 is the following key is important: 1: Non-Metro, 2: Small-Metro, 3: Large-Metro. 
 
 ### Substance Use with Race
-```{r}
+The first model to be explored is whether Race alone is a significant enough of a predictor alone to predict drug use of the three drugs. 
+```{r, message=FALSE}
 
 # Model for the Substance Use vs Race 
 model_sub <- glm(drug_use ~ NEWRACE2, data = drug_use_with_race, family = "binomial")
@@ -169,12 +184,12 @@ output <- output_table |>
 
 output
 ```
-
+Based on the results of the model, we can see a couple of things. First being that all the races have a significantly statistical value for the p value which is very important to note. There is also the coefficient estimates for race variables, which indicates that the Asian race (-3.1570003) is the baseline for the other races to be compared too. Black/African American race group has a odds ratio of 1.4662043 indicating that it is positive and thus tend to be associated with drug use that is higher than that of the Asian race group which is used as the baseline. A positive odds ratio is seen for all the race groups. The p-values as mentioned earlier are all significant and therefore this model lets us say that we have race group as a significant predictor for finding whether the person used drugs or not.
 
 ### Substance Use with Race and Income
+The second model to be explored is whether Race and Income is a significant enough of predictors to predict drug use of the three drugs. The predictors Race and Income do not effect each other in this model.
 
-Same as before, we are gonna assume for the model here that the hypothesis is that there is no association between likelihood of trying drugs ever and race group as well as Income.
-```{r}
+```{r, message=FALSE}
 # Model for the Substance Use vs Race and Income
 model_sub_income <- glm(drug_use ~ NEWRACE2+factor(income) , data = drug_use_with_race, family = "binomial")
 
@@ -196,10 +211,12 @@ output <- output_table |>
 
 output
 ```
-
+This statistical output for this logistic regression model contains some important information for the income and race vs drug. The coefficient estimates for race variables, which indicates that the Asian race (-2.7946504) have the lower odds of the outcome compared to the baseline race, and the odds ratio (0.06113625) shows that about 6.1% of the baseline group's odds, after controlling for other factors in the model. The other races, all with the positive coefficient and odds ratio, suggest that a higher odds of drug use. In this case, the Native Am/AK Native group contains the highest coefficient (1.584202) as well as the odds ratio (4.87539938), which is significantly higher drug use. For the income factors contains the negative coefficient and odds ration less than 1, suggesting a trend of lower drug use with higher income levels. From the section of the p values, with all below 0.05 indicating the associations are statistically significant. Furthermore, the output of the 95% confidence intervals, the result of the Native HI/Other Pac Isl is slightly cross the line of no difference while the others are not crossing 1, also indicate the significance. In general, this model has identified meaningful predictors for the outcome variable. We can assume based of this that income plays a role in predicting drug use as well.
 
 ### Substance Use with Race and Location as a Factor of Each Other 
-```{r}
+The third model to be explored is whether Race and Location is a significant enough of predictors to predict drug use of the three drugs. The predictors Race and Location do not effect each other in this model.
+
+```{r, message=FALSE}
 # Model for the Substance Use vs Race and Location
 model_sub_loc <- glm(drug_use ~ NEWRACE2*factor(COUTYP4), data = drug_use_with_race, family = "binomial")
 
@@ -222,10 +239,13 @@ output <- output_table |>
 output
 ```
 
+This last model also quite interesting relationships between race, location to drug use. As spoken about earlier, the race predictor variable is very good at predicting drug use but when taking into account location, things change a bit. This model takes into account when race and location are factored together. The model shows p values for all the races and the locations and that locations seems to be not statistically significant but close for a Small-Metro area and significant for Non-Metro areas for predicting drug use. When the two are shown together, there are many that have small p-values but not small enough for the 0.05 threshold to be significant. However some variables such as White and Non metro showed a significant p-value and estimates that indicate they were less likely to do drugs than the baseline, which includes Asians and Large Metro. It showed that locations with less people like Non-Metros can be seen to be associated with lower drug use compared to the baseline. In total however, this model is very good at showing that it is not enough to simply put location coded by Large Metro, Small Metro and No Metro and Race together as they seem to have mixed relationships but the p-values are small enough that if we were to have more data available we could make a more defined claim. Therefore, Location and Race are good predictors that have room for improvement.
 
-# Conclusions
+# Final Statements
 
-## Concluding Statements
+## Conclusion
+
+<< Include >>
 
 ## Limitations of Analysis
 
@@ -236,17 +256,12 @@ While our analysis has provided significant findings and we have shown via stati
 Based on the boxplots that compare the ages when people first tried crack versus heroine, a data analysis concerning the accessibility of crack versus heroine to younger people would be
 an interesting complement study to further investigate the trend of people trying crack at a younger age than cocaine. This study could look at how people acquire crack versus cocaine, the median cost of either drug, the average interest of younger versus older people in using crack or cocaine, and the access of those groups to mental health resources between the ages of 18 to 30, which are the approximate median ages of first use of crack and heroine, respectively.  
 
-
-## Table for percentage of Race in Total
-
+We can also expand the analysis to include data on specific location which is made private by SAMHSA for the NSDUH to understand which areas may be more prone to drug use than other areas for people. Another way to go even further is to specifiy the income amount to the dollar if possible and not ranges so we can apply linear regression models to get an even better sense of what is going on with drug use factors. We can even go further to include even more factors such as family history, mental health, etc. These all would add significant detail and explore new relationships that can be talked about further in other research.
 
 
-## Attributions
+## Attributions/Helpful Links
 
-In general, you should try to provide links to relevant resources, especially those that helped you. You don't have to link to every StackOverflow post you used but if there are explainers on aspects of the data or specific models that you found helpful, try to link to those. Also, try to link to other sources that might support (or refute) your analysis. These can just be regular hyperlinks. You don't need a formal citation.
-
-
-If you are directly quoting from a source, please make that clear. You can show quotes using `>` like this
+* https://towardsdatascience.com/simply-explained-logistic-regression-with-example-in-r-b919acb1d6b3 - Understanding Logisitic Regression
 
 
 -------
