@@ -19,13 +19,16 @@ cleaned_data <- readRDS(here::here("dataset/cleaned_data_new.rds"))
 counties_cleaned_METRO <- readRDS(here::here("dataset/metro_clean.rds"))
 ```
 
-# The Surprising Connections: Various Factors that Drive Drug Use Trends in the US!
+# Race, Income, Age, and Location: Which is The Culprit of Drug Use Issues in The US and Are Any of Them Working Together?
 
 ## Debunking Myths: Race, Income, and Drug Use Dynamics
 
-There are many stereotypes about the relationships between race, annual income, location and age for drug use. What underlies common perceptions linking race, income, and drug use? With this study, we have explored connections and factors towards drug use and will tell you everything you need to know about how race, income, location and age  actually influence drug use across the US. The results of our study are based on the National Survey on Drug Use and Health which was conducted in 2021. This survey asked people to report on their drug use, including information about the age when they first used a substance, how often they use it, and how likely they are to use it again in the future. The survey also collected information about the survey taker’s race, income, and location based on county size of where they are located.
+In the US, there are many stereotypes about the relationships between race, annual income, location, and age for drug use. Americans assume that individuals with higher yearly incomes are more likely to use cocaine, while individuals with lower yearly incomes would be more prone to using heroin or crack. They also believe that White individuals are less likely to be drug users compared to Non-White individuals, especially Black/ African American individuals. But are these stereotypes and others like them supported by data?
 
-The survey data is very comprehensive, but to focus on the results of our study, we have only looked at factors influencing the use of three substances: heroin, cocaine, and crack. Stereotypes often heard about these substances would be, for example: people with higher yearly incomes tend to use more cocaine, and people with lower yearly incomes would be more prone to using heroin or crack. We wanted to validate and potentially debunk these stereotypes via statistical models and tests that would test the data-based relationships between drug use, race, and income. For more details on those tests and models, please see the Analysis tab of our website. 
+We were interested in investigating these relationships and how they affect drug use. To do so, we conducted a statistical analysis of the factors influencing drug use in the US using data from the 2021 National Survey on Drug Use and Health. The survey data is comprehensive, with data from just over 58,000 respondents. This survey asked people to report on their drug use, the age when they first used a substance, how often they use it, and how likely they are to use it again in the future. The survey also collected demographic information about the respondent’s race, income, and county size of their location of residence.  
+
+While more drugs were studied in the survey, we were most interested in the use of cocaine, heroin, and crack and have concentrated the results of our analysis on the factors that influence the use of those three drugs. Our analysis provides significant findings that reveal which factors: income, location, age, or race are the most important in predicting a person’s tendency to use cocaine, heroin, and crack. For more details on the statistical tests and models we have used to uncover these relationships, please see the Analysis tab of our website.
+
 
 ![](./images/substance.jpg)
 
