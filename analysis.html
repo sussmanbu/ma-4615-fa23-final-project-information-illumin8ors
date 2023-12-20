@@ -163,7 +163,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#plot-of-cocaine-use-out-of-days-per-week-by-race-faceted-by-metro-status" id="toc-plot-of-cocaine-use-out-of-days-per-week-by-race-faceted-by-metro-status" class="nav-link" data-scroll-target="#plot-of-cocaine-use-out-of-days-per-week-by-race-faceted-by-metro-status">Plot of Cocaine Use Out of Days per Week by Race Faceted by Metro Status</a></li>
   <li><a href="#plots-for-race-and-age-when-first-tried-and-drug-used" id="toc-plots-for-race-and-age-when-first-tried-and-drug-used" class="nav-link" data-scroll-target="#plots-for-race-and-age-when-first-tried-and-drug-used">Plots for Race and Age when First Tried and Drug Used</a></li>
-  <li><a href="#logisitic-regression-models" id="toc-logisitic-regression-models" class="nav-link" data-scroll-target="#logisitic-regression-models">Logisitic Regression Models</a>
+  <li><a href="#logistic-regression-models" id="toc-logistic-regression-models" class="nav-link" data-scroll-target="#logistic-regression-models">Logistic Regression Models</a>
   <ul class="collapse">
   <li><a href="#setting-background-and-understanding-choice" id="toc-setting-background-and-understanding-choice" class="nav-link" data-scroll-target="#setting-background-and-understanding-choice">Setting Background and Understanding Choice</a></li>
   <li><a href="#substance-use-with-race" id="toc-substance-use-with-race" class="nav-link" data-scroll-target="#substance-use-with-race">Substance Use with Race</a></li>
@@ -177,7 +177,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#limitations-of-analysis" id="toc-limitations-of-analysis" class="nav-link" data-scroll-target="#limitations-of-analysis">Limitations of Analysis</a></li>
   <li><a href="#need-for-further-analysis" id="toc-need-for-further-analysis" class="nav-link" data-scroll-target="#need-for-further-analysis">Need for Further Analysis</a></li>
   <li><a href="#attributionshelpful-links" id="toc-attributionshelpful-links" class="nav-link" data-scroll-target="#attributionshelpful-links">Attributions/Helpful Links</a></li>
-  <li><a href="#rubric-on-this-page" id="toc-rubric-on-this-page" class="nav-link" data-scroll-target="#rubric-on-this-page">Rubric: On this page</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -261,7 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="analysis_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>&lt;&lt; Set up with 1 paragraph &gt;&gt;</p>
+<p>Starting off our analysis, we set the scene with a map representing the types of counties and areas the NSDUH survey respondents are located in. This map was made based on the dataset’s “COUTYP4” variable that sorts the respondents’ locations into three types of counties: large metro, small metro, non-metro, or unknown. As we have made both boxplots and logistic regression models based on the locations and metro county status of the respondents, we were interested in visualizing where these county types are in the USA. This helps set the scene for our further analysis since we can track the regions of the US that these counties are in and we can see how many counties are classified into each type.</p>
 </section>
 <section id="proportion-of-race-to-try-drugs-based-on-race" class="level3">
 <h3 class="anchored" data-anchor-id="proportion-of-race-to-try-drugs-based-on-race">Proportion of Race to Try Drugs Based on Race</h3>
@@ -295,6 +294,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="plot-of-cocaine-use-out-of-days-per-week-by-race-faceted-by-metro-status" class="level2">
 <h2 class="anchored" data-anchor-id="plot-of-cocaine-use-out-of-days-per-week-by-race-faceted-by-metro-status">Plot of Cocaine Use Out of Days per Week by Race Faceted by Metro Status</h2>
+<p>Further in our initial exploratory analysis, we made a boxplot that describes the number of days per week people in each race category use cocaine. The plot is faceted by county metro status to allow for an easy comparison of the weekly cocaine use in each county type. From this plot, we can draw conclusions not only about the counties that use the most cocaine per week, but also the race categories that tend to use the most cocaine. The large metro counties have the highest median weekly cocaine use, while the non-metro counties use cocaine the least on average.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>facet.labs <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Large Metro"</span>, <span class="st">"Small Metro"</span>, <span class="st">"Non-Metro"</span>)</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(facet.labs) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>)</span>
@@ -313,6 +313,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="analysis_files/figure-html/bargraphs-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Across all three county metro classifications, the race group that used the most cocaine per week was the Black/African American group. The other groups had more variety, so it is hard to identify the next highest cocaine using group. The plot explains this variety, however, and we can say that county metro status likely does play a role in weekly cocaine use frequency. This relationship is later supported in our analysis via a logistic regression model. We can see from this box plot that white people in small metro areas tend to use more cocaine than white people in large or non-metro areas. The “more than one race” race category follows this trend as well, with people in that category using more cocaine in small metro areas than in the other two areas. These groups diverge from the other race categories, who trend towards using less and less cocaine going from large to non-metro areas. These observations raise several interesting questions concerning the average income by race, the general access to, and interest in cocaine in each of these counties, which would be interesting to analyze further in a future study.</p>
 </section>
 <section id="plots-for-race-and-age-when-first-tried-and-drug-used" class="level2">
 <h2 class="anchored" data-anchor-id="plots-for-race-and-age-when-first-tried-and-drug-used">Plots for Race and Age when First Tried and Drug Used</h2>
@@ -358,8 +359,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>The boxplot above for age of first time heroine use indicates key differences between many of the race groups. The white race group has the most variability compared to the other race groups which would be interesting to explore what is causing people in the white race group to try heroine later in their lives. The average age seems to vary between the race groups compared to crack which is something that can be explored very early on. Something interesting that comes up is that on average the Native Pacific Island groups try heroine when they are around 10 years old which is super interesting to go into.</p>
 <p>This gives us insight that these race groups have differences between one another that can be explored further with what might be affecting the age that people try crack or heroine, whether its income, location or anything else.</p>
 </section>
-<section id="logisitic-regression-models" class="level2">
-<h2 class="anchored" data-anchor-id="logisitic-regression-models">Logisitic Regression Models</h2>
+<section id="logistic-regression-models" class="level2">
+<h2 class="anchored" data-anchor-id="logistic-regression-models">Logistic Regression Models</h2>
 <section id="setting-background-and-understanding-choice" class="level3">
 <h3 class="anchored" data-anchor-id="setting-background-and-understanding-choice">Setting Background and Understanding Choice</h3>
 <p>Several models were created and then assessed for their usefulness and quality. We tried several different predictors in these models to inform how location or income factor, along with race, into a person’s tendency to use drugs. Out of five original models, we took a few things into consideration when deciding which to keep, such as looking at how many values in the model were significant based on their p-values. Many of the models were great, and had similar amounts of significant values, so to narrow down our selection we then looked at the AIC of each model and compared them. A smaller AIC implies a higher quality model. Overall, the AIC values between each model did not vary too much, so we were also able to simply choose models based on which provided the most interesting results to discuss and to support our thesis.</p>
@@ -396,7 +397,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="tbpocpjejj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="yhxadgushl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
@@ -488,7 +489,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="yisyqilspl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="kbhstbeqgi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
@@ -598,7 +599,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 
-<div id="fevxkdenzz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="bcquafnlzs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
   
   <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false" style="-webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; display: table; border-collapse: collapse; line-height: normal; margin-left: auto; margin-right: auto; color: #333333; font-size: 16px; font-weight: normal; font-style: normal; background-color: #FFFFFF; width: auto; border-top-style: solid; border-top-width: 2px; border-top-color: #A8A8A8; border-right-style: none; border-right-width: 2px; border-right-color: #D3D3D3; border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: #A8A8A8; border-left-style: none; border-left-width: 2px; border-left-color: #D3D3D3;" bgcolor="#FFFFFF">
   <thead style="border-style: none;">
@@ -754,7 +755,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1>Final Statements</h1>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>&lt;&lt; Include &gt;&gt;</p>
+<p>With our study, we aimed to investigate the factors that influence cocaine, crack, and heroin use in the USA. We were successful in uncovering relationships between substance abuse, location, income, and age. We found that on average, people try crack at a younger age than they try heroin. In terms of income, we found, via logistic regression, that people with a lower annual income tend to use more drugs than those with higher incomes, a trend that was consistent across most racial groups. For the location relation, we saw via logistic regression and boxplots that people in large metro areas use the most drugs on average, but this trend was not consistent across all race categories. We found that white people and people of more than one race in small metro areas use more drugs than people of the same race categories in other areas. Our study has provided valuable insight into the influence of a variety of demographics on drug use. Cocaine, crack, and heroin are very dangerous drugs and understanding why a person may be more or less inclined to use them is vital in addressing the issues with drug use in the US. We believe that this study would be an excellent support for a future complementary study that dives further into how the factors we have investigated come to affect drug use. We would be interested in further studying how the factors we have identified affect someone’s access to these drugs as the access to drugs is a variable not covered in this survey.</p>
 </section>
 <section id="limitations-of-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="limitations-of-analysis">Limitations of Analysis</h2>
@@ -762,52 +763,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="need-for-further-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="need-for-further-analysis">Need for Further Analysis</h2>
-<p>Based on the boxplots that compare the ages when people first tried crack versus heroine, a data analysis concerning the accessibility of crack versus heroine to younger people would be an interesting complement study to further investigate the trend of people trying crack at a younger age than cocaine. This study could look at how people acquire crack versus cocaine, the median cost of either drug, the average interest of younger versus older people in using crack or cocaine, and the access of those groups to mental health resources between the ages of 18 to 30, which are the approximate median ages of first use of crack and heroine, respectively.</p>
+<p>Based on the boxplots that compare the ages when people first tried crack versus heroin, a data analysis concerning the accessibility of crack versus heroine to younger people would be an interesting complementary study to further investigate the trend of people trying crack at a younger age than cocaine. This study could look at how people acquire crack versus cocaine, the median cost of either drug, the average interest of younger versus older people in using crack or cocaine, and the access of those groups to mental health resources between the ages of 18 to 30, which are the approximate median ages of first use of crack and heroine, respectively. We would also be interested in exploring what percentage of their annual income people spend on drugs and how race, location, age, and access to mental health resources may factor into that spending. We also believe that we could understand, specifically the location portion of this survey, better, if we knew more about how people gained access to each of these drugs. Knowing the volume of drug dealers or other sources of drug access in each county, or even just in each state, would be great supporting knowledge to our study.</p>
 <p>We can also expand the analysis to include data on specific location which is made private by SAMHSA for the NSDUH to understand which areas may be more prone to drug use than other areas for people. Another way to go even further is to specify the income amount to the dollar if possible and not ranges so we can apply linear regression models to get an even better sense of what is going on with drug use factors. We can even go further to include even more factors such as family history, mental health, etc. These all would add significant detail and explore new relationships that can be talked about further in other research.</p>
 </section>
 <section id="attributionshelpful-links" class="level2">
 <h2 class="anchored" data-anchor-id="attributionshelpful-links">Attributions/Helpful Links</h2>
 <ul>
-<li>https://towardsdatascience.com/simply-explained-logistic-regression-with-example-in-r-b919acb1d6b3 - Understanding Logisitic Regression</li>
-</ul>
-<hr>
-</section>
-<section id="rubric-on-this-page" class="level2">
-<h2 class="anchored" data-anchor-id="rubric-on-this-page">Rubric: On this page</h2>
-<p>You will</p>
-<ul>
-<li>Introduce what motivates your Data Analysis (DA)
-<ul>
-<li>Which variables and relationships are you most interested in?</li>
-<li>What questions are you interested in answering?</li>
-<li>Provide context for the rest of the page. This will include figures/tables that illustrate aspects of the data of your question.</li>
-</ul></li>
-<li>Modeling and Inference
-<ul>
-<li>The page will include some kind of formal statistical model. This could be a linear regression, logistic regression, or another modeling framework.</li>
-<li>Explain the techniques you used for validating your results.</li>
-<li>Describe the results of your modelling and make sure to give a sense of the uncertainty in your estimates and conclusions.</li>
-</ul></li>
-<li>Explain the flaws and limitations of your analysis
-<ul>
-<li>Are there some assumptions that you needed to make that might not hold? Is there other data that would help to answer your questions?</li>
-</ul></li>
-<li>Clarity Figures
-<ul>
-<li>Are your figures/tables/results easy to read, informative, without problems like overplotting, hard-to-read labels, etc?</li>
-<li>Each figure should provide a key insight. Too many figures or other data summaries can detract from this. (While not a hard limit, around 5 total figures is probably a good target.)</li>
-<li>Default <code>lm</code> output and plots are typically not acceptable.</li>
-</ul></li>
-<li>Clarity of Explanations
-<ul>
-<li>How well do you explain each figure/result?</li>
-<li>Do you provide interpretations that suggest further analysis or explanations for observed phenomenon?</li>
-</ul></li>
-<li>Organization and cleanliness.
-<ul>
-<li>Make sure to remove excessive warnings, use clean easy-to-read code, organize with sections or multiple pages, use bullets, etc.</li>
-<li>This page should be self-contained.</li>
-</ul></li>
+<li>https://towardsdatascience.com/simply-explained-logistic-regression-with-example-in-r-b919acb1d6b3 - Understanding Logistic Regression</li>
+<li>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2821675/ - an analysis on crack, cocaine, and methamphetamine use</li>
+<li>https://www.rdocumentation.org/packages/tigris/versions/2.0.4 - how to use the tigris package</li>
+<li>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6941412/ - study on drug use in the African American race group</li>
+<li>https://www.datafiles.samhsa.gov/sites/default/files/field-uploads-protected/studies/NSDUH-2021/NSDUH-2021-datasets/NSDUH-2021-DS0001/NSDUH-2021-DS0001-info/NSDUH-2021-DS0001-info-codebook.pdf - link to codebook describing the variables in the NSDUH survey</li>
 </ul>
 
 
