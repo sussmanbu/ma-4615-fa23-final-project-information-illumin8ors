@@ -53,6 +53,28 @@ ggplot(proportions_table, aes(x = NEWRACE2, y = Percentage, fill = Drug_Status))
 
 The bar chart indicates varying drug usage patterns among ethnic groups, with Native Americans/Alaska Natives having the highest percentage of people who have tried drugs, while Asians show the lowest. We can see such a huge differences between many of these race groups which is super important in finding variables that can be contributing to such differences. 
 
+```{r, echo=FALSE}
+big_picture_df = cleaned_data |> 
+  group_by(NEWRACE2) |> 
+  mutate(newccdaypwk = if_else(ccdaypwk > 85, 0, ccdaypwk)) |> 
+  mutate(newcrdaypwk = if_else(crdaypwk > 85, 0, crdaypwk)) |> 
+  mutate(newhrdaypwk = if_else(hrdaypwk > 85, 0, hrdaypwk)) |> 
+  mutate(mean_use = (newccdaypwk + newcrdaypwk + newhrdaypwk)/3) |> 
+  select(NEWRACE2, newccdaypwk, newcrdaypwk, newhrdaypwk, mean_use) |> 
+  summarise(mean_use_good = sum(mean_use)/n())
+
+big_picture_barchart <- big_picture_df |> 
+  ggplot(aes(x = NEWRACE2, y = mean_use_good, fill=NEWRACE2)) + 
+  geom_col() + 
+  labs(title = "Average Summed Weekly Use of Cocaine, Heroin, and Crack across 58,034 NSDUH Survey Respondents", x = "Respondent Race", y = "Average use (number of days per week)") + 
+  scale_fill_viridis_d() +  
+  theme(plot.title = element_text(size = 10), axis.title.x = element_text(size = 9), axis.title.y = element_text(size = 9), axis.text.x = element_text(angle = 15), axis.text.y = element_text(size = 7))
+
+
+big_picture_barchart
+```
+
+
 ## Income and Drug Use
 The intersection of race and income revealed some unexpected trends in the propensity for drug use. The commonly held belief that higher-income individuals are more likely to indulge in drug use, particularly with expensive drugs like cocaine, was partly substantiated. However, this trend was not uniform across all racial groups. Lower-income individuals across most racial groups exhibited a higher likelihood of drug use, contradicting the notion that drug use is a luxury afforded only by the wealthy. For instance, among higher-income brackets, White and Asian populations showed a relatively lower frequency of drug use compared to their Black and Hispanic counterparts. This divergence suggests that income alone does not dictate drug use patterns; cultural, social, and possibly even genetic factors play significant roles.
 
@@ -68,6 +90,14 @@ Our analysis of the 2021 National Survey on Drug Use and Health has presented a 
 
 
 ---
+
+### Video Recording
+
+Make a video recording (probably using Zoom) demonstrating your interactive components.
+You should provide a quick explanation of your data and demonstrate some of the conclusions from your EDA.
+This video should be no longer than 4 minutes.
+Include a link to your video (and password if needed) in your README.md file on your Github repository. You are not required to provide a link on the website.
+This can be presented by any subset of the team members.
 
 ## Rubric: On this page
 
