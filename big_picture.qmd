@@ -19,6 +19,8 @@ cleaned_data <- readRDS(here::here("dataset/cleaned_data_new.rds"))
 counties_cleaned_METRO <- readRDS(here::here("dataset/metro_clean.rds"))
 ```
 
+# The Surprising Connections: Various Factors that Drive Drug Use Trends in the US!
+
 ## Debunking Myths: Race, Income, and Drug Use Dynamics
 
 There are many stereotypes about the relationships between race, annual income, and drug use. What underlies common perceptions linking race, income, and drug use? With this study, we have explored those stereotypes and will tell you everything you need to know about how race and annual income actually influence drug use across the US. The results of our study are based on the National Survey on Drug Use and Health which was conducted in 2021. This survey asked people to report on their drug use, including information about the age when they first used a substance, how often they use it, and how likely they are to use it again in the future. The survey also collected information about the survey taker’s race, income, and location based on county size of where they are located.
@@ -62,7 +64,8 @@ We were also interested in the relationship between location and drug use. We wa
 ## Interpretations
 We found some interesting trends between age and drug use as well. We have shown that on average, people try crack at a younger age then they try heroin. This could be due to a variety of factors, and interesting follow-up studies could involve access to those drugs and a survey of the average interest of people of a variety of ages in either drug. We would hypothesize that there is higher accessibility of crack to younger people, but that it is more difficult to acquire heroin. 
 
-In conclusion, our comprehensive analysis of the 2021 National Survey on Drug Use and Health presents a nuanced understanding of the intricate web of factors influencing drug use in the United States. By debunking stereotypes and exploring the real data, we offer insights that can guide effective policy and intervention strategies. It's evident that drug use is not a monolithic issue but a complex interplay of racial, income, location, age, and societal factors. This understanding is crucial for developing targeted and effective approaches to address the challenges of drug abuse in various communities. Our study serves as a stepping stone for further research and discussion, aiming to contribute meaningfully to the ongoing efforts to combat substance abuse and its far-reaching impacts on society.
+Our analysis of the 2021 National Survey on Drug Use and Health has presented a nuanced understanding of the intricate web of factors influencing the use of cocaine, crack, and heroin in the United States. By exploring the variables in this survey, we have offered insights that could guide effective policy and intervention strategies. To address issues with drug use, we need to know more about why they are tried in the first place. By sorting through the variables in the survey, it has become evident that drug use is not a monolithic issue but a complex interplay of race, income, location, and age. This understanding is crucial for developing targeted and effective approaches to address the challenges of drug abuse in various communities. Our study serves as a stepping stone for further research and discussion, aiming to contribute meaningfully to the ongoing efforts to combat substance abuse.
+
 
 ---
 
