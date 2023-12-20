@@ -5,6 +5,20 @@ toc: true
 draft: FALSE
 ---
 
+```{r, echo=FALSE, message=FALSE}
+
+library(tidyverse)
+library(broom)
+library(ggplot2)
+library(readr)
+library(dplyr)
+library(tigris)
+library(ggthemes)
+library(gt)
+cleaned_data <- readRDS(here::here("dataset/cleaned_data_new.rds"))
+counties_cleaned_METRO <- readRDS(here::here("dataset/metro_clean.rds"))
+```
+
 ## Debunking Myths: Race, Income, and Drug Use Dynamics
 
 There are many stereotypes about the relationships between race, annual income, and drug use. What underlies common perceptions linking race, income, and drug use? With this study, we have explored those stereotypes and will tell you everything you need to know about how race and annual income actually influence drug use across the US. The results of our study are based on the National Survey on Drug Use and Health which was conducted in 2021. This survey asked people to report on their drug use, including information about the age when they first used a substance, how often they use it, and how likely they are to use it again in the future. The survey also collected information about the survey taker’s race, income, and location based on county size of where they are located.
@@ -12,7 +26,30 @@ There are many stereotypes about the relationships between race, annual income, 
 The survey data is very comprehensive, but to focus on the results of our study, we have only looked at factors influencing the use of three substances: heroin, cocaine, and crack. Stereotypes often heard about these substances would be, for example: people with higher yearly incomes tend to use more cocaine, and people with lower yearly incomes would be more prone to using heroin or crack. We wanted to validate and potentially debunk these stereotypes via statistical models and tests that would test the data-based relationships between drug use, race, and income. For more details on those tests and models, please see the Analysis tab of our website. 
 
 ## Drug Exploration: Heroin, Cocaine, and Crack
-After we had conducted our analysis, we found that there is a clear relationship between race and drug use. The bar chart indicates varying drug usage patterns among ethnic groups, with Native Americans/Alaska Natives having the highest percentage of people who have tried drugs, while Asians show the lowest. The boxplots examining the age of first drug use among different racial groups reveal variations. In terms of the age of first heroin use, Native Hawaiian/Other Pacific Islanders start early (around 10 years), whereas Asians have a significantly later initiation (around 29 years), the highest among all groups. Logistic regression analysis shows that Black/African Americans have a slightly higher likelihood of drug use, while Native American/Alaska Native populations exhibit the highest odds, emphasizing the need for targeted interventions to address these disparities.
+After we had conducted our analysis, we found that there is a clear relationship between race and drug use. Some noteable things to notice first are people who tried drugs and did not based on their race.
+
+```{r, echo=FALSE}
+drug_use_with_race <- cleaned_data |>
+  select(NEWRACE2, cocever, cocage, crkever, crkage, herever, herage, income, COUTYP4) |>
+  mutate(drug_use = ifelse( cocever==1 | crkever==1 | herever==1, 1, 0))
+
+proportions_table <- drug_use_with_race |>
+  group_by(NEWRACE2) |>
+  summarize(percent_try_drugs = 100*(mean(drug_use)),
+            percent_do_not = 100 - percent_try_drugs) |>
+  pivot_longer(cols = starts_with("percent"), names_to = "Drug_Status", values_to = "Percentage")
+
+# Create a bar plot 
+ggplot(proportions_table, aes(x = NEWRACE2, y = Percentage, fill = Drug_Status)) +
+  geom_bar(stat = "identity", position = "stack") +
+  scale_fill_viridis_d() +  
+  labs(title = "Percentage of People Who Tried/Did Not Try One of the Three Drugs by Race",
+       x = "Race",
+       y = "Percentage",
+       fill = "Drug Status") + theme(axis.text.x = element_text(angle = 90, size = 9))
+```
+
+The bar chart indicates varying drug usage patterns among ethnic groups, with Native Americans/Alaska Natives having the highest percentage of people who have tried drugs, while Asians show the lowest. We can see such a huge differences between many of these race groups which is super important in finding variables that can be contributing to such differences. 
 
 ## Income and Drug Use
 The intersection of race and income revealed some unexpected trends in the propensity for drug use. The commonly held belief that higher-income individuals are more likely to indulge in drug use, particularly with expensive drugs like cocaine, was partly substantiated. However, this trend was not uniform across all racial groups. Lower-income individuals across most racial groups exhibited a higher likelihood of drug use, contradicting the notion that drug use is a luxury afforded only by the wealthy. For instance, among higher-income brackets, White and Asian populations showed a relatively lower frequency of drug use compared to their Black and Hispanic counterparts. This divergence suggests that income alone does not dictate drug use patterns; cultural, social, and possibly even genetic factors play significant roles.

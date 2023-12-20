@@ -40,6 +40,7 @@ library(dplyr)
 library(tigris)
 library(ggthemes)
 library(gt)
+library(viridis)
 cleaned_data <- readRDS(here::here("dataset/cleaned_data_new.rds"))
 counties_cleaned_METRO <- readRDS(here::here("dataset/metro_clean.rds"))
 ```
@@ -79,7 +80,8 @@ proportions_table <- drug_use_with_race |>
 # Create a bar plot 
 ggplot(proportions_table, aes(x = NEWRACE2, y = Percentage, fill = Drug_Status)) +
   geom_bar(stat = "identity", position = "stack") +
-  labs(title = "Percentage of People Who Tried/Did Not Try Drugs by Race",
+  scale_fill_viridis_d() +  
+  labs(title = "Percentage of People Who Tried/Did Not Try One of the Three Drugs by Race",
        x = "Race",
        y = "Percentage",
        fill = "Drug Status") + theme(axis.text.x = element_text(angle = 90, size = 9))
@@ -100,7 +102,13 @@ names(facet.labs) <- c("1", "2", "3")
 cleaned_data |>
   filter(ccdaypwk < 85) |>
   group_by(NEWRACE2) |>
-  ggplot(aes(x = NEWRACE2, y = ccdaypwk)) + geom_boxplot() + facet_wrap(vars(COUTYP4),   labeller = labeller(COUTYP4 = facet.labs), scales = "free_y") + theme(axis.text.x = element_text(angle = 90, size = 7)) + labs(title = "Days per Week of Cocaine Use by Race and County Metro Status", x = "Race Category", y = "Days Per Week") + theme(axis.title.y = element_text(size = 9)) 
+  ggplot(aes(x = NEWRACE2, y = ccdaypwk, fill = NEWRACE2)) + 
+  scale_fill_viridis_d() +  
+  geom_boxplot() + 
+  facet_wrap(vars(COUTYP4),   labeller = labeller(COUTYP4 = facet.labs), scales = "free_y") + 
+  theme(axis.text.x = element_text(angle = 90, size = 7)) + 
+  labs(title = "Days per Week of Cocaine Use by Race and County Metro Status", x = "Race Category", y = "Days Per Week") + 
+  theme(axis.title.y = element_text(size = 9)) 
 
 ```
 	
@@ -117,6 +125,7 @@ crack_data <- drug_race_age |>
 
 ggplot(crack_data, aes(x = NEWRACE2, y = crkage, fill = NEWRACE2)) +
   geom_boxplot() +
+  scale_fill_viridis_d() + 
   labs(title = "Boxplot of Age of First Drug Use of Crack by Race",
        x = "Race",
        y = "Age of First Use",
@@ -134,6 +143,7 @@ her_data <- drug_race_age |>
 
 ggplot(her_data, aes(x = NEWRACE2, y = herage, fill = NEWRACE2)) +
   geom_boxplot() +
+  scale_fill_viridis_d() + 
   labs(title = "Boxplot of Age of First Drug Use of Heroine by Race",
        x = "Race",
        y = "Age of First Use",
